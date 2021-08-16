@@ -1,5 +1,8 @@
 <template>
-  <div class="home"><h1>BitChest</h1></div>
+  <main>
+    <nav class="col-md-2 col-lg-1 col-sm-2"></nav>
+    <section class="col-lg-11 col-md-10 col-sm-10"></section>
+  </main>
 </template>
 
 <script>
@@ -8,3 +11,17 @@ export default {
   components: {},
 };
 </script>
+
+<style>
+  main {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+  }
+
+  main > * {
+    border: 1px solid white;
+    width: 100%;
+  }
+  
+</style>
