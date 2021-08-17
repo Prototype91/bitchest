@@ -62,4 +62,5 @@ export default {
   ul.menu >li:last-of-type {
     margin-top: auto;
   }
+
 </style>

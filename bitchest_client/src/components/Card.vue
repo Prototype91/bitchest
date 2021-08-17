@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <p>BTC</p>
+    <p><i class="fab fa-bitcoin"></i> BTC</p>
     <p>${{ balance }}</p>
     <p>+{{ fluctuation }}%</p>
   </div>
@@ -25,10 +25,9 @@ export default {
 <style scoped>
 .card {
   width: 15%;
-  border: white solid 1px;
+  background-color: #1E1F23;
   border-radius: 25px;
   padding: 20px;
-  background-color: #131517 !important;
 }
 
 .card p {
