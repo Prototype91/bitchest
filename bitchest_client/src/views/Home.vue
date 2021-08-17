@@ -1,7 +1,7 @@
 <template>
   <main>
     <NavBar />
-    <section class="col-lg-11 col-md-10 col-sm-10">
+    <section class="synthesis-ctn">
         <Header :balance="3000"/>
         <Wallet />
     </section>
@@ -27,4 +27,7 @@ main {
   padding: 15px 10px;
 }
 
+.synthesis-ctn {
+  width: 90%;
+}
 </style>
