@@ -27,7 +27,6 @@ main {
 }
 
 main > * {
-  border: 1px solid white;
   width: 100%;
 }
 </style>

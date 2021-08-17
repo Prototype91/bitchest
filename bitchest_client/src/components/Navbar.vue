@@ -8,4 +8,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+nav {
+  background-color: #1E1F23;
+}
+
+</style>
