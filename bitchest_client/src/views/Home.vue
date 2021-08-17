@@ -1,6 +1,6 @@
 <template>
   <main>
-    <NavBar />
+    <Navigation />
     <section class="synthesis-ctn">
       <Header :balance="3000" />
       <Wallet />
@@ -9,13 +9,13 @@
 </template>
 
 <script>
-import NavBar from "../components/NavBar.vue";
-import Header from "../components/Header.vue";
-import Wallet from "../components/Wallet.vue";
+import Navigation from "../components/shared/Navigation.vue";
+import Header from "../components/shared/Header.vue";
+import Wallet from "../components/public/Wallet.vue";
 
 export default {
   name: "Home",
-  components: { NavBar, Header, Wallet },
+  components: { Navigation, Header, Wallet },
 };
 </script>
 
@@ -28,7 +28,8 @@ main {
 }
 
 .synthesis-ctn {
-  width: 90%;
+  width: 80%;
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 768px) {

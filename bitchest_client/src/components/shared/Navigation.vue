@@ -74,7 +74,7 @@ import Burger from "./Burger.vue";
 
 export default {
   components: { Burger },
-  name: "NavBar",
+  name: "Navigation",
 };
 </script>
 

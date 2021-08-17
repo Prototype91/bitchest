@@ -22,13 +22,13 @@ export default {
       type: Number,
       required: true,
     },
-  }
+  },
 };
 </script>
 
 <style scoped>
 .card {
-  width: 15%;
+  width: 30%;
   background-color: #1e1f23;
   border-radius: 25px;
   padding: 20px;
@@ -36,5 +36,11 @@ export default {
 
 .card p {
   margin: 0;
+}
+
+@media (max-width: 700px) {
+  .card {
+    width: 100%;
+  }
 }
 </style>

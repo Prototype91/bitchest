@@ -6,7 +6,7 @@
           <th>Crypto</th>
           <th>Prix</th>
           <th>Fluctuation</th>
-          <th>Acheter</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -14,7 +14,7 @@
           <td data-label="Crypto">{{ crypto.cryptoName }}</td>
           <td data-label="Prix">${{ crypto.balance }}</td>
           <td data-label="Fluctuation">+{{ crypto.fluctuation }}%</td>
-          <td data-label="Acheter">
+          <td data-label="Action">
             <router-link to="/"><span>Acheter</span></router-link>
           </td>
         </tr>
@@ -38,7 +38,7 @@ export default {
 <style scoped>
 .table-ctn {
   width: 80%;
-  margin: 0 auto;
+  margin: 0 auto 30px;
   text-align: center;
   display: flex;
   flex-direction: column;
