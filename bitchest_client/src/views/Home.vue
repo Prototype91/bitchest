@@ -10,8 +10,8 @@
 
 <script>
 import NavBar from "../components/NavBar.vue";
-import Header from "../components/Header.vue"
-import Wallet from "../components/Wallet.vue"
+import Header from "../components/Header.vue";
+import Wallet from "../components/Wallet.vue";
 
 export default {
   name: "Home",
@@ -24,10 +24,7 @@ main {
   display: flex;
   flex-direction: row;
   height: 100vh;
+  padding: 10px;
 }
 
-main > * {
-  border: 1px solid white;
-  width: 100%;
-}
 </style>
