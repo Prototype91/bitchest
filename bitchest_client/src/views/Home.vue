@@ -30,4 +30,11 @@ main {
 .synthesis-ctn {
   width: 90%;
 }
+
+@media screen and (max-width: 768px) {
+  main {
+    padding: 7.5px 5px;
+    flex-direction: column;
+  }
+}
 </style>
