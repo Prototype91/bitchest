@@ -24,7 +24,7 @@ main {
   display: flex;
   flex-direction: row;
   height: 100vh;
-  padding: 10px;
+  padding: 15px 10px;
 }
 
 </style>
