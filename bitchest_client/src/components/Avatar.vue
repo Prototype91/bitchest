@@ -1,6 +1,6 @@
 <template>
   <div class="avatar">
-    <svg role="none" style="height: 120px; width: 120px">
+    <svg role="none" style="height: 120px; width: 100%">
       <mask id="circle">
         <circle cx="60" cy="60" fill="white" r="60"></circle>
       </mask>
@@ -12,7 +12,7 @@
           preserveAspectRatio="xMidYMid slice"
           width="100%"
           :href="image"
-          style="height: 120px; width: 120px"
+          style="height: 120px; width: 100%"
         />
         <circle class="border" cx="60" cy="60" r="60"></circle>
       </g>
@@ -48,7 +48,7 @@ export default {
   display: flex;
   flex-direction: column;
   margin-right: 12px;
-  width: 120px;
+  width: 100%;
 }
 .avatar .border {
   stroke-width: 10;
