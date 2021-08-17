@@ -9,9 +9,9 @@
 </template>
 
 <script>
-import Navigation from "../components/shared/Navigation.vue";
-import Header from "../components/shared/Header.vue";
-import Wallet from "../components/public/Wallet.vue";
+import Navigation from "../../components/shared/Navigation.vue";
+import Header from "../../components/shared/Header.vue";
+import Wallet from "../../components/public/Wallet.vue";
 
 export default {
   name: "Home",

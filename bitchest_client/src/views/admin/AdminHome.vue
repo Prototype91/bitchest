@@ -1,10 +1,10 @@
 <template>
-  <h1>Here the future Macket Place</h1>
+    <h1>Espace Admin</h1>
 </template>
 
 <script>
 export default {
-  name: "MarketPlace",
+  name: "AdminHome",
 };
 </script>
 
