@@ -2,8 +2,8 @@
   <main>
     <NavBar />
     <section class="synthesis-ctn">
-        <Header :balance="3000"/>
-        <Wallet />
+      <Header :balance="3000" />
+      <Wallet />
     </section>
   </main>
 </template>

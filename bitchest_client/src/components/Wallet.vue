@@ -8,13 +8,15 @@
       :key="index"
     />
   </section>
+  <Table :cryptos="cryptos"/>
 </template>
 
 <script>
 import Card from "./Card.vue";
+import Table from "./Table.vue";
 export default {
   name: "Wallet",
-  components: { Card },
+  components: { Card, Table },
   data() {
     return {
       cryptos: [
