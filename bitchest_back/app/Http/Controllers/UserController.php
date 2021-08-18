@@ -21,9 +21,12 @@ class UserController extends Controller
 
         $password = Hash::check($fields['password'], $user->password);
 
+        $token = $user->createToken('bitchesttoken')->plainTextToken;
+
         // We set the success response
         $successResponse = [
-            'user' => $user
+            'user' => $user,
+            'token' => $token
         ];
 
         // We set the error response
