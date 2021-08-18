@@ -34,7 +34,20 @@ export default {
     onSubmitForm(event) {
       event.preventDefault();
       console.log(this.email, this.password);
-      userService.getUserData(this.email, this.password);
+      userService
+        .getUserData(this.email, this.password)
+        .then((response) => {
+          console.log(response.data);
+          const user = response.data.user;
+          if (user.elevation === "admin") {
+            this.$router.push("/admin");
+          } else {
+            this.$router.push("/client");
+          }
+        })
+        .catch((error) => {
+          console.error(error.message);
+        });
     },
   },
 };
