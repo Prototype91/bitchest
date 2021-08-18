@@ -24,6 +24,7 @@
           name="nickname"
           class="form-control"
           v-model="nickname"
+          id="nickname"
           type="text"
         />
       </div>
@@ -33,16 +34,17 @@
           name="adress"
           class="form-control"
           v-model="adress"
+          id="adress"
           type="text"
         />
       </div>
       <div>
         <label for="tel">Téléphone : </label>
-        <input name="tel" class="form-control" v-model="tel" type="tel" />
+        <input name="tel" class="form-control" id="tel" v-model="tel" type="tel" />
       </div>
       <div>
         <label for="mail">Mail : </label>
-        <input name="mail" class="form-control" v-model="mail" type="mail" />
+        <input name="mail" class="form-control" id="mail" v-model="mail" type="mail" />
       </div>
       <div>
         <label for="password">Mot de passe : </label>
@@ -51,6 +53,7 @@
           class="form-control"
           v-model="password"
           type="password"
+					id="password"
         />
       </div>
       <div class="input-file">
@@ -87,7 +90,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .admin-ctn {
   width: 100%;
   display: flex;
