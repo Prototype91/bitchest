@@ -82,7 +82,7 @@ export default {
 nav {
   padding: 15px;
   border-radius: 10px;
-  background-color: #2f4f4f;
+  background-color: rgba(0, 0, 0, 0.5);;
   height: 100%;
 }
 
