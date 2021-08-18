@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
+class LoginController extends Controller
 {
     public function login(Request $request)
     {
@@ -35,5 +35,10 @@ class UserController extends Controller
         ], 403);
 
         return !$user || !$password ? $errorResponse : $successResponse;
+    }
+
+    public function logout(Request $request)
+    {
+        $request->user()->tokens()->delete();
     }
 }
