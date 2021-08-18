@@ -6,7 +6,6 @@
       <Wallet />
     </section>
   </main>
-  <button @click="clickme">AAAA</button>
 </template>
 
 <script>
@@ -14,28 +13,9 @@ import Navigation from "../../components/shared/Navigation.vue";
 import Header from "../../components/shared/Header.vue";
 import Wallet from "../../components/public/Wallet.vue";
 
-import { computed } from "vue";
-import { useStore } from "vuex";
-
 export default {
   name: "Home",
-  components: { Navigation, Header, Wallet },
-  setup() {
-    const store = useStore();
-
-    let storeCrypto = computed(function () {
-      return store.state.cryptoCurrencies;
-    });
-
-    return {
-      storeCrypto,
-    };
-  },
-  methods: {
-    clickme() {
-      console.log(this.storeCrypto);
-    },
-  },
+  components: { Navigation, Header, Wallet }
 };
 </script>
 

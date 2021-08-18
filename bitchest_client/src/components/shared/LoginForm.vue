@@ -11,7 +11,7 @@
         <label>Password</label>
       </div>
       <input
-        @click="onSubmitForm"
+        @click="login"
         class="submit"
         type="submit"
         value="SUBMIT"
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import userService from "../../services/data-access/user";
+import AuthService from "../../services/authentication/auth.service";
 export default {
   name: "LoginForm",
   data() {
@@ -31,21 +31,24 @@ export default {
     };
   },
   methods: {
-    onSubmitForm(event) {
+    login(event) {
       event.preventDefault();
-      console.log(this.email, this.password);
-      userService
-        .getUserData(this.email, this.password)
-        .then((response) => {
-          console.log(response.data);
+
+      AuthService
+        .login(this.email, this.password)
+        .then(response => {
           const user = response.data.user;
+
+          this.$root.$emit("login", true);
+          sessionStorage.setItem("token", response.data.token);
+
           if (user.elevation === "admin") {
             this.$router.push("/admin");
           } else {
             this.$router.push("/client");
           }
         })
-        .catch((error) => {
+        .catch(error => {
           console.error(error.message);
         });
     },
