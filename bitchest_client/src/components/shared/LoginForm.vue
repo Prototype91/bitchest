@@ -10,25 +10,33 @@
         <input type="password" name="password" required v-model="password" />
         <label>Password</label>
       </div>
-      <input @click="onSubmitForm" class="submit" type="submit" value="SUBMIT">
+      <input
+        @click="onSubmitForm"
+        class="submit"
+        type="submit"
+        value="SUBMIT"
+      />
     </form>
   </div>
 </template>
 
 <script>
+import userService from "../../services/data-access/user";
 export default {
   name: "LoginForm",
   data() {
     return {
-      email: '',
-      password: ''
-    }
+      email: null,
+      password: null,
+    };
   },
   methods: {
-    onSubmitForm() {
-      console.log(this.email, this.password)
-    }
-  }
+    onSubmitForm(event) {
+      event.preventDefault();
+      console.log(this.email, this.password);
+      userService.getUserData(this.email, this.password);
+    },
+  },
 };
 </script>
 
