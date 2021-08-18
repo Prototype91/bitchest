@@ -1,6 +1,12 @@
 <template>
   <div class="login-ctn">
-    <Loading :active="isLoading" :is-full-page="fullPage" :loader="loader"/>
+    <Loading
+      :active="isLoading"
+      :is-full-page="fullPage"
+      :loader="loader"
+      :background-color="backgroundColor"
+      :color="color"
+    />
     <h2>Login</h2>
     <form>
       <div class="user-data">
@@ -13,6 +19,7 @@
       </div>
       <input @click="login" class="submit" type="submit" value="SUBMIT" />
     </form>
+    <p v-if='error' class="error">Email ou mot de passe incorrect ...</p>
   </div>
 </template>
 
@@ -30,9 +37,13 @@ export default {
     return {
       email: null,
       password: null,
+      error: false,
       isLoading: false,
-      fullPage: false,
-      loader: "dots"
+      fullPage: true,
+      loader: "dots",
+      backgroundColor: "black",
+      color: "white",
+      opacity: 1,
     };
   },
   methods: {
@@ -58,6 +69,7 @@ export default {
         })
         .catch((error) => {
           this.isLoading = false;
+          this.error = true;
           console.error(error.message);
         });
     },
@@ -65,7 +77,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .login-ctn {
   width: 30%;
   padding: 40px;
@@ -132,6 +144,11 @@ export default {
   border: solid white 1px;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
+}
+
+.error {
+  color: red;
+  margin-top: 25px;
 }
 
 @media (max-width: 700px) {

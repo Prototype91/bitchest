@@ -1,7 +1,13 @@
 <template>
   <nav>
     <div class="logo-ctn">
-      <Loading :active="isLoading" :is-full-page="fullPage" :loader="loader" />
+      <Loading
+        :active="isLoading"
+        :is-full-page="fullPage"
+        :loader="loader"
+        :background-color="backgroundColor"
+        :color="color"
+      />
       <router-link title="Accueil" class="link-menu" to="/">
         <svg
           width="77"
@@ -61,7 +67,7 @@
         ></router-link>
       </li>
       <li>
-        <button @click="logout" title="Déconnexion" class="link-menu">
+        <button @click="logout" title="Déconnexion" class="logout">
           <i class="fas fa-sign-out-alt"></i>
         </button>
       </li>
@@ -82,8 +88,11 @@ export default {
   data() {
     return {
       isLoading: false,
-      fullPage: false,
       loader: "dots",
+      fullPage: true,
+      backgroundColor: "black",
+      color: "white",
+      opacity: 1,
     };
   },
   methods: {
@@ -139,7 +148,7 @@ nav {
   margin-top: auto;
 }
 
-.link-menu {
+.link-menu, .logout {
   width: 100%;
   height: 100%;
   display: flex;
@@ -158,11 +167,17 @@ nav {
   color: white;
 }
 
+.logout {
+  background-color: #101010;
+  border: none;
+  color: white;
+}
+
 @media screen and (max-width: 768px) {
   nav {
     padding: 7.5px;
     border-radius: 10px;
-    background-color: #2f4f4f;
+    background-color: #101010;
     height: 70px;
     display: flex;
     justify-content: space-between;
@@ -182,7 +197,7 @@ nav {
     z-index: 999999999;
     right: 5px;
     position: absolute;
-    background-color: #2f4f4f;
+    background-color: #101010;
     height: auto;
   }
 
