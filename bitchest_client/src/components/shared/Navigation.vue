@@ -1,7 +1,7 @@
 <template>
   <nav>
     <div class="logo-ctn">
-      <router-link class="link-menu" to="/">
+      <router-link title="Accueil" class="link-menu" to="/">
         <svg
           width="77"
           height="84"
@@ -45,22 +45,22 @@
     </div>
     <ul id="menu">
       <li>
-        <router-link class="link-menu" to="/">
+        <router-link title="Acheter/Vendre" class="link-menu" to="/">
           <i class="fas fa-coins"></i>
         </router-link>
       </li>
       <li>
-        <router-link class="link-menu" to="/">
+        <router-link title="Cour des cryptomonaies" class="link-menu" to="/">
           <i class="fas fa-chart-line"></i>
         </router-link>
       </li>
       <li>
-        <router-link class="link-menu" to="/"
+        <router-link title="Mes informations" class="link-menu" to="/"
           ><i class="far fa-user-circle"></i
         ></router-link>
       </li>
       <li>
-        <router-link class="link-menu" to="/">
+        <router-link title="Déconnexion" class="link-menu" to="/">
           <i class="fas fa-sign-out-alt"></i>
         </router-link>
       </li>
@@ -161,30 +161,30 @@ nav {
   }
 
   #menu {
-      flex-direction: row;
-    }
+    flex-direction: row;
+  }
 
-    #menu > li {
-      width: 55px;
-      height: 55px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+  #menu > li {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-    #menu > li:last-of-type {
-      margin: 0;
-      /* margin-left: auto; */
-    }
+  #menu > li:last-of-type {
+    margin: 0;
+    /* margin-left: auto; */
+  }
 
   #menu {
     display: none;
   }
 
   .link-menu > * {
-  width: 50% !important;
-  height: 50% !important;
-  color: white;
+    width: 50% !important;
+    height: 50% !important;
+    color: white;
   }
 }
 </style>
