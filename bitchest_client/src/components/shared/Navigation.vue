@@ -60,9 +60,9 @@
         ></router-link>
       </li>
       <li>
-        <router-link title="Déconnexion" class="link-menu" to="/">
+        <button @click="logout" title="Déconnexion" class="link-menu">
           <i class="fas fa-sign-out-alt"></i>
-        </router-link>
+        </button>
       </li>
     </ul>
     <Burger />
@@ -71,10 +71,25 @@
 
 <script>
 import Burger from "./Burger.vue";
+import AuthService from "../../services/authentication/auth.service";
 
 export default {
   components: { Burger },
   name: "Navigation",
+  methods: {
+    logout() {
+      AuthService.logout()
+        .then(() => {
+          // Removes the token in sessionStorage
+          sessionStorage.removeItem('token');
+          // Redirection
+          this.$router.push('/');
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+  },
 };
 </script>
 
@@ -82,7 +97,7 @@ export default {
 nav {
   padding: 15px;
   border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.5);;
+  background-color: rgba(0, 0, 0, 0.5);
   height: 100%;
 }
 

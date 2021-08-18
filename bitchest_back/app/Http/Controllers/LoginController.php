@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Response;
 
 class LoginController extends Controller
 {
@@ -24,10 +25,10 @@ class LoginController extends Controller
         $token = $user->createToken('bitchesttoken')->plainTextToken;
 
         // We set the success response
-        $successResponse = [
+        $successResponse = response([
             'user' => $user,
             'token' => $token
-        ];
+        ], 201);
 
         // We set the error response
         $errorResponse = response([
@@ -39,6 +40,11 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
+        $currentUser = auth()->user();
+        $currentUser->tokens()->delete();
+
+        return [
+            'message' => 'disconnected with success !'
+        ];
     }
 }
