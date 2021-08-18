@@ -1,6 +1,7 @@
 <template>
   <nav>
     <div class="logo-ctn">
+      <Loading :active="isLoading" :is-full-page="fullPage" :loader="loader" />
       <router-link title="Accueil" class="link-menu" to="/">
         <svg
           width="77"
@@ -72,20 +73,34 @@
 <script>
 import Burger from "./Burger.vue";
 import AuthService from "../../services/authentication/auth.service";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 
 export default {
-  components: { Burger },
+  components: { Burger, Loading },
   name: "Navigation",
+  data() {
+    return {
+      isLoading: false,
+      fullPage: false,
+      loader: "dots",
+    };
+  },
   methods: {
     logout() {
+      this.isLoading = true;
       AuthService.logout()
         .then(() => {
           // Removes the token in sessionStorage
-          sessionStorage.removeItem('token');
+          sessionStorage.removeItem("token");
+
+          this.isLoading = false;
+
           // Redirection
-          this.$router.push('/');
+          this.$router.push("/");
         })
         .catch((error) => {
+          this.isLoading = false;
           console.error(error);
         });
     },

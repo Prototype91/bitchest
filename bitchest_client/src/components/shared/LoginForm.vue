@@ -1,5 +1,6 @@
 <template>
   <div class="login-ctn">
+    <Loading :active="isLoading" :is-full-page="fullPage" :loader="loader"/>
     <h2>Login</h2>
     <form>
       <div class="user-data">
@@ -10,37 +11,44 @@
         <input type="password" name="password" required v-model="password" />
         <label>Password</label>
       </div>
-      <input
-        @click="login"
-        class="submit"
-        type="submit"
-        value="SUBMIT"
-      />
+      <input @click="login" class="submit" type="submit" value="SUBMIT" />
     </form>
   </div>
 </template>
 
 <script>
 import AuthService from "../../services/authentication/auth.service";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
+
 export default {
   name: "LoginForm",
+  components: {
+    Loading,
+  },
   data() {
     return {
       email: null,
       password: null,
+      isLoading: false,
+      fullPage: false,
+      loader: "dots"
     };
   },
   methods: {
     login(event) {
       event.preventDefault();
 
-      AuthService
-        .login(this.email, this.password)
-        .then(response => {
+      this.isLoading = true;
+
+      AuthService.login(this.email, this.password)
+        .then((response) => {
           const user = response.data.user;
 
           this.$root.$emit("login", true);
           sessionStorage.setItem("token", response.data.token);
+
+          this.isLoading = false;
 
           if (user.elevation === "admin") {
             this.$router.push("/admin");
@@ -48,7 +56,8 @@ export default {
             this.$router.push("/client");
           }
         })
-        .catch(error => {
+        .catch((error) => {
+          this.isLoading = false;
           console.error(error.message);
         });
     },
