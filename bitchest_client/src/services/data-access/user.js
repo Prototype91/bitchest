@@ -8,16 +8,10 @@ const server = axios.create({
 
 export default {
 	getUserData(email, password) {
-		server
+		return server
 			.post("/login", {
 				email,
 				password
-			})
-			.then(response => {
-				console.log(response.data);
-			})
-			.catch(error => {
-				console.error(error.message);
 			});
 	}
 };
