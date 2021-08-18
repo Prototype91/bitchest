@@ -9,8 +9,9 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap');
 body {
-  background-color: #131517 !important;
+  background-color: #212121 !important;
   color: #fefefe !important;
 }
 
@@ -31,8 +32,8 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font: inherit;
 	vertical-align: baseline;
+	font-family: 'Nunito', sans-serif;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
