@@ -1,17 +1,23 @@
-// import axios from 'axios';
+import axios from 'axios';
 
 // Initialization for future requests
-// const server = axios.create({
-// 	baseURL: '',
-// 	timeout: 1000,
-// });
+const server = axios.create({
+	baseURL: 'http://127.0.0.1:8000/api',
+	timeout: 1000,
+});
 
 export default {
-	getUserData() {
-		return {
-			name: 'Dylan',
-			cryptoCurrencies: ['Bitcoin', 'Ethereum', 'Stellar'],
-			balance: 3000,
-		};
+	getUserData(email, password) {
+		server
+			.post("/login", {
+				email,
+				password
+			})
+			.then(response => {
+				console.log(response.data);
+			})
+			.catch(error => {
+				console.error(error.message);
+			});
 	}
 };
