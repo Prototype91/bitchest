@@ -1,7 +1,7 @@
 <template>
-  <section>
-    <section class="card-ctn">
-      <Card
+  <div>
+    <section class="cards-ctn">
+      <CryptoCurrencyCard
         v-for="(cryptoCurrency, index) in this.cryptoCurrencies"
         :name="cryptoCurrency.name"
         :price="cryptoCurrency.current_price"
@@ -10,16 +10,18 @@
         :key="index"
       />
     </section>
-    <Table :cryptoCurrencies="this.cryptoCurrencies" />
-  </section>
+    <section>
+      <CryptoCurrenciesTable :cryptoCurrencies="this.cryptoCurrencies" />
+    </section>
+  </div>
 </template>
 
 <script>
-import Card from "../shared/Card.vue";
-import Table from "./Table.vue";
+import CryptoCurrencyCard from "../shared/CryptoCurrencyCard.vue";
+import CryptoCurrenciesTable from "./CryptoCurrenciesTable.vue";
 export default {
-  name: "Wallet",
-  components: { Card, Table },
+  name: "HeartSynthesis",
+  components: { CryptoCurrencyCard, CryptoCurrenciesTable },
   props: {
     cryptoCurrencies: {
       type: Array,
@@ -30,7 +32,7 @@ export default {
 </script>
 
 <style>
-.card-ctn {
+.cards-ctn {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;

@@ -66,17 +66,17 @@
         </button>
       </li>
     </ul>
-    <Burger />
+    <BurgerMenu />
   </nav>
 </template>
 
 <script>
-import Burger from "./Burger.vue";
+import BurgerMenu from "./BurgerMenu.vue";
 import AuthService from "../../services/authentication/auth.service";
 import Loader from "./Loader.vue"
 
 export default {
-  components: { Burger, Loader },
+  components: { BurgerMenu, Loader },
   name: "Navigation",
   data() {
     return {

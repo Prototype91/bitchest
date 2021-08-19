@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: "Table",
+  name: "CryptoCurrenciesTable",
   props: {
     cryptoCurrencies: {
       type: Array,

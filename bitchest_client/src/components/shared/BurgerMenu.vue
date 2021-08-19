@@ -6,6 +6,7 @@
 
 <script>
 export default {
+  name: 'BurgerMenu',
   methods: {
     burgerClic() {
       let smMenu = document.getElementById("smartphone-menu");

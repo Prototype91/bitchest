@@ -1,10 +1,10 @@
 <template>
-  <h1>Here Graphics</h1>
+  <h1>Here Graphic</h1>
 </template>
 
 <script>
 export default {
-  name: "Graphic",
+  name: "CryptoCurrencyGraph",
 };
 </script>
 
