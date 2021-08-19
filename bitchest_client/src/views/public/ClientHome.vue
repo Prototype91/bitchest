@@ -26,7 +26,17 @@ export default {
   mounted() {
     CryptoCurrencyService.getCryptoCurrencies()
       .then((response) => {
-        this.cryptoCurrencies = CryptoCurrencyMapper.mapCryptoCurrencies(response);
+        this.cryptoCurrencies =
+          CryptoCurrencyMapper.mapCryptoCurrencies(response);
+        console.log(this.cryptoCurrencies);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    CryptoCurrencyService.getHistoricalCoinValues("ethereum")
+      .then((response) => {
+        CryptoCurrencyMapper.mapCryptoCurrencies(response);
       })
       .catch((error) => {
         console.error(error);

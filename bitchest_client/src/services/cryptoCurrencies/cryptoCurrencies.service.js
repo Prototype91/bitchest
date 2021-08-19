@@ -6,9 +6,9 @@ export default {
         const baseUrl = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&ids=';
 
         // End URL
-        const endUrl = '&order=market_cap_desc&per_page=10&page=1&sparkline=false';
+        const endUrl = '&order=market_cap_desc&per_page=10&page=1&sparkline=true';
 
-        // Returs all the cryptocurrencies needed
+        // Returns all the cryptocurrencies needed
         return axios.all([
             axios.get(`${baseUrl}ethereum${endUrl}`),
             axios.get(`${baseUrl}ripple${endUrl}`),
@@ -21,5 +21,17 @@ export default {
             axios.get(`${baseUrl}litecoin${endUrl}`),
             axios.get(`${baseUrl}dash${endUrl}`)
         ]);
+    },
+    
+    getHistoricalCoinValues(cryptoCurrency) {
+        // Base URL
+        const baseUrl = 'https://api.coingecko.com/api/v3/coins/';
+
+        // End URL
+        const endUrl = '/market_chart?vs_currency=eur&days=30&interval=daily';
+
+        // Returns the cryptocurrency historical values for 30 days
+        return axios.get(`${baseUrl}${cryptoCurrency}${endUrl}`)
+
     }
 }
