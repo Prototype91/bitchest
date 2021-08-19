@@ -97,7 +97,7 @@
             name="elevation" value="user"> Client
           </label>
         </div>
-        <button @click="add($event)" class="btn btn-primary" type="submit">
+        <button @click="addUser($event)" class="btn btn-primary" type="submit">
           Ajouter l'utilisateur
         </button>
       </form>
@@ -106,7 +106,7 @@
 </template>
 
 <script>
-import authService from "../../services/authentication/auth.service";
+import UsersService from "../../services/users/users.service";
 export default {
   name: "CreateUser",
   data() {
@@ -123,9 +123,9 @@ export default {
     };
   },
   methods: {
-    add(e) {
-      e.preventDefault();
-      authService
+    addUser(event) {
+      event.preventDefault();
+      UsersService
         .addUser(this.user)
         .then((response) => {
           console.log(response);

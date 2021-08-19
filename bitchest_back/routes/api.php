@@ -22,9 +22,9 @@ Route::post('login', [LoginController::class, 'login']);
 Route::group(['middleware' => ['auth:sanctum']], function() {
     // Logout
     Route::post('/logout', [LoginController::class, 'logout']);
-    Route::post('/admin', [UsersController::class, 'store']);
+    Route::post('/add', [UsersController::class, 'store']);
     Route::delete('/users/{id}', [UsersController::class, 'destroy']);
-    Route::get('/user', function (Request $request) {   
+    Route::get('/user', function (Request $request) {
         return $request->user();
     });
     Route::get('/users', [UsersController::class, 'index']);
