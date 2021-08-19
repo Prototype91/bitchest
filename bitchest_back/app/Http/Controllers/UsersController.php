@@ -15,7 +15,12 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+
+        return response([
+            'users' => $users,
+            'message' => 'Utilisateurs récupérés avec succès'
+        ], 200);
     }
 
     /**
@@ -43,10 +48,10 @@ class UsersController extends Controller
         //     $product->save();
         // }
 
-        return [
+        return response([
             'user' => $user,
-            'message' => 'Utilisateur ajouté avec succés'
-        ];
+            'message' => 'Utilisateur ajouté avec succès'
+        ], 200);
     }
 
     /**
