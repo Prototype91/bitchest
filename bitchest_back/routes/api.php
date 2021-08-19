@@ -23,6 +23,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     // Logout
     Route::post('/logout', [LoginController::class, 'logout']);
     Route::post('/admin', [UsersController::class, 'store']);
+    Route::delete('/users/{id}', [UsersController::class, 'destroy']);
     Route::get('/user', function (Request $request) {   
         return $request->user();
     });
