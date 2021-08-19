@@ -18,10 +18,10 @@ export default {
         let mappedValues = [];
 
         for (let i = 0; i < thirtyDaysValues.length; i++) {
-          const price = Math.floor(thirtyDaysValues[i][1]);
-          const unixTime = thirtyDaysValues[i][0];
-          const finalTime = moment.unix(unixTime/1000).format("DD MM YYYY");
-          mappedValues.push({ price, finalTime });
+            const price = Math.floor(thirtyDaysValues[i][1]);
+            const unixTime = thirtyDaysValues[i][0];
+            const finalTime = moment.unix(unixTime / 1000).format("DD MM YYYY");
+            mappedValues.push({ price, time: finalTime });
         }
 
         console.log(mappedValues);

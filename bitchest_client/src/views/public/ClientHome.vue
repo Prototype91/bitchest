@@ -33,14 +33,6 @@ export default {
       .catch((error) => {
         console.error(error);
       });
-
-    CryptoCurrencyService.getHistoricalCoinValues("ethereum")
-      .then((response) => {
-        CryptoCurrencyMapper.mapCryptoCurrencyHistory(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
   },
 };
 </script>
