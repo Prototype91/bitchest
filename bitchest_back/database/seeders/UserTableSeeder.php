@@ -17,13 +17,19 @@ class UserTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'name' => 'dylan',
+                'firstname' => 'Dylan',
+                'lastname' => 'Lecomte',
+                'adress' => '24 avenue Gambetta',
+                'phone' => '+33606060606',
                 'email' => 'dylan@dylan.fr',
                 'password' => Hash::make('dylan'),
                 'elevation' => 'admin'
             ],
             [
-                'name' => 'kenny',
+                'name' => 'Kenny',
+                'lastname' => 'Herillard',
+                'adress' => '54 boulevar Bessières',
+                'phone' => '+33606060607',
                 'email' => 'kenny@kenny.fr',
                 'password' => Hash::make('kenny'),
                 'elevation' => 'user'
