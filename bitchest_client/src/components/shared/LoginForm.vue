@@ -1,13 +1,7 @@
 <template>
   <div class="login-centered">
     <div class="login-ctn">
-      <Loading
-        :active="isLoading"
-        :is-full-page="fullPage"
-        :loader="loader"
-        :background-color="backgroundColor"
-        :color="color"
-      />
+      <Loader :isLoading="isLoading" />
       <h2>Login</h2>
       <form>
         <div class="input-ctn">
@@ -41,13 +35,12 @@
 
 <script>
 import AuthService from "../../services/authentication/auth.service";
-import Loading from "vue-loading-overlay";
-import "vue-loading-overlay/dist/vue-loading.css";
+import Loader from "./Loader.vue";
 
 export default {
   name: "LoginForm",
   components: {
-    Loading,
+    Loader,
   },
   data() {
     return {
@@ -55,11 +48,6 @@ export default {
       password: null,
       error: false,
       isLoading: false,
-      fullPage: true,
-      loader: "dots",
-      backgroundColor: "black",
-      color: "white",
-      opacity: 1,
     };
   },
   methods: {
@@ -74,13 +62,13 @@ export default {
 
           this.$root.$emit("login", true);
 
-          const dataToPush= {
+          const dataToPush = {
             token: response.data.token,
-            elevation: user.elevation
-          }
+            elevation: user.elevation,
+          };
 
           const sessionStorageData = JSON.stringify(dataToPush);
-          
+
           sessionStorage.setItem("token", sessionStorageData);
 
           this.isLoading = false;

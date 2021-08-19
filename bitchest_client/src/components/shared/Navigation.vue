@@ -1,13 +1,7 @@
 <template>
   <nav>
+    <Loader :isLoading="isLoading" />
     <div class="logo-ctn">
-      <Loading
-        :active="isLoading"
-        :is-full-page="fullPage"
-        :loader="loader"
-        :background-color="backgroundColor"
-        :color="color"
-      />
       <router-link title="Accueil" class="link-menu" to="/">
         <svg
           width="77"
@@ -79,20 +73,14 @@
 <script>
 import Burger from "./Burger.vue";
 import AuthService from "../../services/authentication/auth.service";
-import Loading from "vue-loading-overlay";
-import "vue-loading-overlay/dist/vue-loading.css";
+import Loader from "./Loader.vue"
 
 export default {
-  components: { Burger, Loading },
+  components: { Burger, Loader },
   name: "Navigation",
   data() {
     return {
       isLoading: false,
-      loader: "dots",
-      fullPage: true,
-      backgroundColor: "black",
-      color: "white",
-      opacity: 1,
     };
   },
   methods: {
