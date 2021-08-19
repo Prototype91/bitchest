@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +22,8 @@ Route::post('login', [LoginController::class, 'login']);
 Route::group(['middleware' => ['auth:sanctum']], function() {
     // Logout
     Route::post('/logout', [LoginController::class, 'logout']);
-    Route::get('/user', function (Request $request) {
+    Route::post('/admin', [UsersController::class, 'store']);
+    Route::get('/user', function (Request $request) {   
         return $request->user();
     });
 });
