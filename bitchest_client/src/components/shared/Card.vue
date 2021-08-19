@@ -1,8 +1,8 @@
 <template>
   <div class="card">
     <p><i class="fab fa-bitcoin"></i> {{ cryptoName }}</p>
-    <p>${{ balance }}</p>
-    <p>+{{ fluctuation }}%</p>
+    <p>{{ balance }}€</p>
+    <p>{{ fluctuation }}%</p>
   </div>
 </template>
 

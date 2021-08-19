@@ -3,7 +3,7 @@
     <Navigation />
     <section class="synthesis-ctn">
       <Header :balance="3000" />
-      <Wallet />
+      <Wallet :cryptoCurrencies="cryptoCurrencies" />
     </section>
   </main>
 </template>
@@ -26,7 +26,7 @@ export default {
   mounted() {
     CryptoService.getCryptoCurrencies().then((response) => {
       this.cryptoCurrencies = CryptoMapper.mapCryptoCurrencies(response);
-      console.log(this.cryptos);
+      console.log(this.cryptoCurrencies);
     });
   },
 };
