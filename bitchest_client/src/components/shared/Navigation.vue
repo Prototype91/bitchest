@@ -67,7 +67,7 @@
         ></router-link>
       </li>
       <li>
-        <button @click="logout" title="Déconnexion" class="logout">
+        <button @click="logout" title="Déconnexion" class="logout link-menu">
           <i class="fas fa-sign-out-alt"></i>
         </button>
       </li>

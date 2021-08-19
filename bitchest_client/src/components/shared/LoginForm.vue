@@ -1,25 +1,41 @@
 <template>
-  <div class="login-ctn">
-    <Loading
-      :active="isLoading"
-      :is-full-page="fullPage"
-      :loader="loader"
-      :background-color="backgroundColor"
-      :color="color"
-    />
-    <h2>Login</h2>
-    <form>
-      <div class="user-data">
-        <input type="email" name="email" required v-model="email" />
-        <label>Mail</label>
-      </div>
-      <div class="user-data">
-        <input type="password" name="password" required v-model="password" />
-        <label>Password</label>
-      </div>
-      <input @click="login" class="submit" type="submit" value="SUBMIT" />
-    </form>
-    <p v-if='error' class="error">Email ou mot de passe incorrect ...</p>
+  <div class="login-centered">
+    <div class="login-ctn">
+      <Loading
+        :active="isLoading"
+        :is-full-page="fullPage"
+        :loader="loader"
+        :background-color="backgroundColor"
+        :color="color"
+      />
+      <h2>Login</h2>
+      <form>
+        <div class="input-ctn">
+          <label>Adresse mail</label>
+          <input
+            type="email"
+            name="email"
+            class="form-control"
+            required
+            v-model="email"
+          />
+        </div>
+        <div class="input-ctn">
+          <label>Mot de passe</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            required
+            v-model="password"
+          />
+        </div>
+        <button @click="login" class="submit btn btn-primary">
+          Se connecter
+        </button>
+      </form>
+      <p v-if="error" class="error">Email ou mot de passe incorrect ...</p>
+    </div>
   </div>
 </template>
 
@@ -86,6 +102,13 @@ export default {
 </script>
 
 <style scoped>
+.login-centered {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .login-ctn {
   width: 30%;
   padding: 40px;
@@ -107,37 +130,17 @@ export default {
   letter-spacing: 4px;
 }
 
-.login-ctn .user-data {
-  position: relative;
+.login-ctn form {
+  display: flex;
+  flex-direction: column;
 }
 
-.login-ctn .user-data input {
-  width: 100%;
-  padding: 10px 0;
-  font-size: 16px;
-  color: white;
-  margin-bottom: 30px;
-  border: none;
-  border-bottom: 1px solid white;
-  outline: none;
-  background: transparent;
-}
-.login-ctn .user-data label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 10px 0;
-  font-size: 16px;
-  color: white;
-  pointer-events: none;
-  transition: 0.5s;
+.login-ctn form .input-ctn {
+  padding-bottom: 10px;
 }
 
-.login-ctn .user-data input:focus ~ label,
-.login-ctn .user-data input:valid ~ label {
-  top: -20px;
-  left: 0;
-  font-size: 12px;
+.login-ctn form .input-ctn label {
+  padding-bottom: 2px;
 }
 
 .login-ctn form .submit {
@@ -152,6 +155,7 @@ export default {
   border: solid white 1px;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
+  margin-top: 10px;
 }
 
 .error {
