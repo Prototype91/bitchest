@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Response;
 
 class LoginController extends Controller
 {
@@ -38,7 +37,7 @@ class LoginController extends Controller
         return !$user || !$password ? $errorResponse : $successResponse;
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
         $currentUser = auth()->user();
         $currentUser->tokens()->delete();

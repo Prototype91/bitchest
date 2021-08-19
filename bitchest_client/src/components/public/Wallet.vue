@@ -1,14 +1,16 @@
 <template>
-  <section class="card-ctn">
-    <Card
-      v-for="(crypto, index) in cryptos"
-      :cryptoName="crypto.cryptoName"
-      :balance="crypto.balance"
-      :fluctuation="crypto.fluctuation"
-      :key="index"
-    />
+  <section>
+    <section class="card-ctn">
+      <Card
+        v-for="(crypto, index) in cryptos"
+        :cryptoName="crypto.cryptoName"
+        :balance="crypto.balance"
+        :fluctuation="crypto.fluctuation"
+        :key="index"
+      />
+    </section>
+    <Table :cryptos="cryptos" />
   </section>
-  <Table :cryptos="cryptos"/>
 </template>
 
 <script>
