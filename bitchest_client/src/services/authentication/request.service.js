@@ -1,15 +1,16 @@
 import axios from "axios";
 
 let server = axios.create({
-    baseURL: 'http://127.0.0.1:8000/api',
-    timeout: 1000
+    baseURL: 'http://127.0.0.1:8000/api'
 });
 
 let Api = () => {
-    let token = sessionStorage.getItem("token");
+    let dataToGet = sessionStorage.getItem("token");
 
-    if (token) {
-        server.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    let sessionStorageData = JSON.parse(dataToGet);
+
+    if (sessionStorageData?.token) {
+        server.defaults.headers.common["Authorization"] = `Bearer ${sessionStorageData.token}`;
     }
 
     return server;

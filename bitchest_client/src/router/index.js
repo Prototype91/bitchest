@@ -25,6 +25,12 @@ const routes = [
     meta: { authOnly: true }
   },
   {
+    path: '/admin',
+    name: 'AdminHome',
+    component: AdminHome,
+    meta: { authOnly: true }
+  },
+  {
     path: '/admin/informations',
     name: 'AdminPersonals',
     component: PersonalsInfo,
@@ -35,12 +41,6 @@ const routes = [
     name: 'AdminCreate',
     component: Create,
     meta: { authOnly: true }
-  },
-  {
-    path: '/admin',
-    name: 'AdminHome',
-    component: AdminHome,
-    meta: { authOnly: true }
   }
 ]
 
@@ -49,8 +49,11 @@ const router = createRouter({
   routes
 });
 
-function isLoggedIn() {
-  return sessionStorage.getItem("token");
+const isLoggedIn = () => {
+  let dataToGet = sessionStorage.getItem("token");
+  const sessionStorageData = JSON.parse(dataToGet);
+
+  return !!sessionStorageData?.token;
 }
 
 router.beforeEach((to, from, next) => {
