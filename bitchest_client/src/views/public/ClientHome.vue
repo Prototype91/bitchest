@@ -3,7 +3,7 @@
     <Navigation />
     <section class="synthesis-ctn">
       <Header :balance="3000" />
-      <Wallet />
+      <Wallet :cryptoCurrencies="cryptoCurrencies" />
     </section>
   </main>
 </template>
@@ -12,10 +12,23 @@
 import Navigation from "../../components/shared/Navigation.vue";
 import Header from "../../components/shared/Header.vue";
 import Wallet from "../../components/public/Wallet.vue";
+import CryptoService from "../../services/crypto/cryptoCurrencies.service";
+import CryptoMapper from "../../services/crypto/cryptoCurrencies.mapper";
 
 export default {
   name: "Home",
   components: { Navigation, Header, Wallet },
+  data() {
+    return {
+      cryptoCurrencies: [],
+    };
+  },
+  mounted() {
+    CryptoService.getCryptoCurrencies().then((response) => {
+      this.cryptoCurrencies = CryptoMapper.mapCryptoCurrencies(response);
+      console.log(this.cryptoCurrencies);
+    });
+  },
 };
 </script>
 

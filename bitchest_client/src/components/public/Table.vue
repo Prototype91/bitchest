@@ -10,10 +10,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(crypto, index) in cryptos" :key="index">
-          <td data-label="Crypto">{{ crypto.cryptoName }}</td>
-          <td data-label="Prix">${{ crypto.balance }}</td>
-          <td data-label="Fluctuation">+{{ crypto.fluctuation }}%</td>
+        <tr v-for="(cryptoCurrency, index) in this.cryptoCurrencies" :key="index">
+          <td data-label="Crypto">{{ cryptoCurrency.name }}</td>
+          <td data-label="Prix">{{ cryptoCurrency.current_price }}€</td>
+          <td data-label="Fluctuation">{{ cryptoCurrency.ath_change_percentage }}%</td>
           <td data-label="Action">
             <router-link to="/"><span>Acheter</span></router-link>
           </td>
@@ -27,7 +27,7 @@
 export default {
   name: "Table",
   props: {
-    cryptos: {
+    cryptoCurrencies: {
       type: Array,
       required: true,
     },
