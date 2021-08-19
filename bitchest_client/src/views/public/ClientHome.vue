@@ -15,7 +15,7 @@ import Wallet from "../../components/public/Wallet.vue";
 
 export default {
   name: "Home",
-  components: { Navigation, Header, Wallet }
+  components: { Navigation, Header, Wallet },
 };
 </script>
 

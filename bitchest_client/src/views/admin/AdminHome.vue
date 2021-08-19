@@ -1,5 +1,5 @@
 <template>
-    <h1>Espace Admin</h1>
+  <h1>Espace Admin</h1>
 </template>
 
 <script>

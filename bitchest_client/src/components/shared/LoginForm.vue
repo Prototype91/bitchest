@@ -57,7 +57,15 @@ export default {
           const user = response.data.user;
 
           this.$root.$emit("login", true);
-          sessionStorage.setItem("token", response.data.token);
+
+          const dataToPush= {
+            token: response.data.token,
+            elevation: user.elevation
+          }
+
+          const sessionStorageData = JSON.stringify(dataToPush);
+          
+          sessionStorage.setItem("token", sessionStorageData);
 
           this.isLoading = false;
 
