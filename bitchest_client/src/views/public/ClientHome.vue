@@ -2,22 +2,22 @@
   <main>
     <Navigation />
     <section class="synthesis-ctn">
-      <Header :balance="3000" />
-      <Wallet :cryptoCurrencies="cryptoCurrencies" />
+      <HeaderSynthesis :balance="3000" />
+      <HeartSynthesis :cryptoCurrencies="cryptoCurrencies" />
     </section>
   </main>
 </template>
 
 <script>
 import Navigation from "../../components/shared/Navigation.vue";
-import Header from "../../components/shared/Header.vue";
-import Wallet from "../../components/public/Wallet.vue";
+import HeaderSynthesis from "../../components/public/HeaderSythesis.vue";
+import HeartSynthesis from "../../components/public/HeartSynthesis.vue";
 import CryptoService from "../../services/crypto/cryptoCurrencies.service";
 import CryptoMapper from "../../services/crypto/cryptoCurrencies.mapper";
 
 export default {
   name: "Home",
-  components: { Navigation, Header, Wallet },
+  components: { Navigation, HeaderSynthesis, HeartSynthesis },
   data() {
     return {
       cryptoCurrencies: [],
