@@ -2,27 +2,27 @@
   <div class="admin-ctn">
     <div>
       <h1>Ajouter un utilisateur :</h1>
-      <form action="" method="post" enctype="multipart/form-data">
+      <form>
         <div>
-          <label for="name">Nom :</label> <br />
+          <label for="lastname">Nom :</label> <br />
           <input
             type="text"
-            name="name"
-            v-model="name"
+            name="lastname"
+            v-model="user.firstname"
             class="form-control"
-            id="name"
+            id="lastname"
             placeholder="Nom"
             required
           />
         </div>
         <div>
-          <label for="nickname">Prénom : </label>
+          <label for="firstname">Prénom : </label>
           <input
-            name="nickname"
+            name="firstname"
             class="form-control"
-            v-model="nickname"
+            v-model="user.lastname"
             type="text"
-            id="nickname"
+            id="firstname"
             placeholder="Prénom"
             required
           />
@@ -33,34 +33,41 @@
             name="mail"
             class="form-control"
             required
-            v-model="mail"
+            v-model="user.email"
             id="mail"
             type="mail"
             placeholder="Adresse mail"
           />
         </div>
         <div>
-          <label for="adress">Adresse : </label>
+          <label for="address">Adresse : </label>
           <input
-            name="adress"
+            name="address"
             class="form-control"
-            v-model="adress"
+            v-model="user.address"
             type="text"
-            id="adress"
+            id="address"
             placeholder="Lieu de résidence"
             required
           />
         </div>
         <div>
-          <label for="tel">Téléphone : </label>
-          <input name="tel" class="form-control" id="tel" v-model="tel" type="tel" placeholder="Mobile"/>
+          <label for="phone">Téléphone : </label>
+          <input
+            name="phone"
+            class="form-control"
+            id="phone"
+            v-model="user.phone"
+            type="tel"
+            placeholder="Mobile"
+          />
         </div>
         <div>
           <label for="password">Mot de passe : </label>
           <input
             name="password"
             class="form-control"
-            v-model="password"
+            v-model="user.password"
             type="password"
             id="password"
             placeholder="Mot de passe"
@@ -72,14 +79,25 @@
           <input
             name="password-confirm"
             class="form-control"
-            v-model="password"
             type="password"
             id="password-confirm"
             placeholder="Confirmation du mot de passe"
             required
           />
         </div>
-        <button class="btn btn-primary" type="submit">
+        <div>
+          <label>
+            <input type="radio"
+            v-model="user.elevation"
+            name="elevation" value="admin"> Admin
+          </label>
+          <label>
+            <input type="radio"
+            v-model="user.elevation"
+            name="elevation" value="user"> Client
+          </label>
+        </div>
+        <button @click="add($event)" class="btn btn-primary" type="submit">
           Ajouter l'utilisateur
         </button>
       </form>
@@ -88,8 +106,35 @@
 </template>
 
 <script>
+import authService from "../../services/authentication/auth.service";
 export default {
-    name: "CreateUser"
+  name: "CreateUser",
+  data() {
+    return {
+      user: {
+        firstname: null,
+        lastname: null,
+        email: null,
+        phone: null,
+        address: null,
+        password: null,
+        elevation: null,
+      },
+    };
+  },
+  methods: {
+    add(e) {
+      e.preventDefault();
+      authService
+        .addUser(this.user)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+  },
 };
 </script>
 
