@@ -12,8 +12,8 @@
 import Navigation from "../../components/shared/Navigation.vue";
 import HeaderSynthesis from "../../components/public/HeaderSythesis.vue";
 import HeartSynthesis from "../../components/public/HeartSynthesis.vue";
-import CryptoService from "../../services/crypto/cryptoCurrencies.service";
-import CryptoMapper from "../../services/crypto/cryptoCurrencies.mapper";
+import CryptoCurrencyService from "../../services/cryptoCurrencies/cryptoCurrencies.service";
+import CryptoCurrencyMapper from "../../services/cryptoCurrencies/cryptoCurrencies.mapper";
 
 export default {
   name: "Home",
@@ -24,10 +24,13 @@ export default {
     };
   },
   mounted() {
-    CryptoService.getCryptoCurrencies().then((response) => {
-      this.cryptoCurrencies = CryptoMapper.mapCryptoCurrencies(response);
-      console.log(this.cryptoCurrencies);
-    });
+    CryptoCurrencyService.getCryptoCurrencies()
+      .then((response) => {
+        this.cryptoCurrencies = CryptoCurrencyMapper.mapCryptoCurrencies(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   },
 };
 </script>

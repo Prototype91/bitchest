@@ -1,12 +1,8 @@
-import Api from "./request.service";
+import Api from "../server/request.service";
 
 export default {
     login(email, password) {
         return Api().post("/login", { email, password });
-    },
-
-    addUser(user) {
-        return Api().post("/admin", user);
     },
 
     logout() {
