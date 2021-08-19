@@ -3,7 +3,8 @@ import AdminHome from '../views/admin/AdminHome.vue'
 import Login from '../views/Login.vue'
 import ClientHome from '../views/public/ClientHome.vue'
 import PersonalsInfo from '../views/public/PersonalsInfo.vue'
-import Create from '../views/admin/Create.vue'
+import Create from '../views/admin/Create.vue';
+import Details from "../views/public/Details.vue";
 
 const routes = [
   {
@@ -22,6 +23,12 @@ const routes = [
     path: '/client/informations',
     name: 'ClientPersonals',
     component: PersonalsInfo,
+    meta: { authOnly: true }
+  },
+  {
+    path: '/client/details',
+    name: 'Details',
+    component: Details,
     meta: { authOnly: true }
   },
   {

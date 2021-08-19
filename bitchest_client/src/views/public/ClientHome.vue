@@ -36,7 +36,7 @@ export default {
 
     CryptoCurrencyService.getHistoricalCoinValues("ethereum")
       .then((response) => {
-        CryptoCurrencyMapper.mapCryptoCurrencies(response);
+        CryptoCurrencyMapper.mapCryptoCurrencyHistory(response);
       })
       .catch((error) => {
         console.error(error);
