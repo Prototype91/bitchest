@@ -1,10 +1,12 @@
 <template>
-  <h1>Espace Admin</h1>
+  <ManageUsers />
 </template>
 
 <script>
+import ManageUsers from "../../components/admin/ManageUsers.vue";
 export default {
   name: "AdminHome",
+  components: { ManageUsers },
 };
 </script>
 

@@ -25,7 +25,7 @@ export default {
   props: {
     cryptoCurrencies: {
       type: Array,
-      requied: true,
+      required: true,
     },
   },
 };
