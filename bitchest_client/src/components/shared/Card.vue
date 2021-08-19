@@ -1,7 +1,8 @@
 <template>
   <div class="card">
-    <p><i class="fab fa-bitcoin"></i> {{ cryptoName }}</p>
-    <p>{{ balance }}€</p>
+    <img :src="image" alt="">
+    <p>{{ name }}</p>
+    <p>{{ price }}€</p>
     <p>{{ fluctuation }}%</p>
   </div>
 </template>
@@ -10,11 +11,11 @@
 export default {
   name: "Card",
   props: {
-    cryptoName: {
+    name: {
       type: String,
       required: true,
     },
-    balance: {
+    price: {
       type: Number,
       required: true,
     },
@@ -22,6 +23,10 @@ export default {
       type: Number,
       required: true,
     },
+    image: {
+      type: String,
+      required: true
+    }
   },
 };
 </script>
@@ -32,10 +37,15 @@ export default {
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 25px;
   padding: 20px;
+  text-align: center;
 }
 
 .card p {
   margin: 0;
+}
+
+.card img {
+  width: 50%;
 }
 
 @media (max-width: 700px) {

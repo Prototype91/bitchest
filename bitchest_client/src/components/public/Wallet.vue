@@ -3,9 +3,10 @@
     <section class="card-ctn">
       <Card
         v-for="(cryptoCurrency, index) in this.cryptoCurrencies"
-        :cryptoName="cryptoCurrency.name"
-        :balance="cryptoCurrency.current_price"
+        :name="cryptoCurrency.name"
+        :price="cryptoCurrency.current_price"
         :fluctuation="cryptoCurrency.ath_change_percentage"
+        :image="cryptoCurrency.image"
         :key="index"
       />
     </section>
@@ -20,11 +21,11 @@ export default {
   name: "Wallet",
   components: { Card, Table },
   props: {
-    cryptoCurrencies : {
+    cryptoCurrencies: {
       type: Array,
-      requied: true
-    }
-  }
+      requied: true,
+    },
+  },
 };
 </script>
 
