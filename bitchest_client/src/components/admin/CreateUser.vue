@@ -1,5 +1,6 @@
 <template>
   <div class="admin-ctn">
+    <Loader :isLoading="isLoading" />
     <div>
       <h1>Ajouter un utilisateur :</h1>
       <form>
@@ -107,8 +108,10 @@
 
 <script>
 import UsersService from "../../services/users/users.service";
+import Loader from "../shared/Loader.vue";
 export default {
   name: "CreateUser",
+  components: { Loader },
   data() {
     return {
       user: {
@@ -120,17 +123,22 @@ export default {
         password: null,
         elevation: null,
       },
+      isLoading: false
     };
   },
   methods: {
     addUser(event) {
       event.preventDefault();
+      this.isLoading = true;
       UsersService
         .addUser(this.user)
         .then((response) => {
+          this.isLoading = false;
+          this.$router.push('/admin');
           console.log(response);
         })
         .catch((err) => {
+          this.isLoading = false;
           console.error(err);
         });
     },
