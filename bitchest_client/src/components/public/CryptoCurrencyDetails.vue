@@ -18,11 +18,13 @@ export default {
   data() {
     return {
       cryptoCurrencyData: [],
-      label: "Prix",
+      label: "",
     };
   },
   mounted() {
-    CryptoCurrencyService.getHistoricalCoinValues("bitcoin")
+    const cryptoCurrencyId = this.$route.params.id;
+    this.label = `Cours du ${cryptoCurrencyId.toUpperCase()}`;
+    CryptoCurrencyService.getHistoricalCoinValues(cryptoCurrencyId)
       .then((response) => {
         this.cryptoCurrencyData =
           CryptoCurrencyMapper.mapCryptoCurrencyHistory(response);

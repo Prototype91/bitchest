@@ -26,7 +26,7 @@ const routes = [
     meta: { authOnly: true }
   },
   {
-    path: '/client/details',
+    path: '/client/details/:id',
     name: 'Details',
     component: Details,
     meta: { authOnly: true }

@@ -10,12 +10,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(cryptoCurrency, index) in this.cryptoCurrencies" :key="index">
+        <tr
+          v-for="(cryptoCurrency, index) in this.cryptoCurrencies"
+          :key="index"
+        >
           <td data-label="Crypto">{{ cryptoCurrency.name }}</td>
           <td data-label="Prix">{{ cryptoCurrency.current_price }}€</td>
-          <td data-label="Fluctuation">{{ cryptoCurrency.ath_change_percentage }}%</td>
+          <td data-label="Fluctuation">
+            {{ cryptoCurrency.ath_change_percentage }}%
+          </td>
           <td data-label="Action">
-            <router-link to="/"><span>Acheter</span></router-link>
+            <router-link :to="'/client/details/' + cryptoCurrency.id"
+              >Voir</router-link
+            >
           </td>
         </tr>
       </tbody>

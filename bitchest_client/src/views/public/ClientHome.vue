@@ -1,11 +1,14 @@
 <template>
-  <main>
-    <Navigation />
-    <section class="synthesis-ctn">
-      <HeaderSynthesis :balance="3000" />
-      <HeartSynthesis :cryptoCurrencies="cryptoCurrencies" />
-    </section>
-  </main>
+  <div>
+    <Loader :isLoading="isLoading" />
+    <main v-if="cryptoCurrencies.length">
+      <Navigation />
+      <section class="synthesis-ctn">
+        <HeaderSynthesis :balance="3000" />
+        <HeartSynthesis :cryptoCurrencies="cryptoCurrencies" />
+      </section>
+    </main>
+  </div>
 </template>
 
 <script>
@@ -14,20 +17,24 @@ import HeaderSynthesis from "../../components/public/HeaderSythesis.vue";
 import HeartSynthesis from "../../components/public/HeartSynthesis.vue";
 import CryptoCurrencyService from "../../services/cryptoCurrencies/cryptoCurrencies.service";
 import CryptoCurrencyMapper from "../../services/cryptoCurrencies/cryptoCurrencies.mapper";
+import Loader from "../../components/shared/Loader.vue";
 
 export default {
   name: "Home",
-  components: { Navigation, HeaderSynthesis, HeartSynthesis },
+  components: { Navigation, HeaderSynthesis, HeartSynthesis, Loader },
   data() {
     return {
       cryptoCurrencies: [],
+      isLoading: false,
     };
   },
   mounted() {
+    this.isLoading = true;
     CryptoCurrencyService.getCryptoCurrencies()
       .then((response) => {
         this.cryptoCurrencies =
           CryptoCurrencyMapper.mapCryptoCurrencies(response);
+        this.isLoading = false;
         console.log(this.cryptoCurrencies);
       })
       .catch((error) => {
