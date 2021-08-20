@@ -3,7 +3,7 @@
     <div class="login-ctn">
       <Loader :isLoading="isLoading" />
       <h2>Login</h2>
-      <form>
+      <form @submit.prevent="login">
         <div class="input-ctn">
           <label>Adresse mail</label>
           <input
@@ -24,7 +24,7 @@
             v-model="password"
           />
         </div>
-        <button @click="login" class="submit btn btn-primary">
+        <button type="submit" class="submit btn btn-primary">
           Se connecter
         </button>
       </form>
@@ -51,9 +51,7 @@ export default {
     };
   },
   methods: {
-    login(event) {
-      event.preventDefault();
-
+    login() {
       this.isLoading = true;
 
       AuthService.login(this.email, this.password)

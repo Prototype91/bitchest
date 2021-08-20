@@ -3,14 +3,13 @@
     <Loader :isLoading="isLoading" />
     <div>
       <h1>Modifier cet Utilisateur :</h1>
-      <form>
+      <form @submit.prevent="editUser(currentUserData.id, this.user)">
         <div>
           <label for="lastname">Nom :</label> <br />
           <input
             type="text"
             name="lastname"
-            v-model="user.firstname"
-            :value="currentUserData.firstname"
+            v-model="user.lastname"
             class="form-control"
             id="lastname"
             placeholder="Nom"
@@ -22,8 +21,7 @@
           <input
             name="firstname"
             class="form-control"
-            v-model="user.lastname"
-            :value="currentUserData.lastname"
+            v-model="user.firstname"
             type="text"
             id="firstname"
             placeholder="Prénom"
@@ -37,7 +35,6 @@
             class="form-control"
             required
             v-model="user.email"
-            :value="currentUserData.email"
             id="mail"
             type="mail"
             placeholder="Adresse mail"
@@ -49,7 +46,6 @@
             name="address"
             class="form-control"
             v-model="user.address"
-            :value="currentUserData.address"
             type="text"
             id="address"
             placeholder="Lieu de résidence"
@@ -63,7 +59,6 @@
             class="form-control"
             id="phone"
             v-model="user.phone"
-            :value="currentUserData.phone"
             type="tel"
             placeholder="Mobile"
           />
@@ -74,7 +69,6 @@
             name="password"
             class="form-control"
             v-model="user.password"
-            :value="currentUserData.password"
             type="password"
             id="password"
             placeholder="Mot de passe"
@@ -113,7 +107,6 @@
           </label>
         </div>
         <button
-          @click="editUser($event, currentUserData.id)"
           class="btn btn-primary"
           type="submit"
         >
@@ -125,8 +118,12 @@
 </template>
 
 <script>
+import UsersService from "../../services/users/users.service";
+import Loader  from "../shared/Loader.vue";
+
 export default {
   name: "EditUserForm",
+  components: { Loader },
   props: {
     currentUserData: {
       type: Object,
@@ -136,21 +133,30 @@ export default {
   data() {
     return {
       user: {
-        firstname: null,
-        lastname: null,
-        email: null,
-        phone: null,
-        address: null,
+        firstname: this.currentUserData.firstname,
+        lastname: this.currentUserData.lastname,
+        email: this.currentUserData.email,
+        phone: this.currentUserData.phone,
+        address: this.currentUserData.address,
         password: null,
-        elevation: null,
+        elevation: this.currentUserData.elevation,
       },
       isLoading: false,
     };
   },
-  mounted() {
-    const userId = this.$route.params.id;
-    console.log(userId);
-  },
+  methods: {
+    editUser(id, user) {
+      this.isLoading = true;
+      UsersService.updateUser(id, user).then(response => {
+        console.log(response);
+        this.isLoading = false;
+        this.$router.push('/admin');
+      }).catch(error => {
+        console.error(error);
+        this.isLoading = false;
+      })
+    }
+  }
 };
 </script>
 

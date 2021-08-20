@@ -3,13 +3,13 @@
     <Loader :isLoading="isLoading" />
     <div>
       <h1>Ajouter un utilisateur :</h1>
-      <form>
+      <form @submit.prevent="addUser">
         <div>
           <label for="lastname">Nom :</label> <br />
           <input
             type="text"
             name="lastname"
-            v-model="user.firstname"
+            v-model="user.lastname"
             class="form-control"
             id="lastname"
             placeholder="Nom"
@@ -21,7 +21,7 @@
           <input
             name="firstname"
             class="form-control"
-            v-model="user.lastname"
+            v-model="user.firstname"
             type="text"
             id="firstname"
             placeholder="Prénom"
@@ -98,7 +98,7 @@
             name="elevation" value="user"> Client
           </label>
         </div>
-        <button @click="addUser($event)" class="btn btn-primary" type="submit">
+        <button class="btn btn-primary" type="submit">
           Ajouter l'utilisateur
         </button>
       </form>
@@ -127,8 +127,7 @@ export default {
     };
   },
   methods: {
-    addUser(event) {
-      event.preventDefault();
+    addUser() {
       this.isLoading = true;
       UsersService
         .addUser(this.user)

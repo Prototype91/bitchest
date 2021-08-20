@@ -1,14 +1,19 @@
 import Api from "../server/request.service";
 
 export default {
-    // Request to add a new User
-    addUser(user) {
-        return Api().post("/add", user);
+    // Request to get Users
+    getUsers() {
+        return Api().get("/users");
+    },
+
+    // Request to get a specific user
+    getUser(id) {
+        return Api().get(`/user/${id}`);
     },
 
     // Request to add a new User
-    getUsers() {
-        return Api().get("/users");
+    addUser(user) {
+        return Api().post("/add", user);
     },
 
     // Request to delete a specific user
@@ -17,7 +22,7 @@ export default {
     },
 
     // Request to update a specific user
-    updateUser(id) {
-        return Api().put(`/user/update/${id}`);
+    updateUser(id, userData) {
+        return Api().put(`/user/update/${id}`, userData);
     }
 }

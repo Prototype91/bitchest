@@ -29,7 +29,7 @@ export default {
     this.isLoading = true;
     UsersService.getUsers()
       .then((response) => {
-        console.log(response);
+        console.log(response.data.users);
         this.users = response.data.users;
         this.isLoading = false;
       })
