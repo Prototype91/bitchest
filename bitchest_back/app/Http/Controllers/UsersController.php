@@ -73,8 +73,15 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {        
+        $user = User::find($id);
+
+        $user->update($request->all());
+
+        return response([
+            'user' => $user,
+            'message' => 'Utilisateur mis à jour'
+        ], 200);
     }
 
     /**
