@@ -5,7 +5,7 @@
 <script>
 import ManageUsers from "../../components/admin/ManageUsers.vue";
 export default {
-  name: "AdminHome",
+  name: "AdminHomeView",
   components: { ManageUsers },
 };
 </script>

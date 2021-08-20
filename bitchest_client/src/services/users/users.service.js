@@ -11,8 +11,13 @@ export default {
         return Api().get("/users");
     },
 
-    // Request to delete a specifi user
+    // Request to delete a specific user
     deleteUser(id) {
         return Api().delete(`/user/${id}`);
+    },
+
+    // Request to update a specific user
+    updateUser(id) {
+        return Api().put(`/user/update/${id}`);
     }
 }

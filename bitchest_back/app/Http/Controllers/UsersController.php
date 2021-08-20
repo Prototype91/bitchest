@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\User as ModelsUser;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -35,8 +33,8 @@ class UsersController extends Controller
 
         // // image
         // $im = $request->file('picture');
-        
-        // // si on associe une image à un product 
+
+        // // si on associe une image à un product
         // if (!empty($im)) {
         //     $link = $request->file('picture')->store($category->gender);
 
@@ -62,7 +60,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        return User::find($id);
     }
 
     /**
@@ -73,7 +71,7 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {        
+    {
         $user = User::find($id);
 
         $user->update($request->all());

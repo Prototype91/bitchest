@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import AdminHome from '../views/admin/AdminHome.vue'
+import AdminHomeView from '../views/admin/AdminHomeView.vue'
 import Login from '../views/Login.vue'
 import ClientHome from '../views/public/ClientHome.vue'
 import PersonalsInfo from '../views/public/PersonalsInfo.vue'
-import Create from '../views/admin/Create.vue';
+import AdminCreateUserView from '../views/admin/AdminCreateUserView.vue';
 import Details from "../views/public/Details.vue";
+import AdminEditUserView from "../views/admin/AdminEditUserView";
 
 const routes = [
   {
@@ -33,8 +34,8 @@ const routes = [
   },
   {
     path: '/admin',
-    name: 'AdminHome',
-    component: AdminHome,
+    name: 'AdminHomeView',
+    component: AdminHomeView,
     meta: { authOnly: true }
   },
   {
@@ -45,8 +46,14 @@ const routes = [
   },
   {
     path: '/admin/create',
-    name: 'AdminCreate',
-    component: Create,
+    name: 'AdminCreateUserView',
+    component: AdminCreateUserView,
+    meta: { authOnly: true }
+  },
+  {
+    path: '/admin/update/:id',
+    name: 'AdminUpdate',
+    component: AdminEditUserView,
     meta: { authOnly: true }
   }
 ]

@@ -18,7 +18,7 @@
           <td data-label="Email">{{ user.email }}</td>
           <td data-label="Rôle">{{ user.elevation }}</td>
           <td data-label="Modifier">
-            <router-link to="/"><span>Modifier</span></router-link>
+            <router-link :to="'/admin/update/' + user.id">Modifier</router-link>
           </td>
           <td data-label="Supprimer">
             <button @click="deleteUser(user.id)">Supprimer</button>
