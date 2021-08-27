@@ -38,11 +38,13 @@ export default {
       type: Array,
     },
   },
+  emits: ['user-deleted'],
   methods: {
     deleteUser(id) {
       UserService.deleteUser(id)
         .then((reponse) => {
           console.log(reponse);
+          this.$emit('user-deleted');
         })
         .catch((error) => {
           console.error(error);
