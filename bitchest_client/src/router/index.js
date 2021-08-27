@@ -18,43 +18,43 @@ const routes = [
     path: '/client',
     name: 'ClientHome',
     component: ClientHome,
-    meta: { authOnly: true }
+    meta: { userOnly: true }
   },
   {
     path: '/client/informations',
     name: 'ClientPersonals',
     component: PersonalsInfo,
-    meta: { authOnly: true }
+    meta: { userOnly: true }
   },
   {
     path: '/client/details/:id',
     name: 'Details',
     component: Details,
-    meta: { authOnly: true }
+    meta: { userOnly: true }
   },
   {
     path: '/admin',
     name: 'AdminHomeView',
     component: AdminHomeView,
-    meta: { authOnly: true }
+    meta: { adminOnly: true }
   },
   {
     path: '/admin/informations',
     name: 'AdminPersonals',
     component: PersonalsInfo,
-    meta: { authOnly: true }
+    meta: { adminOnly: true }
   },
   {
     path: '/admin/create',
     name: 'AdminCreateUserView',
     component: AdminCreateUserView,
-    meta: { authOnly: true }
+    meta: { adminOnly: true }
   },
   {
     path: '/admin/update/:id',
     name: 'AdminUpdate',
     component: AdminEditUserView,
-    meta: { authOnly: true }
+    meta: { adminOnly: true }
   }
 ]
 
@@ -70,27 +70,51 @@ const isLoggedIn = () => {
   return !!sessionStorageData?.token;
 }
 
+const isClient = () => {
+  let dataToGet = sessionStorage.getItem("token");
+  const sessionStorageData = JSON.parse(dataToGet);
+
+  return sessionStorageData?.elevation == 'user';
+}
+
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.authOnly)) {
-    // if you are not logged in, you will be redirected
+  if (to.matched.some((record) => record.meta.adminOnly)) {
+    if (isLoggedIn() && isClient()) {
+      next("/client");
+      return;
+    }
     if (!isLoggedIn()) {
-      next({
-        path: "/",
-        query: { redirect: to.fullPath }
-      });
-    } else {
-      next();
+      next("/");
+      return;
     }
-  } else if (to.matched.some(record => record.meta.guestOnly)) {
-    // if you are logged in, you have the access
+    next();
+  } else {
+    next();
+  }
+});
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.guestOnly)) {
     if (isLoggedIn()) {
-      next({
-        path: "/client",
-        query: { redirect: to.fullPath }
-      });
-    } else {
-      next();
+      isClient() ? next("/client") : next("/admin");
+      return;
     }
+    next();
+  } else {
+    next();
+  }
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.userOnly)) {
+    if (isLoggedIn() && !isClient()) {
+      next('/admin');
+      return;
+    }
+    if (!isLoggedIn()) {
+      next('/');
+      return;
+    }
+    next();
   } else {
     next();
   }

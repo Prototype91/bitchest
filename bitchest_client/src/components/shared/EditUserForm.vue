@@ -106,10 +106,7 @@
             Client
           </label>
         </div>
-        <button
-          class="btn btn-primary"
-          type="submit"
-        >
+        <button class="btn btn-primary" type="submit">
           Modifier l'utilisateur
         </button>
       </form>
@@ -119,7 +116,7 @@
 
 <script>
 import UsersService from "../../services/users/users.service";
-import Loader  from "../shared/Loader.vue";
+import Loader from "../shared/Loader.vue";
 
 export default {
   name: "EditUserForm",
@@ -147,16 +144,18 @@ export default {
   methods: {
     editUser(id, user) {
       this.isLoading = true;
-      UsersService.updateUser(id, user).then(response => {
-        console.log(response);
-        this.isLoading = false;
-        this.$router.push('/admin');
-      }).catch(error => {
-        console.error(error);
-        this.isLoading = false;
-      })
-    }
-  }
+      UsersService.updateUser(id, user)
+        .then((response) => {
+          console.log(response);
+          this.isLoading = false;
+          this.$router.push("/admin");
+        })
+        .catch((error) => {
+          console.error(error);
+          this.isLoading = false;
+        });
+    },
+  },
 };
 </script>
 
