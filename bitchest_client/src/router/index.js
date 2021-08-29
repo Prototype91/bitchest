@@ -1,11 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import AdminCreateUserView from '../views/admin/AdminCreateUserView.vue'
+import AdminEditUserView from "../views/admin/AdminEditUserView"
 import AdminHomeView from '../views/admin/AdminHomeView.vue'
 import Login from '../views/Login.vue'
+import PageNotFound from '../views/PageNotFound.vue'
 import ClientHome from '../views/public/ClientHome.vue'
+import Details from "../views/public/Details.vue"
 import PersonalsInfo from '../views/public/PersonalsInfo.vue'
-import AdminCreateUserView from '../views/admin/AdminCreateUserView.vue';
-import Details from "../views/public/Details.vue";
-import AdminEditUserView from "../views/admin/AdminEditUserView";
 
 const routes = [
   {
@@ -55,6 +56,11 @@ const routes = [
     name: 'AdminUpdate',
     component: AdminEditUserView,
     meta: { adminOnly: true }
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: 'PageNotfound',
+    component: PageNotFound
   }
 ]
 
