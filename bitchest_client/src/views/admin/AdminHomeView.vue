@@ -1,13 +1,24 @@
 <template>
-  <ManageUsers />
+  <main>
+    <Navigation />
+    <ManageUsers />
+  </main>
 </template>
 
 <script>
 import ManageUsers from "../../components/admin/ManageUsers.vue";
+import Navigation from "../../components/shared/Navigation.vue";
 export default {
   name: "AdminHomeView",
-  components: { ManageUsers },
+  components: { ManageUsers, Navigation },
 };
 </script>
 
-<style></style>
+<style>
+main {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  padding: 15px 10px;
+}
+</style>

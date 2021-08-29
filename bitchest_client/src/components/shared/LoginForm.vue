@@ -71,11 +71,9 @@ export default {
 
           this.isLoading = false;
 
-          if (user.elevation === "admin") {
-            this.$router.push("/admin");
-          } else {
-            this.$router.push("/client");
-          }
+          user.elevation === "admin"
+            ? this.$router.push("/admin")
+            : this.$router.push("/client");
         })
         .catch((error) => {
           this.isLoading = false;

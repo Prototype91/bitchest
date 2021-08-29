@@ -31,7 +31,6 @@ export default {
         const endUrl = '/market_chart?vs_currency=eur&days=30&interval=daily';
 
         // Returns the cryptocurrency historical values for 30 days
-        return axios.get(`${baseUrl}${cryptoCurrency}${endUrl}`)
-
+        return axios.get(`${baseUrl}${cryptoCurrency}${endUrl}`);
     }
 }
