@@ -1,116 +1,113 @@
 <template>
   <div class="admin-ctn">
     <Loader :isLoading="isLoading" />
-    <div>
-      <h1>Modifier cet Utilisateur :</h1>
-      <form @submit.prevent="editUser(currentUserData.id, this.user)">
-        <div>
-          <label for="lastname">Nom :</label> <br />
+    <form @submit.prevent="editUser(currentUserData.id, this.user)">
+      <div>
+        <label for="lastname">Nom :</label> <br />
+        <input
+          type="text"
+          name="lastname"
+          v-model="user.lastname"
+          class="form-control"
+          id="lastname"
+          placeholder="Nom"
+          required
+        />
+      </div>
+      <div>
+        <label for="firstname">Prénom : </label>
+        <input
+          name="firstname"
+          class="form-control"
+          v-model="user.firstname"
+          type="text"
+          id="firstname"
+          placeholder="Prénom"
+          required
+        />
+      </div>
+      <div>
+        <label for="mail">Mail : </label>
+        <input
+          name="mail"
+          class="form-control"
+          required
+          v-model="user.email"
+          id="mail"
+          type="mail"
+          placeholder="Adresse mail"
+        />
+      </div>
+      <div>
+        <label for="address">Adresse : </label>
+        <input
+          name="address"
+          class="form-control"
+          v-model="user.address"
+          type="text"
+          id="address"
+          placeholder="Lieu de résidence"
+          required
+        />
+      </div>
+      <div>
+        <label for="phone">Téléphone : </label>
+        <input
+          name="phone"
+          class="form-control"
+          id="phone"
+          v-model="user.phone"
+          type="tel"
+          placeholder="Mobile"
+        />
+      </div>
+      <div>
+        <label for="password">Mot de passe : </label>
+        <input
+          name="password"
+          class="form-control"
+          v-model="user.password"
+          type="password"
+          id="password"
+          placeholder="Mot de passe"
+          required
+        />
+      </div>
+      <div>
+        <label for="password-confirm">Confirmer le mot de passe : </label>
+        <input
+          name="password-confirm"
+          class="form-control"
+          type="password"
+          id="password-confirm"
+          placeholder="Confirmation du mot de passe"
+          required
+        />
+      </div>
+      <div class="radio-ctn">
+        <label>
           <input
-            type="text"
-            name="lastname"
-            v-model="user.lastname"
-            class="form-control"
-            id="lastname"
-            placeholder="Nom"
-            required
+            type="radio"
+            v-model="user.elevation"
+            name="elevation"
+            value="admin"
           />
-        </div>
-        <div>
-          <label for="firstname">Prénom : </label>
+          Admin
+        </label>
+        <label>
           <input
-            name="firstname"
-            class="form-control"
-            v-model="user.firstname"
-            type="text"
-            id="firstname"
-            placeholder="Prénom"
-            required
+            type="radio"
+            v-model="user.elevation"
+            name="elevation"
+            value="user"
           />
-        </div>
-        <div>
-          <label for="mail">Mail : </label>
-          <input
-            name="mail"
-            class="form-control"
-            required
-            v-model="user.email"
-            id="mail"
-            type="mail"
-            placeholder="Adresse mail"
-          />
-        </div>
-        <div>
-          <label for="address">Adresse : </label>
-          <input
-            name="address"
-            class="form-control"
-            v-model="user.address"
-            type="text"
-            id="address"
-            placeholder="Lieu de résidence"
-            required
-          />
-        </div>
-        <div>
-          <label for="phone">Téléphone : </label>
-          <input
-            name="phone"
-            class="form-control"
-            id="phone"
-            v-model="user.phone"
-            type="tel"
-            placeholder="Mobile"
-          />
-        </div>
-        <div>
-          <label for="password">Mot de passe : </label>
-          <input
-            name="password"
-            class="form-control"
-            v-model="user.password"
-            type="password"
-            id="password"
-            placeholder="Mot de passe"
-            required
-          />
-        </div>
-        <div>
-          <label for="password-confirm">Confirmer le mot de passe : </label>
-          <input
-            name="password-confirm"
-            class="form-control"
-            type="password"
-            id="password-confirm"
-            placeholder="Confirmation du mot de passe"
-            required
-          />
-        </div>
-        <div>
-          <label>
-            <input
-              type="radio"
-              v-model="user.elevation"
-              name="elevation"
-              value="admin"
-            />
-            Admin
-          </label>
-          <label>
-            <input
-              type="radio"
-              v-model="user.elevation"
-              name="elevation"
-              value="user"
-            />
-            Client
-          </label>
-        </div>
-        <button class="btn btn-primary" type="submit">
-          Modifier l'utilisateur
-        </button>
-      </form>
-    </div>
+          Client
+        </label>
+      </div>
+      <button class="btn btn-primary" type="submit">
+        Modifier l'utilisateur
+      </button>
+    </form>
   </div>
 </template>
 
@@ -159,5 +156,33 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+.admin-ctn {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-ctn h1 {
+  font-size: 2rem;
+  padding-bottom: 35px;
+}
+
+.admin-ctn form > div {
+  padding-bottom: 12px;
+  min-width: 300px;
+}
+
+.admin-ctn form > div.radio-ctn {
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.admin-ctn form label {
+      padding-bottom: 2px;
+    margin-right: 10px;
+}
 </style>
