@@ -35,6 +35,7 @@
 
 <script>
 import AuthService from "../../services/authentication/auth.service";
+import SessionStorageService from '../../services/sessionStorage/sessionStorage.service';
 import Loader from "./Loader.vue";
 
 export default {
@@ -71,9 +72,7 @@ export default {
             email: user.email
           };
 
-          const sessionStorageData = JSON.stringify(dataToPush);
-
-          sessionStorage.setItem("token", sessionStorageData);
+          SessionStorageService.setSessionStorage(dataToPush);
 
           this.isLoading = false;
 
