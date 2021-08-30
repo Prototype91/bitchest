@@ -2,7 +2,7 @@
   <nav>
     <Loader :isLoading="isLoading" />
     <div class="logo-ctn">
-      <router-link title="Accueil" class="link-menu" to="/">
+      <router-link title="Accueil" class="link-menu" :to="'/' + elevation">
         <svg
           width="77"
           height="84"
@@ -45,7 +45,7 @@
       </router-link>
     </div>
     <ul id="menu">
-      <li>
+      <li v-if="elevation == 'user'">
         <router-link title="Acheter/Vendre" class="link-menu" to="/">
           <i class="fas fa-coins"></i>
         </router-link>
@@ -56,7 +56,10 @@
         </router-link>
       </li>
       <li>
-        <router-link title="Mes informations" class="link-menu" to="/"
+        <router-link
+          title="Mes informations"
+          class="link-menu"
+          :to="'/' + elevation + '/profile'"
           ><i class="far fa-user-circle"></i
         ></router-link>
       </li>
@@ -73,7 +76,7 @@
 <script>
 import BurgerMenu from "./BurgerMenu.vue";
 import AuthService from "../../services/authentication/auth.service";
-import Loader from "./Loader.vue"
+import Loader from "./Loader.vue";
 
 export default {
   components: { BurgerMenu, Loader },
@@ -81,6 +84,8 @@ export default {
   data() {
     return {
       isLoading: false,
+      elevation: null,
+      id: null
     };
   },
   methods: {
@@ -101,6 +106,15 @@ export default {
           console.error(error);
         });
     },
+  },
+  mounted() {
+    let dataToGet = sessionStorage.getItem("token");
+    const sessionStorageData = JSON.parse(dataToGet);
+
+    console.log(sessionStorageData);
+
+    this.elevation = sessionStorageData.elevation == "user" ? "client" : "admin";
+    this.id = sessionStorageData.id;
   },
 };
 </script>
@@ -136,7 +150,8 @@ nav {
   margin-top: auto;
 }
 
-.link-menu, .logout {
+.link-menu,
+.logout {
   width: 100%;
   height: 100%;
   display: flex;

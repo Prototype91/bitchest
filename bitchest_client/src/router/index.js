@@ -6,7 +6,7 @@ import Login from '../views/Login.vue'
 import PageNotFound from '../views/PageNotFound.vue'
 import ClientHome from '../views/public/ClientHome.vue'
 import Details from "../views/public/Details.vue"
-import PersonalsInfo from '../views/public/PersonalsInfo.vue'
+import ProfileView from '../views/ProfileView.vue'
 
 const routes = [
   {
@@ -22,9 +22,9 @@ const routes = [
     meta: { userOnly: true }
   },
   {
-    path: '/client/informations',
-    name: 'ClientPersonals',
-    component: PersonalsInfo,
+    path: '/client/profile',
+    name: 'ClientProfile',
+    component: ProfileView,
     meta: { userOnly: true }
   },
   {
@@ -40,9 +40,9 @@ const routes = [
     meta: { adminOnly: true }
   },
   {
-    path: '/admin/informations',
-    name: 'AdminPersonals',
-    component: PersonalsInfo,
+    path: '/admin/profile',
+    name: 'AdminProfile',
+    component: ProfileView,
     meta: { adminOnly: true }
   },
   {

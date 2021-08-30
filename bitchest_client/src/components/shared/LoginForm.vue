@@ -58,11 +58,17 @@ export default {
         .then((response) => {
           const user = response.data.user;
 
-          this.$root.$emit("login", true);
+          console.log(user);
 
           const dataToPush = {
             token: response.data.token,
             elevation: user.elevation,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            address: user.address,
+            phone: user.phone,
+            id: user.id,
+            email: user.email
           };
 
           const sessionStorageData = JSON.stringify(dataToPush);
