@@ -19,9 +19,9 @@
     "core-js": "^3.6.5",
     "moment": "^2.29.1",
     "vue": "^3.0.0",
+    "vue-chartkick": "^1.1.0",
     "vue-loading-overlay": "^4.0.3",
     "vue-router": "^4.0.0-0",
-    "vue3-chart-v2": "^0.8.2",
     "vuex": "^4.0.2"
   },
   "devDependencies": {

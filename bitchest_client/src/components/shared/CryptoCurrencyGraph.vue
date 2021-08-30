@@ -1,38 +1,37 @@
+<template>
+  <line-chart
+    :data="cryptoCurrencyData"
+    suffix="€"
+    :min="minValue"
+    :max="maxValue"
+  ></line-chart>
+</template>
+
 <script>
-import { Line } from "vue3-chart-v2";
+// import { Line } from "vue3-chart-v2";
 export default {
   name: "CryptoCurrencyGraph",
-  extends: Line,
   props: {
     cryptoCurrencyData: {
-      type: Array,
+      type: Object,
       required: true,
     },
-    label: {
-      type: String,
-    },
   },
-  mounted() {
-    const dates = this.cryptoCurrencyData.map((data) => data.time);
-    const prices = this.cryptoCurrencyData.map((data) => data.price);
-
-    console.log(dates, prices);
-
-    this.renderChart({
-      labels: dates,
-      datasets: [
-        {
-          label: this.label,
-          data: prices,
-          borderColor: 'rgb(75, 192, 192)',
-          responsive: true,
-          fill: false,
-          tension: 0.1,
-          width: '100%',
-          height: '100%'
-        },
-      ],
-    });
+  data() {
+    return {
+      minValue: null,
+      maxValue: null,
+    };
+  },
+  methods: {
+    getMinValue() {
+      let values = Object.values(this.cryptoCurrencyData);
+      this.minValue =  Math.min(...values);
+    },
+    getMaxValue() {
+      let values = Object.values(this.cryptoCurrencyData);
+      this.maxValue =  Math.max(...values);
+    }
   },
 };
 </script>

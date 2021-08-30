@@ -8,6 +8,8 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from "./store";
+import VueChartkick from 'vue-chartkick'
+import 'chartkick/chart.js'
 
 
 library.add(fas);
@@ -19,4 +21,4 @@ const app = createApp(App);
 
 app.component("font-awesome-icon", FontAwesomeIcon);
 
-createApp(App).use(router).use(store).mount('#app')
+createApp(App).use(router).use(store).use(VueChartkick).mount('#app')

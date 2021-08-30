@@ -1,11 +1,12 @@
 <template>
   <section class="graph-ctn">
     <Loader :isLoading="isLoading" />
-    <CryptoCurrencyGraph
-      v-if="cryptoCurrencyData.length"
-      :cryptoCurrencyData="cryptoCurrencyData"
-      :label="label"
-    />
+    <div v-if="Object.entries(cryptoCurrencyData).length">
+      <h1>Voici l'évolution du {{ label }} sur 30 jours :</h1>
+      <CryptoCurrencyGraph
+        :cryptoCurrencyData="cryptoCurrencyData"
+      />
+    </div>
   </section>
 </template>
 
@@ -20,14 +21,14 @@ export default {
   components: { CryptoCurrencyGraph, Loader },
   data() {
     return {
-      cryptoCurrencyData: [],
+      cryptoCurrencyData: {},
       label: "",
       isLoading: false,
     };
   },
   mounted() {
     const cryptoCurrencyId = this.$route.params.id;
-    this.label = `Cours du ${cryptoCurrencyId.toUpperCase()}`;
+    this.label = cryptoCurrencyId.toUpperCase();
     this.isLoading = true;
     CryptoCurrencyService.getHistoricalCoinValues(cryptoCurrencyId)
       .then((response) => {
@@ -43,13 +44,16 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .graph-ctn {
-  width: 50%;
-  height: 200px !important;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   margin: 0 auto;
   padding: 10px;
 }
+.graph-ctn h1 {
+  margin-bottom: 30px;
+}
+
 </style>

@@ -1,12 +1,16 @@
 <template>
-  <CryptoCurrencyDetails />
+  <main>
+    <Navigation />
+    <CryptoCurrencyDetails />
+  </main>
 </template>
 
 <script>
 import CryptoCurrencyDetails from "../../components/public/CryptoCurrencyDetails.vue";
+import Navigation from '../../components/shared/Navigation.vue'
 
 export default {
-  components: { CryptoCurrencyDetails },
+  components: { CryptoCurrencyDetails, Navigation },
 };
 </script>
 
