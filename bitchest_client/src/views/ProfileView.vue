@@ -14,6 +14,8 @@
 import EditUserForm from "../components/shared/EditUserForm.vue";
 import Navigation from "../components/shared/Navigation.vue";
 import Loader from '../components/shared/Loader.vue';
+import UsersService from '../services/users/users.service';
+import SessionStorageService from '../services/sessionStorage/sessionStorage.service';
 
 export default {
   name: 'ProfileView',
@@ -24,12 +26,15 @@ export default {
     };
   },
   mounted() {
-    let dataToGet = sessionStorage.getItem("token");
-    const sessionStorageData = JSON.parse(dataToGet);
+    const sessionStorageData = SessionStorageService.getSessionStorage();
+    const userId = sessionStorageData.id;
 
     console.log(sessionStorageData);
 
-    this.userData = sessionStorageData
+    UsersService.getUser(userId).then((response) => {
+      console.log(response.data);
+      this.userData = response.data;
+    });
   },
 };
 </script>

@@ -1,12 +1,13 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import AdminCreateUserView from '../views/admin/AdminCreateUserView.vue'
-import AdminEditUserView from "../views/admin/AdminEditUserView"
-import AdminHomeView from '../views/admin/AdminHomeView.vue'
-import Login from '../views/Login.vue'
-import PageNotFound from '../views/PageNotFound.vue'
-import ClientHome from '../views/public/ClientHome.vue'
-import Details from "../views/public/Details.vue"
-import ProfileView from '../views/ProfileView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import AdminCreateUserView from '../views/admin/AdminCreateUserView.vue';
+import AdminEditUserView from "../views/admin/AdminEditUserView";
+import SessionStorageService from '../services/sessionStorage/sessionStorage.service';
+import AdminHomeView from '../views/admin/AdminHomeView.vue';
+import Login from '../views/Login.vue';
+import PageNotFound from '../views/PageNotFound.vue';
+import ProfileView from '../views/ProfileView.vue';
+import ClientHome from '../views/public/ClientHome.vue';
+import Details from "../views/public/Details.vue";
 
 const routes = [
   {
@@ -70,16 +71,12 @@ const router = createRouter({
 });
 
 const isLoggedIn = () => {
-  let dataToGet = sessionStorage.getItem("token");
-  const sessionStorageData = JSON.parse(dataToGet);
-
+  const sessionStorageData = SessionStorageService.getSessionStorage();
   return !!sessionStorageData?.token;
 }
 
 const isClient = () => {
-  let dataToGet = sessionStorage.getItem("token");
-  const sessionStorageData = JSON.parse(dataToGet);
-
+  const sessionStorageData = SessionStorageService.getSessionStorage();
   return sessionStorageData?.elevation == 'user';
 }
 

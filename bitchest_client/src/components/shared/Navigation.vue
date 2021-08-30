@@ -77,6 +77,7 @@
 import BurgerMenu from "./BurgerMenu.vue";
 import AuthService from "../../services/authentication/auth.service";
 import Loader from "./Loader.vue";
+import SessionStorageService from '../../services/sessionStorage/sessionStorage.service';
 
 export default {
   components: { BurgerMenu, Loader },
@@ -108,8 +109,7 @@ export default {
     },
   },
   mounted() {
-    let dataToGet = sessionStorage.getItem("token");
-    const sessionStorageData = JSON.parse(dataToGet);
+    const sessionStorageData = SessionStorageService.getSessionStorage();
 
     console.log(sessionStorageData);
 
