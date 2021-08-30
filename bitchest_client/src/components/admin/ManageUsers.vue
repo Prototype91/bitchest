@@ -2,8 +2,9 @@
   <div>
     <Loader :isLoading="isLoading" />
     <div v-if="users.length" class="user-table">
+      <h1>Liste des utilisateurs</h1>
+      <button class="btn btn-success"><router-link to="/admin/create">Ajouter un utilisateur</router-link></button>
       <UsersTable :users="users" @user-deleted="onUserDeleted" />
-      <router-link to="/admin/create">Ajouter</router-link>
     </div>
   </div>
 </template>
@@ -49,4 +50,24 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+h1 {
+  text-align: center;
+  font-size: 30px;
+}
+
+button {
+  margin: 20px;
+  margin-left: auto;
+  display: flex;
+}
+
+button a {
+  color: white;
+  text-decoration: none;
+}
+
+button a:hover {
+  color: white;
+}
+</style>
