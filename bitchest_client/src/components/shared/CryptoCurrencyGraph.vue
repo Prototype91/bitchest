@@ -24,10 +24,10 @@ export default {
         {
           label: this.label,
           data: prices,
-          backgroundColor: "#f87979",
+          borderColor: 'rgb(75, 192, 192)',
           responsive: true,
-          maintainAspectRatio: false,
-          width: "100px",
+          fill: false,
+          tension: 0.1
         },
       ],
     });
