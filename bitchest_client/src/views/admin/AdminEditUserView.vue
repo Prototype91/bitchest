@@ -1,21 +1,23 @@
 <template>
   <main>
+    <Navigation />
     <Loader :isLoading="!userData" />
     <div>
       <h1>Modification de l'utilisateur</h1>
-      <EditUserForm v-if="userData" :currentUserData="userData" />
+      <EditUserForm v-if="userData" :currentUserData="userData" :displayRadios="true"/>
     </div>
   </main>
 </template>
 
 <script>
+import Navigation from "../../components/shared/Navigation.vue";
 import EditUserForm from "../../components/shared/EditUserForm.vue";
 import UsersService from "../../services/users/users.service";
 import Loader from "../../components/shared/Loader.vue";
 
 export default {
   name: "AdminEditUserView",
-  components: { EditUserForm, Loader },
+  components: { EditUserForm, Navigation, Loader },
   data() {
     return {
       userData: null,
