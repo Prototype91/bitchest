@@ -56,4 +56,10 @@ export default {
     flex-direction: column;
   }
 }
+
+@media screen and (max-width: 917px) {
+  .synthesis-ctn {
+    width: 100%;
+  }
+}
 </style>

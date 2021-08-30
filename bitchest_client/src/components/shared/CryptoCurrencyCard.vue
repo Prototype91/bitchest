@@ -2,8 +2,8 @@
   <div class="card">
     <img :src="image" alt="">
     <p>{{ name }}</p>
-    <p>{{ price }}€</p>
-    <p>{{ fluctuation }}%</p>
+    <p>{{ price.toFixed(2) }}€</p>
+    <p>{{ fluctuation.toFixed(2) }}%</p>
   </div>
 </template>
 
@@ -33,19 +33,23 @@ export default {
 
 <style scoped>
 .card {
-  width: 30%;
-  background-color: rgba(0, 0, 0, 0.5);
+  width: 45%;
+  background-color: white;
   border-radius: 25px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
   padding: 20px;
-  text-align: center;
 }
 
 .card p {
   margin: 0;
+  color: black;
 }
 
 .card img {
-  width: 50%;
+  width: 10%;
 }
 
 @media (max-width: 700px) {

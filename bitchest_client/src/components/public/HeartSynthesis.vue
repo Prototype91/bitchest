@@ -5,7 +5,7 @@
         v-for="(cryptoCurrency, index) in this.cryptoCurrencies"
         :name="cryptoCurrency.name"
         :price="cryptoCurrency.current_price"
-        :fluctuation="cryptoCurrency.ath_change_percentage"
+        :fluctuation="cryptoCurrency.price_change_percentage_24h"
         :image="cryptoCurrency.image"
         :key="index"
       />

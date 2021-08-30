@@ -27,7 +27,9 @@ export default {
           borderColor: 'rgb(75, 192, 192)',
           responsive: true,
           fill: false,
-          tension: 0.1
+          tension: 0.1,
+          width: '100%',
+          height: '100%'
         },
       ],
     });
