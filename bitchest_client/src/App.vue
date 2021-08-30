@@ -9,12 +9,15 @@ export default {
 </script>
 
 <style>
+/* FONT */
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap");
 
 body {
   background-color: #212121 !important;
   color: #fefefe !important;
 }
+
+/* RESET CSS */
 
 html,
 body,
@@ -150,9 +153,11 @@ table {
   border-spacing: 0;
 }
 
+/* BUTTONS STYLE */
+
 button.link-inside {
   padding: 0px !important;
-  display: inline-flex
+  display: inline-flex;
 }
 
 button.btn a {
@@ -165,5 +170,26 @@ button.btn a {
 
 button.btn a:hover {
   color: white;
+}
+
+/* MODAL STYLE */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  border: none;
+}
+
+.modal-content h1,
+.modal-content p {
+  margin-bottom: 16px;
+  color: black;
+}
+
+.modal-content h1 {
+  font-size: 32px;
+}
+
+.modal-content p {
+  font-size: 18px;
 }
 </style>

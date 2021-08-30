@@ -18,39 +18,73 @@
           <td data-label="Email">{{ user.email }}</td>
           <td data-label="Rôle">{{ user.elevation }}</td>
           <td data-label="Modifier">
-            <button class="btn btn-primary link-inside"><router-link :to="'/admin/update/' + user.id">Modifier</router-link></button>
+            <button class="btn btn-primary link-inside">
+              <router-link :to="'/admin/update/' + user.id"
+                >Modifier</router-link
+              >
+            </button>
           </td>
           <td data-label="Supprimer">
-            <button class="btn btn-danger" @click="deleteUser(user.id)">Supprimer</button>
+            <button class="btn btn-danger" @click="updateModalStatus(user.id)">
+              Supprimer
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
+    <Modal
+      @cancel="updateModalStatus(null)"
+      @confirm="onConfirm(this.userIdToDelete)"
+      :modalActive="modalActive"
+    >
+      <div class="modal-content">
+        <h1>Supprimer cet utilisateur ?</h1>
+        <p>Cette action est irreversible ...</p>
+      </div>
+    </Modal>
   </div>
 </template>
 
 <script>
 import UserService from "../../services/users/users.service";
+import Modal from "../../components/shared/Modal.vue";
+import { ref } from "vue";
+
 export default {
   name: "UsersTable",
+  components: { Modal },
   props: {
     users: {
       type: Array,
     },
   },
-  emits: ['user-deleted'],
-  methods: {
-    deleteUser(id) {
-      UserService.deleteUser(id)
-        .then((reponse) => {
-          console.log(reponse);
-          this.$emit('user-deleted');
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
+  data() {
+    return {
+      userIdToDelete: null
+    }
   },
+  emits: ["user-deleted"],
+  setup(props, { emit }) {
+    const modalActive = ref(false);
+    return {
+      modalActive,
+      updateModalStatus(id) {
+        this.userIdToDelete = id
+        modalActive.value = !modalActive.value;
+      },
+      onConfirm(id) {
+        UserService.deleteUser(id)
+          .then((reponse) => {
+            console.log(reponse);
+            emit("user-deleted");
+            modalActive.value = !modalActive.value;
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      },
+    };
+  }
 };
 </script>
 
