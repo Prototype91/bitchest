@@ -84,7 +84,7 @@
           required
         />
       </div>
-      <div class="radio-ctn">
+      <div class="radio-ctn" v-if="displayRadios == true">
         <label>
           <input
             type="radio"
@@ -123,6 +123,10 @@ export default {
       type: Object,
       required: true,
     },
+    displayRadios: {
+      type: Boolean,
+      default: false,
+    }
   },
   data() {
     return {

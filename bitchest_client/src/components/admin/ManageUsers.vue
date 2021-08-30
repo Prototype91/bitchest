@@ -3,7 +3,7 @@
     <Loader :isLoading="isLoading" />
     <div v-if="users.length" class="user-table">
       <h1>Liste des utilisateurs</h1>
-      <button class="btn btn-success"><router-link to="/admin/create">Ajouter un utilisateur</router-link></button>
+      <button class="btn btn-success link-inside"><router-link to="/admin/create">Ajouter un utilisateur</router-link></button>
       <UsersTable :users="users" @user-deleted="onUserDeleted" />
     </div>
   </div>
