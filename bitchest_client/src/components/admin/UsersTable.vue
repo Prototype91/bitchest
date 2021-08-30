@@ -54,7 +54,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .table-ctn {
   width: 80%;
   margin: 0 auto 30px;
@@ -102,15 +102,6 @@ table td {
 table th {
   font-size: 15px;
   letter-spacing: 1.5px;
-}
-
-table tbody button a {
-  color: white;
-  text-decoration: none;
-}
-
-table tbody button a:hover {
-  color: white;
 }
 
 @media (max-width: 1040px) {

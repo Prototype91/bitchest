@@ -140,5 +140,12 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+button.btn a {
+  color: white;
+  text-decoration: none;
+}
 
+button.btn a:hover {
+  color: white;
+}
 </style>

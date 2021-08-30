@@ -61,13 +61,4 @@ button {
   margin-left: auto;
   display: flex;
 }
-
-button a {
-  color: white;
-  text-decoration: none;
-}
-
-button a:hover {
-  color: white;
-}
 </style>
