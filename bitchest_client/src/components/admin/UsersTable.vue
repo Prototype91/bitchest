@@ -18,10 +18,10 @@
           <td data-label="Email">{{ user.email }}</td>
           <td data-label="Rôle">{{ user.elevation }}</td>
           <td data-label="Modifier">
-            <router-link :to="'/admin/update/' + user.id">Modifier</router-link>
+            <button class="btn btn-primary"><router-link :to="'/admin/update/' + user.id">Modifier</router-link></button>
           </td>
           <td data-label="Supprimer">
-            <button @click="deleteUser(user.id)">Supprimer</button>
+            <button class="btn btn-danger" @click="deleteUser(user.id)">Supprimer</button>
           </td>
         </tr>
       </tbody>
@@ -54,7 +54,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .table-ctn {
   width: 80%;
   margin: 0 auto 30px;
