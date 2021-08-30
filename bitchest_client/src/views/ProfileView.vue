@@ -3,8 +3,9 @@
     <Navigation/>
     <section>
       <Loader :isLoading="!userData" />
-      <div>
-        <EditUserForm v-if="userData" :currentUserData="userData" />
+      <div class="ctn" v-if="userData">
+        <h1>Bonjour <span>{{ userData.firstname }}</span>, voici vos informations personnelles :</h1>
+        <EditUserForm :currentUserData="userData" />
       </div>
     </section>
   </main>
@@ -29,10 +30,23 @@ export default {
 
     console.log(sessionStorageData);
 
-    this.userData = sessionStorageData
+    this.userData = sessionStorageData;
   },
 };
 </script>
 
-<style>
+<style scoped>
+section {
+  width: 100%;
+}
+
+section h1 {
+  font-size: 2rem;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+section > .ctn {
+  width: 100%;
+} 
 </style>
