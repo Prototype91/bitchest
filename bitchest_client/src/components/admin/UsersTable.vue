@@ -18,7 +18,7 @@
           <td data-label="Email">{{ user.email }}</td>
           <td data-label="Rôle">{{ user.elevation }}</td>
           <td data-label="Modifier">
-            <button class="btn btn-primary"><router-link :to="'/admin/update/' + user.id">Modifier</router-link></button>
+            <button class="btn btn-primary link-inside"><router-link :to="'/admin/update/' + user.id">Modifier</router-link></button>
           </td>
           <td data-label="Supprimer">
             <button class="btn btn-danger" @click="deleteUser(user.id)">Supprimer</button>
@@ -65,11 +65,6 @@ export default {
 
 .table-ctn .state button {
   width: 100px;
-}
-
-.table-ctn a {
-  padding: 0;
-  outline: none;
 }
 
 .table-ctn th {

@@ -149,9 +149,18 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+button.link-inside {
+  padding: 0px !important;
+  display: inline-flex
+}
+
 button.btn a {
   color: white;
   text-decoration: none;
+  padding: 6px 12px;
+  width: 100%;
+  height: 100%;
 }
 
 button.btn a:hover {
