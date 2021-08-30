@@ -45,13 +45,6 @@ export default {
 </script>
 
 <style>
-main {
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-  padding: 15px 10px;
-}
-
 .synthesis-ctn {
   width: 80%;
   margin: 0 auto;

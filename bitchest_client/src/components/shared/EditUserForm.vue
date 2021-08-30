@@ -105,7 +105,7 @@
         </label>
       </div>
       <button class="btn btn-primary" type="submit">
-        Modifier l'utilisateur
+        Modifier
       </button>
     </form>
   </div>

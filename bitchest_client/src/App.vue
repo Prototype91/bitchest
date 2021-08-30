@@ -136,6 +136,15 @@ q:after {
   content: "";
   content: none;
 }
+
+main {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
+  padding: 15px 10px;
+}
+
 table {
   border-collapse: collapse;
   border-spacing: 0;

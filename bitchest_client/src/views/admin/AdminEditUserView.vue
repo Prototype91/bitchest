@@ -1,10 +1,11 @@
 <template>
-  <section>
+  <main>
     <Loader :isLoading="!userData" />
     <div>
+      <h1>Modification de l'utilisateur</h1>
       <EditUserForm v-if="userData" :currentUserData="userData" />
     </div>
-  </section>
+  </main>
 </template>
 
 <script>
@@ -29,3 +30,19 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+h1 {
+  font-size: 2rem;
+  text-align: center;
+  padding: 30px 0px;
+}
+
+main > div {
+      width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+</style>
