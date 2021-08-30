@@ -2,7 +2,7 @@
   <nav>
     <Loader :isLoading="isLoading" />
     <div class="logo-ctn">
-      <router-link title="Accueil" class="link-menu" :to="'/' + elevation">
+      <router-link title="Accueil" class="link-menu" :to="'/' + elevationPath">
         <svg
           width="77"
           height="84"
@@ -45,8 +45,8 @@
       </router-link>
     </div>
     <ul id="menu">
-      <li v-if="elevation == 'user'">
-        <router-link title="Acheter/Vendre" class="link-menu" to="/">
+      <li v-if="userElevation == 'user'">
+        <router-link title="Acheter/Vendre" class="link-menu" to="/client/market">
           <i class="fas fa-coins"></i>
         </router-link>
       </li>
@@ -59,7 +59,7 @@
         <router-link
           title="Mes informations"
           class="link-menu"
-          :to="'/' + elevation + '/profile'"
+          :to="'/' + elevationPath + '/profile'"
           ><i class="far fa-user-circle"></i
         ></router-link>
       </li>
@@ -85,7 +85,8 @@ export default {
   data() {
     return {
       isLoading: false,
-      elevation: null,
+      elevationPath: null,
+      userElevation: null,
       id: null
     };
   },
@@ -112,8 +113,8 @@ export default {
     const sessionStorageData = SessionStorageService.getSessionStorage();
 
     console.log(sessionStorageData);
-
-    this.elevation = sessionStorageData.elevation == "user" ? "client" : "admin";
+    this.userElevation = sessionStorageData.elevation;
+    this.elevationPath = sessionStorageData.elevation == "user" ? "client" : "admin";
     this.id = sessionStorageData.id;
   },
 };

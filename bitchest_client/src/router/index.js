@@ -1,13 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import SessionStorageService from '../services/sessionStorage/sessionStorage.service';
 import AdminCreateUserView from '../views/admin/AdminCreateUserView.vue';
 import AdminEditUserView from "../views/admin/AdminEditUserView";
-import SessionStorageService from '../services/sessionStorage/sessionStorage.service';
 import AdminHomeView from '../views/admin/AdminHomeView.vue';
 import Login from '../views/Login.vue';
 import PageNotFound from '../views/PageNotFound.vue';
 import ProfileView from '../views/ProfileView.vue';
 import ClientHome from '../views/public/ClientHome.vue';
 import Details from "../views/public/Details.vue";
+import MarketPlace from '../views/public/MarketPlace.vue';
 
 const routes = [
   {
@@ -26,6 +27,12 @@ const routes = [
     path: '/client/profile',
     name: 'ClientProfile',
     component: ProfileView,
+    meta: { userOnly: true }
+  },
+  {
+    path: '/client/market',
+    name: 'MarketPlace',
+    component: MarketPlace,
     meta: { userOnly: true }
   },
   {

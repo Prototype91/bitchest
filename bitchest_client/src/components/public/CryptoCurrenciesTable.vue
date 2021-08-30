@@ -1,33 +1,50 @@
 <template>
-  <div class="table-ctn">
-    <table>
-      <thead>
-        <tr>
-          <th>Nom</th>
-          <th>Prix</th>
-          <th>Fluctuation</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="(cryptoCurrency, index) in this.cryptoCurrencies"
-          :key="index"
-        >
-          <td data-label="Nom">{{ cryptoCurrency.name }}</td>
-          <td data-label="Prix">{{ cryptoCurrency.current_price.toFixed(2) }}€</td>
-          <td data-label="Fluctuation">
-            {{ cryptoCurrency.price_change_percentage_24h.toFixed(2) }}%
-          </td>
-          <td data-label="Action">
-            <router-link :to="'/client/details/' + cryptoCurrency.id"
-              >Voir</router-link
+  <section>
+    <div class="container">
+      <div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Cryptomonnaie</th>
+              <th>Prix</th>
+              <th class="responsive">Fluctuation (24h)</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="(cryptoCurrency, index) in this.cryptoCurrencies"
+              :key="index"
             >
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+              <td>
+                <img :src="cryptoCurrency.image" class="prices-icon" alt="" />
+                <span class="responsive">{{ cryptoCurrency.name }}</span>
+                ({{ cryptoCurrency.symbol.toUpperCase() }})
+              </td>
+              <td>{{ cryptoCurrency.current_price.toFixed(2) }}€</td>
+              <td
+                :class="[
+                  'responsive',
+                  cryptoCurrency.price_change_percentage_24h > 0
+                    ? 'positive'
+                    : 'negative',
+                ]"
+              >
+                {{ cryptoCurrency.price_change_percentage_24h.toFixed(2) }}%
+              </td>
+              <td>
+                <router-link
+                  class="btn btn-primary"
+                  :to="'/client/details/' + cryptoCurrency.id"
+                  >Voir</router-link
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -43,89 +60,36 @@ export default {
 </script>
 
 <style scoped>
-.table-ctn {
-  width: 80%;
-  margin: 0 auto 30px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
+table,
+td {
+  color: white;
 }
 
-.table-ctn .state button {
-  width: 100px;
+.positive {
+  color: green;
 }
 
-.table-ctn a {
-  padding: 0;
-  outline: none;
+.negative {
+  color: red;
 }
 
-.table-ctn th {
-  text-align: center;
-}
-
-table {
-  border-collapse: collapse;
-  margin: 0 auto;
-  padding: 0;
-  width: 90%;
-  table-layout: fixed;
-  -webkit-box-shadow: 5px 4px 11px 0px rgba(0, 0, 0, 0.49);
-  box-shadow: 5px 4px 11px 0px rgba(0, 0, 0, 0.49);
-  border-radius: 15px !important;
-}
-
-table tr {
-  border: 1px solid rgb(228, 225, 225);
+table img {
+  vertical-align: middle;
+  margin-right: 20px;
+  width: 20%;
+  background-color: white;
   border-radius: 15px;
-  padding: 7px;
+  padding: 20px;
 }
 
-table th,
-table td {
-  padding: 10px;
-  text-align: center;
-}
-
-table th {
-  font-size: 15px;
-  letter-spacing: 1.5px;
-}
-
-@media (max-width: 1040px) {
-  table {
-    border: 0;
+@media (max-width: 700px) {
+  .responsive {
+    display: none;
   }
 
-  table thead {
-    border: none;
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-  }
-
-  table tr {
-    display: block;
-    margin-bottom: 10px;
-  }
-
-  table td {
-    border-bottom: 1px solid rgb(228, 228, 228);
-    display: block;
-    font-size: 15px;
-    text-align: right;
-  }
-
-  table td::before {
-    content: attr(data-label);
-    float: left;
-  }
-
-  table td:last-child {
-    border-bottom: 0;
+  table img {
+    width: 40%;
+    padding: 10px;
   }
 }
 </style>
