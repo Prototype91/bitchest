@@ -69,6 +69,7 @@ export default {
             address: user.address,
             phone: user.phone,
             id: user.id,
+            balance: user.balance,
             email: user.email
           };
 

@@ -1,6 +1,5 @@
 <template>
   <div class="balance-ctn">
-    <p>Synthèse</p>
     <p>Solde : {{ balance }} €</p>
   </div>
 </template>

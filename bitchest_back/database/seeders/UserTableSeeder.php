@@ -22,6 +22,7 @@ class UserTableSeeder extends Seeder
                 'address' => '24 avenue Gambetta',
                 'phone' => '+33606060606',
                 'email' => 'dylan@dylan.fr',
+                'balance' => 1567.66,
                 'password' => Hash::make('dylan'),
                 'elevation' => 'admin'
             ],
@@ -31,6 +32,7 @@ class UserTableSeeder extends Seeder
                 'address' => '54 boulevar Bessières',
                 'phone' => '+33606060607',
                 'email' => 'kenny@kenny.fr',
+                'balance' => 1567.66,
                 'password' => Hash::make('kenny'),
                 'elevation' => 'user'
             ]

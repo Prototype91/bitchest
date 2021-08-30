@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('lastname');
             $table->string('phone');
             $table->string('address');
+            $table->float('balance', 8, 2);
             $table->string('email')->unique();
             $table->string('password');
             $table->enum('elevation', ['admin', 'user']);
