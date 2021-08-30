@@ -51,7 +51,7 @@
         </router-link>
       </li>
       <li>
-        <router-link title="Cour des cryptomonaies" class="link-menu" to="/">
+        <router-link v-if="userElevation == 'admin'" title="Cours des cryptomonaies" class="link-menu" to="/admin/crypto-prices">
           <i class="fas fa-chart-line"></i>
         </router-link>
       </li>

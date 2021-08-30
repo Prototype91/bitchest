@@ -18,7 +18,7 @@
 
 <script>
 import CryptoCurrencyCard from "../shared/CryptoCurrencyCard.vue";
-import CryptoCurrenciesTable from "./CryptoCurrenciesTable.vue";
+import CryptoCurrenciesTable from "../shared/CryptoCurrenciesTable.vue";
 export default {
   name: "HeartSynthesis",
   components: { CryptoCurrencyCard, CryptoCurrenciesTable },

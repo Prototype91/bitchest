@@ -3,9 +3,10 @@ import SessionStorageService from '../services/sessionStorage/sessionStorage.ser
 import AdminCreateUserView from '../views/admin/AdminCreateUserView.vue';
 import AdminEditUserView from "../views/admin/AdminEditUserView";
 import AdminHomeView from '../views/admin/AdminHomeView.vue';
-import Login from '../views/Login.vue';
-import PageNotFound from '../views/PageNotFound.vue';
-import ProfileView from '../views/ProfileView.vue';
+import Login from '../views/shared/Login.vue';
+import CryptoCurrenciesPricesView from '../views/admin/CryptoCurrenciesPricesView.vue'
+import PageNotFound from '../views/shared/PageNotFound.vue';
+import ProfileView from '../views/shared/ProfileView.vue';
 import ClientHome from '../views/public/ClientHome.vue';
 import Details from "../views/public/Details.vue";
 import MarketPlace from '../views/public/MarketPlace.vue';
@@ -51,6 +52,12 @@ const routes = [
     path: '/admin/profile',
     name: 'AdminProfile',
     component: ProfileView,
+    meta: { adminOnly: true }
+  },
+  {
+    path: '/admin/crypto-prices',
+    name: 'CryptoPrices',
+    component: CryptoCurrenciesPricesView,
     meta: { adminOnly: true }
   },
   {

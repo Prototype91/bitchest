@@ -15,11 +15,11 @@
 </template>
 
 <script>
-import EditUserForm from "../components/shared/EditUserForm.vue";
-import Navigation from "../components/shared/Navigation.vue";
-import Loader from "../components/shared/Loader.vue";
-import UsersService from "../services/users/users.service";
-import SessionStorageService from "../services/sessionStorage/sessionStorage.service";
+import EditUserForm from "../../components/shared/EditUserForm.vue";
+import Navigation from "../../components/shared/Navigation.vue";
+import Loader from "../../components/shared/Loader.vue";
+import UsersService from "../../services/users/users.service";
+import SessionStorageService from "../../services/sessionStorage/sessionStorage.service";
 
 export default {
   name: "ProfileView",

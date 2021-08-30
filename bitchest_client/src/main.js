@@ -7,7 +7,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
-import store from "./store";
 import VueChartkick from 'vue-chartkick'
 import 'chartkick/chart.js'
 
@@ -21,4 +20,4 @@ const app = createApp(App);
 
 app.component("font-awesome-icon", FontAwesomeIcon);
 
-createApp(App).use(router).use(store).use(VueChartkick).mount('#app')
+createApp(App).use(router).use(VueChartkick).mount('#app')
