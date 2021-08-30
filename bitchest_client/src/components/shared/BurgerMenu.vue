@@ -58,7 +58,7 @@ export default {
 .burger-menu {
   width: 100%;
   height: 2px;
-  background: black;
+  background: white;
   border-radius: 5px;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -71,7 +71,7 @@ export default {
   position: absolute;
   width: calc(100% - 10px);
   height: 2px;
-  background: black;
+  background: white;
   border-radius: 5px;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
