@@ -15,8 +15,10 @@ class CreateTransactionTable extends Migration
     {
         Schema::create('transaction', function (Blueprint $table) {
             $table->id();
-            $table->integer('currency_id');
-            $table->integer('user_id');
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedInteger('currency_id');
+            $table->foreign('currency_id')->references('id')->on('currency');
             $table->string('currency_value');
             $table->string('amount');
             $table->boolean('type');

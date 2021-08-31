@@ -48,40 +48,4 @@ class TransactionController extends Controller
     {
         return Transaction::find($id);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $transaction = Transaction::find($id);
-
-        $transaction->update($request->all());
-
-        return response([
-            'transaction' => $transaction,
-            'message' => 'Transaction mise à jour'
-        ], 200);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $transaction = Transaction::find($id);
-
-        $transaction->delete();
-
-        return response([
-            'message' => 'Transaction supprimée avec succès'
-        ], 200);
-    }
 }

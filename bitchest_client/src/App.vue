@@ -146,6 +146,7 @@ main {
   height: 100vh;
   width: 100vw;
   padding: 15px 10px;
+  overflow-x: hidden;
 }
 
 table {
