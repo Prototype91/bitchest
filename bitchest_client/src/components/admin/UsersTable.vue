@@ -18,14 +18,14 @@
           <td data-label="Email">{{ user.email }}</td>
           <td data-label="Rôle">{{ user.elevation }}</td>
           <td data-label="Modifier">
-            <button class="btn btn-primary link-inside">
+            <button class="btn btn-primary link-inside" :class="[user.id === this.currentUserId ? 'disabled' : '']">
               <router-link :to="'/admin/update/' + user.id"
                 >Modifier</router-link
               >
             </button>
           </td>
           <td data-label="Supprimer">
-            <button class="btn btn-danger" @click="updateModalStatus(user.id)">
+            <button class="btn btn-danger" :class="[user.id === this.currentUserId ? 'disabled' : '']" @click="updateModalStatus(user.id)">
               Supprimer
             </button>
           </td>
@@ -49,6 +49,7 @@
 import UserService from "../../services/users/users.service";
 import Modal from "../../components/shared/Modal.vue";
 import { ref } from "vue";
+import sessionStorageService from '../../services/sessionStorage/sessionStorage.service';
 
 export default {
   name: "UsersTable",
@@ -60,7 +61,8 @@ export default {
   },
   data() {
     return {
-      userIdToDelete: null
+      userIdToDelete: null,
+      currentUserId: sessionStorageService.getSessionStorage().id
     }
   },
   emits: ["user-deleted"],
