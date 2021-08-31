@@ -169,6 +169,11 @@ export default {
   align-items: center;
 }
 
+.admin-ctn .error {
+  color: red;
+  padding: 7.5px 0px;
+}
+
 .admin-ctn h1 {
   font-size: 2rem;
   padding-bottom: 35px;
