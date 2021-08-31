@@ -18,8 +18,6 @@ class CreateCurrencyTable extends Migration
             $table->string('name');
             $table->string('symbol');
             $table->string('coin_id');
-            $table->float('value');
-            $table->timestamp('last_update');
         });
     }
 

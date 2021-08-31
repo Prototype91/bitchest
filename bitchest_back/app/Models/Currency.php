@@ -15,10 +15,8 @@ class Currency extends Model
      * @var array
      */
     protected $fillable = [
-        'value',
         'coin_id',
         'symbol',
         'name',
-        'last_update',
     ];
 }
