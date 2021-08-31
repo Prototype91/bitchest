@@ -97,6 +97,7 @@ export default {
         .then(() => {
           // Removes the token in localStorage
           window.localStorage.removeItem("user");
+          window.localStorage.removeItem("cryptoCurrencies");
 
           this.isLoading = false;
 
