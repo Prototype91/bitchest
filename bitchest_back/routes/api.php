@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,10 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::delete('/user/{id}', [UsersController::class, 'destroy']);
     Route::get('/user/{id}', [UsersController::class, 'show']);
     Route::put('/user/update/{id}', [UsersController::class, 'update']);
+
+    Route::post('/transactions', [TransactionsController::class, 'store']);
+    Route::get('/transactions', [TransactionsController::class, 'index']);
+
     Route::get('/user', function (Request $request) {
         return $request->user();
     });

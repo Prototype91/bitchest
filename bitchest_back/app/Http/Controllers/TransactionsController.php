@@ -5,7 +5,7 @@ use App\Models\Transaction;
 
 use Illuminate\Http\Request;
 
-class TransactionController extends Controller
+class TransactionsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,12 +30,15 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        $transaction = Transaction::create($request->all());
+        $request->validate([
+            "currency_id" => "required",
+            "currency_value" => "required",
+            "type" => "required",
+            "user_id" => "required",
+            "amount" => "required"
+        ]);
 
-        return response([
-            'transaction' => $transaction,
-            'message' => 'Transaction effectuée avec succès'
-        ], 200);
+        return Transaction::create($request->all());
     }
 
     /**
