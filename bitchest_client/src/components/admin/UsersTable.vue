@@ -62,7 +62,7 @@ export default {
   data() {
     return {
       userIdToDelete: null,
-      currentUserId: LocalStorageService.getLocalStorage().id
+      currentUserId: LocalStorageService.getUserLocalStorage().id
     }
   },
   emits: ["user-deleted"],

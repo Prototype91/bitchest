@@ -96,7 +96,7 @@ export default {
       AuthService.logout()
         .then(() => {
           // Removes the token in localStorage
-          window.localStorage.removeItem("token");
+          window.localStorage.removeItem("user");
 
           this.isLoading = false;
 
@@ -110,7 +110,7 @@ export default {
     },
   },
   mounted() {
-    const localStorageData = LocalStorageService.getLocalStorage();
+    const localStorageData = LocalStorageService.getUserLocalStorage();
 
     console.log(localStorageData);
     this.userElevation = localStorageData.elevation;

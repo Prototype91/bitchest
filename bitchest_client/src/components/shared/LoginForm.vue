@@ -74,7 +74,7 @@ export default {
             email: user.email
           };
 
-          LocalStorageService.setLocalStorage(dataToPush);
+          LocalStorageService.setUserLocalStorage(dataToPush);
 
           this.isLoading = false;
 

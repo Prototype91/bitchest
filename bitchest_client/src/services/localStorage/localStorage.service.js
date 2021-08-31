@@ -1,11 +1,21 @@
 export default {
-    getLocalStorage() {
-        let dataToGet = localStorage.getItem("token");
+    setUserLocalStorage(data) {
+        const localStorageData = JSON.stringify(data);
+        window.localStorage.setItem("user", localStorageData);
+    },
+    
+    getUserLocalStorage() {
+        let dataToGet = localStorage.getItem("user");
         return JSON.parse(dataToGet);
     },
 
-    setLocalStorage(data) {
+    setCryptoCurrenciesLocalStorage(data) {
         const localStorageData = JSON.stringify(data);
-        window.localStorage.setItem("token", localStorageData);
+        window.localStorage.setItem("cryptoCurrencies", localStorageData);
+    },
+
+    getCryptoCurrenciesLocalStorage() {
+        let dataToGet = localStorage.getItem("cryptoCurrencies");
+        return JSON.parse(dataToGet);
     }
 }

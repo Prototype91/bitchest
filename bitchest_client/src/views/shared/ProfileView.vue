@@ -30,7 +30,7 @@ export default {
     };
   },
   mounted() {
-    const localStorageData = LocalStorageService.getLocalStorage();
+    const localStorageData = LocalStorageService.getUserLocalStorage();
     const userId = localStorageData.id;
 
     console.log(localStorageData);

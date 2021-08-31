@@ -6,7 +6,7 @@ let server = axios.create({
 });
 
 let Api = () => {
-    let localStorageData = LocalStorageService.getLocalStorage();
+    let localStorageData = LocalStorageService.getUserLocalStorage();
 
     if (localStorageData?.token) {
         server.defaults.headers.common["Authorization"] = `Bearer ${localStorageData.token}`;

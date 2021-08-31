@@ -85,12 +85,12 @@ const router = createRouter({
 });
 
 const isLoggedIn = () => {
-  const localStorageData = LocalStorageService.getLocalStorage();
+  const localStorageData = LocalStorageService.getUserLocalStorage();
   return !!localStorageData?.token;
 }
 
 const isClient = () => {
-  const localStorageData = LocalStorageService.getLocalStorage();
+  const localStorageData = LocalStorageService.getUserLocalStorage();
   return localStorageData?.elevation == 'user';
 }
 

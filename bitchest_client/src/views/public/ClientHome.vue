@@ -33,18 +33,32 @@ export default {
   },
   mounted() {
     this.isLoading = true;
-    CryptoCurrencyService.getCryptoCurrencies()
-      .then((response) => {
-        this.cryptoCurrencies =
-          CryptoCurrencyMapper.mapCryptoCurrencies(response);
-        this.isLoading = false;
-        console.log(this.cryptoCurrencies);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
 
-    this.userData = LocalStorageService.getLocalStorage();
+    const cryptosLocalStorageData =
+      LocalStorageService.getCryptoCurrenciesLocalStorage();
+
+    if (cryptosLocalStorageData?.length) {
+      this.cryptoCurrencies = cryptosLocalStorageData;
+      this.isLoading = false;
+    } else {
+      CryptoCurrencyService.getCryptoCurrencies()
+        .then((response) => {
+          const mappedValues =
+            CryptoCurrencyMapper.mapCryptoCurrencies(response);
+
+          this.cryptoCurrencies = mappedValues;
+          
+          LocalStorageService.setCryptoCurrenciesLocalStorage(mappedValues);
+
+          this.isLoading = false;
+          console.log(this.cryptoCurrencies);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+
+    this.userData = LocalStorageService.getUserLocalStorage();
   },
 };
 </script>
