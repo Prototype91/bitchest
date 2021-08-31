@@ -24,7 +24,6 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->enum('elevation', ['admin', 'user']);
             $table->rememberToken();
-            $table->timestamps();
         });
     }
 
