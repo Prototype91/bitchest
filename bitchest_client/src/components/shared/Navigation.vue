@@ -77,7 +77,7 @@
 import BurgerMenu from "./BurgerMenu.vue";
 import AuthService from "../../services/authentication/auth.service";
 import Loader from "./Loader.vue";
-import SessionStorageService from '../../services/sessionStorage/sessionStorage.service';
+import LocalStorageService from '../../services/localStorage/localStorage.service';
 
 export default {
   components: { BurgerMenu, Loader },
@@ -95,8 +95,8 @@ export default {
       this.isLoading = true;
       AuthService.logout()
         .then(() => {
-          // Removes the token in sessionStorage
-          sessionStorage.removeItem("token");
+          // Removes the token in localStorage
+          window.localStorage.removeItem("token");
 
           this.isLoading = false;
 
@@ -110,12 +110,12 @@ export default {
     },
   },
   mounted() {
-    const sessionStorageData = SessionStorageService.getSessionStorage();
+    const localStorageData = LocalStorageService.getLocalStorage();
 
-    console.log(sessionStorageData);
-    this.userElevation = sessionStorageData.elevation;
-    this.elevationPath = sessionStorageData.elevation == "user" ? "client" : "admin";
-    this.id = sessionStorageData.id;
+    console.log(localStorageData);
+    this.userElevation = localStorageData.elevation;
+    this.elevationPath = localStorageData.elevation == "user" ? "client" : "admin";
+    this.id = localStorageData.id;
   },
 };
 </script>

@@ -18,7 +18,7 @@ import HeaderSynthesis from "../../components/public/HeaderSythesis.vue";
 import HeartSynthesis from "../../components/public/HeartSynthesis.vue";
 import CryptoCurrencyService from "../../services/cryptoCurrencies/cryptoCurrencies.service";
 import CryptoCurrencyMapper from "../../services/cryptoCurrencies/cryptoCurrencies.mapper";
-import SessionStorageService from "../../services/sessionStorage/sessionStorage.service";
+import LocalStorageService from "../../services/localStorage/localStorage.service";
 import Loader from "../../components/shared/Loader.vue";
 
 export default {
@@ -44,7 +44,7 @@ export default {
         console.error(error);
       });
 
-    this.userData = SessionStorageService.getSessionStorage();
+    this.userData = LocalStorageService.getLocalStorage();
   },
 };
 </script>

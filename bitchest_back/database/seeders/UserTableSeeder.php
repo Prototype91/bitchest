@@ -19,7 +19,7 @@ class UserTableSeeder extends Seeder
             [
                 'firstname' => 'Dylan',
                 'lastname' => 'Lecomte',
-                'address' => '24 avenue Gambetta',
+                'address' => '24 Avenue Gambetta',
                 'phone' => '+33606060606',
                 'email' => 'dylan@dylan.fr',
                 'balance' => 1567.66,
@@ -29,7 +29,7 @@ class UserTableSeeder extends Seeder
             [
                 'firstname' => 'Kenny',
                 'lastname' => 'Herillard',
-                'address' => '54 boulevar Bessières',
+                'address' => '54 Boulevard Bessières',
                 'phone' => '+33606060607',
                 'email' => 'kenny@kenny.fr',
                 'balance' => 1567.66,
