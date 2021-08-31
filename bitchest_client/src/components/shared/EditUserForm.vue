@@ -102,15 +102,15 @@
         <input
           name="password-confirm"
           class="form-control"
-          v-model="user.confirmPassword"
+          v-model="user.password_confirmation"
           type="password"
           id="password-confirm"
           placeholder="Confirmation du mot de passe"
           required
           @blur="v$.$touch"
         />
-        <div class="error" v-if="v$.user.confirmPassword.$error">
-          {{ v$.user.confirmPassword.$errors[0].$message }}
+        <div class="error" v-if="v$.user.password_confirmation.$error">
+          {{ v$.user.password_confirmation.$errors[0].$message }}
         </div>
       </div>
       <div class="radio-ctn" v-if="displayRadios == true">
@@ -177,7 +177,7 @@ export default {
         phone: this.currentUserData.phone,
         address: this.currentUserData.address,
         password: this.currentUserData.password,
-        confirmPassword: null,
+        password_confirmation: null,
         elevation: this.currentUserData.elevation,
       },
       isLoading: false,
@@ -190,7 +190,7 @@ export default {
         lastname: { required, minLength: minLength(2) },
         email: { required, email },
         password: { required, minLength: minLength(8), alphaNum },
-        confirmPassword: { required, sameAs: sameAs(this.user.password) },
+        password_confirmation: { required, sameAs: sameAs(this.user.password) },
         phone: {
           required,
           numeric,

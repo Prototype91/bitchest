@@ -14,10 +14,10 @@
             id="lastname"
             placeholder="Nom"
             required
-            @blur="$v.$touch"
+            @blur="v$.$touch"
           />
-          <div class="error" v-if="$v.user.lastname.$error">
-            {{ $v.user.lastname.$errors[0].$message }}
+          <div class="error" v-if="v$.user.lastname.$error">
+            {{ v$.user.lastname.$errors[0].$message }}
           </div>
         </div>
         <div>
@@ -30,10 +30,10 @@
             id="firstname"
             placeholder="Prénom"
             required
-            @blur="$v.$touch"
+            @blur="v$.$touch"
           />
-          <div class="error" v-if="$v.user.firstname.$error">
-            {{ $v.user.firstname.$errors[0].$message }}
+          <div class="error" v-if="v$.user.firstname.$error">
+            {{ v$.user.firstname.$errors[0].$message }}
           </div>
         </div>
         <div>
@@ -46,10 +46,10 @@
             id="mail"
             type="mail"
             placeholder="Adresse mail"
-            @blur="$v.$touch"
+            @blur="v$.$touch"
           />
-          <div class="error" v-if="$v.user.email.$error">
-            {{ $v.user.email.$errors[0].$message }}
+          <div class="error" v-if="v$.user.email.$error">
+            {{ v$.user.email.$errors[0].$message }}
           </div>
         </div>
         <div>
@@ -62,10 +62,10 @@
             id="address"
             placeholder="Lieu de résidence"
             required
-            @blur="$v.$touch"
+            @blur="v$.$touch"
           />
-          <div class="error" v-if="$v.user.address.$error">
-            {{ $v.user.address.$errors[0].$message }}
+          <div class="error" v-if="v$.user.address.$error">
+            {{ v$.user.address.$errors[0].$message }}
           </div>
         </div>
         <div>
@@ -77,10 +77,10 @@
             v-model="user.phone"
             type="tel"
             placeholder="0606060606"
-            @blur="$v.$touch"
+            @blur="v$.$touch"
           />
-          <div class="error" v-if="$v.user.phone.$error">
-            {{ $v.user.phone.$errors[0].$message }}
+          <div class="error" v-if="v$.user.phone.$error">
+            {{ v$.user.phone.$errors[0].$message }}
           </div>
         </div>
         <div>
@@ -93,10 +93,10 @@
             id="password"
             placeholder="Mot de passe"
             required
-            @blur="$v.$touch"
+            @blur="v$.$touch"
           />
-          <div class="error" v-if="$v.user.password.$error">
-            {{ $v.user.password.$errors[0].$message }}
+          <div class="error" v-if="v$.user.password.$error">
+            {{ v$.user.password.$errors[0].$message }}
           </div>
         </div>
         <div>
@@ -104,15 +104,15 @@
           <input
             name="password-confirm"
             class="form-control"
-            v-model="user.confirmPassword"
+            v-model="user.password_confirmation"
             type="password"
             id="password-confirm"
             placeholder="Confirmation du mot de passe"
             required
-            @blur="$v.$touch"
+            @blur="v$.$touch"
           />
-          <div class="error" v-if="$v.user.confirmPassword.$error">
-            {{ $v.user.confirmPassword.$errors[0].$message }}
+          <div class="error" v-if="v$.user.password_confirmation.$error">
+            {{ v$.user.password_confirmation.$errors[0].$message }}
           </div>
         </div>
         <div>
@@ -134,8 +134,8 @@
             />
             Client
           </label>
-          <div class="error" v-if="$v.user.elevation.$error">
-            {{ $v.user.elevation.$errors[0].$message }}
+          <div class="error" v-if="v$.user.elevation.$error">
+            {{ v$.user.elevation.$errors[0].$message }}
           </div>
         </div>
         <button class="btn btn-primary" type="submit">
@@ -171,7 +171,7 @@ export default {
         phone: null,
         address: null,
         password: null,
-        confirmPassword: null,
+        password_confirmation: null,
         elevation: null,
       },
       isLoading: false,
@@ -184,7 +184,7 @@ export default {
         lastname: { required, minLength: minLength(2) },
         email: { required, email },
         password: { required, minLength: minLength(8), alphaNum },
-        confirmPassword: { required, sameAs: sameAs(this.user.password) },
+        password_confirmation: { required, sameAs: sameAs(this.user.password) },
         phone: {
           required,
           numeric,
@@ -197,13 +197,13 @@ export default {
     };
   },
   setup() {
-    return { $v: useVuelidate() };
+    return { v$: useVuelidate() };
   },
   methods: {
     addUser() {
-      this.$v.$validate();
+      this.v$.$validate();
 
-      if (this.$v.$error) {
+      if (this.v$.$error) {
         return false;
       }
 
