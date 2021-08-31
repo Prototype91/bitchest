@@ -18,7 +18,7 @@ import HeaderSynthesis from "../../components/public/HeaderSythesis.vue";
 import HeartSynthesis from "../../components/public/HeartSynthesis.vue";
 import CryptoCurrencyService from "../../services/cryptoCurrencies/cryptoCurrencies.service";
 import CryptoCurrencyMapper from "../../services/cryptoCurrencies/cryptoCurrencies.mapper";
-import SessionStorageService from "../../services/sessionStorage/sessionStorage.service";
+import LocalStorageService from "../../services/localStorage/localStorage.service";
 import Loader from "../../components/shared/Loader.vue";
 
 export default {
@@ -33,18 +33,32 @@ export default {
   },
   mounted() {
     this.isLoading = true;
-    CryptoCurrencyService.getCryptoCurrencies()
-      .then((response) => {
-        this.cryptoCurrencies =
-          CryptoCurrencyMapper.mapCryptoCurrencies(response);
-        this.isLoading = false;
-        console.log(this.cryptoCurrencies);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
 
-    this.userData = SessionStorageService.getSessionStorage();
+    const cryptosLocalStorageData =
+      LocalStorageService.getCryptoCurrenciesLocalStorage();
+
+    if (cryptosLocalStorageData?.length) {
+      this.cryptoCurrencies = cryptosLocalStorageData;
+      this.isLoading = false;
+    } else {
+      CryptoCurrencyService.getCryptoCurrencies()
+        .then((response) => {
+          const mappedValues =
+            CryptoCurrencyMapper.mapCryptoCurrencies(response);
+
+          this.cryptoCurrencies = mappedValues;
+          
+          LocalStorageService.setCryptoCurrenciesLocalStorage(mappedValues);
+
+          this.isLoading = false;
+          console.log(this.cryptoCurrencies);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+
+    this.userData = LocalStorageService.getUserLocalStorage();
   },
 };
 </script>

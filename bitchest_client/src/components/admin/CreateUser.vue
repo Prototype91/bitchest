@@ -3,7 +3,7 @@
     <Loader :isLoading="isLoading" />
     <div>
       <h1>Ajouter un utilisateur :</h1>
-      <form @submit.prevent="addUser">
+      <form autocomplete="off" @submit.prevent="addUser">
         <div>
           <label for="lastname">Nom :</label> <br />
           <input
@@ -92,6 +92,7 @@
             type="password"
             id="password"
             placeholder="Mot de passe"
+            autocomplete="off"
             required
             @blur="v$.$touch"
           />
@@ -108,6 +109,7 @@
             type="password"
             id="password-confirm"
             placeholder="Confirmation du mot de passe"
+            autocomplete="off"
             required
             @blur="v$.$touch"
           />

@@ -3,7 +3,7 @@
     <div class="login-ctn">
       <Loader :isLoading="isLoading" />
       <h2>Login</h2>
-      <form @submit.prevent="login">
+      <form autocomplete="off" @submit.prevent="login">
         <div class="input-ctn">
           <label>Adresse mail</label>
           <input
@@ -22,6 +22,7 @@
             name="password"
             required
             v-model="password"
+            autocomplete="off"
           />
         </div>
         <button type="submit" class="submit btn btn-primary">
@@ -35,7 +36,7 @@
 
 <script>
 import AuthService from "../../services/authentication/auth.service";
-import SessionStorageService from '../../services/sessionStorage/sessionStorage.service';
+import LocalStorageService from '../../services/localStorage/localStorage.service';
 import Loader from "./Loader.vue";
 
 export default {
@@ -73,7 +74,7 @@ export default {
             email: user.email
           };
 
-          SessionStorageService.setSessionStorage(dataToPush);
+          LocalStorageService.setUserLocalStorage(dataToPush);
 
           this.isLoading = false;
 

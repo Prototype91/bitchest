@@ -1,7 +1,7 @@
 <template>
   <div class="admin-ctn">
     <Loader :isLoading="isLoading" />
-    <form @submit.prevent="editUser(currentUserData.id, this.user)">
+    <form autocomplete="off" @submit.prevent="editUser(currentUserData.id, this.user)">
       <div>
         <label for="lastname">Nom :</label> <br />
         <input
@@ -90,6 +90,7 @@
           type="password"
           id="password"
           placeholder="Mot de passe"
+          autocomplete="off"
           required
           @blur="v$.$touch"
         />
@@ -106,6 +107,7 @@
           type="password"
           id="password-confirm"
           placeholder="Confirmation du mot de passe"
+          autocomplete="off"
           required
           @blur="v$.$touch"
         />

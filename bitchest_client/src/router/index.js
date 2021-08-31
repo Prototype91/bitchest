@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import SessionStorageService from '../services/sessionStorage/sessionStorage.service';
+import LocalStorageService from '../services/localStorage/localStorage.service';
 import AdminCreateUserView from '../views/admin/AdminCreateUserView.vue';
 import AdminEditUserView from "../views/admin/AdminEditUserView";
 import AdminHomeView from '../views/admin/AdminHomeView.vue';
@@ -85,13 +85,13 @@ const router = createRouter({
 });
 
 const isLoggedIn = () => {
-  const sessionStorageData = SessionStorageService.getSessionStorage();
-  return !!sessionStorageData?.token;
+  const localStorageData = LocalStorageService.getUserLocalStorage();
+  return !!localStorageData?.token;
 }
 
 const isClient = () => {
-  const sessionStorageData = SessionStorageService.getSessionStorage();
-  return sessionStorageData?.elevation == 'user';
+  const localStorageData = LocalStorageService.getUserLocalStorage();
+  return localStorageData?.elevation == 'user';
 }
 
 router.beforeEach((to, from, next) => {

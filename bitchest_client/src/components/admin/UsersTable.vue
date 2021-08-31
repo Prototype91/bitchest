@@ -49,7 +49,7 @@
 import UserService from "../../services/users/users.service";
 import Modal from "../../components/shared/Modal.vue";
 import { ref } from "vue";
-import sessionStorageService from '../../services/sessionStorage/sessionStorage.service';
+import LocalStorageService from '../../services/localStorage/localStorage.service';
 
 export default {
   name: "UsersTable",
@@ -62,7 +62,7 @@ export default {
   data() {
     return {
       userIdToDelete: null,
-      currentUserId: sessionStorageService.getSessionStorage().id
+      currentUserId: LocalStorageService.getUserLocalStorage().id
     }
   },
   emits: ["user-deleted"],
