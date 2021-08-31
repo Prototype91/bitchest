@@ -4,11 +4,11 @@
     suffix="€"
     :min="minValue"
     :max="maxValue"
+    :precision="3"
   ></line-chart>
 </template>
 
 <script>
-// import { Line } from "vue3-chart-v2";
 export default {
   name: "CryptoCurrencyGraph",
   props: {

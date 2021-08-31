@@ -50,8 +50,8 @@
           <i class="fas fa-coins"></i>
         </router-link>
       </li>
-      <li>
-        <router-link v-if="userElevation == 'admin'" title="Cours des cryptomonaies" class="link-menu" to="/admin/crypto-prices">
+      <li v-if="userElevation == 'admin'">
+        <router-link title="Cours des cryptomonaies" class="link-menu" to="/admin/crypto-prices">
           <i class="fas fa-chart-line"></i>
         </router-link>
       </li>
