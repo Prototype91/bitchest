@@ -13,7 +13,7 @@ export default {
 
     // Request to add a new User
     addUser(user) {
-        return Api().post("/add", user);
+        return Api().post("/user", user);
     },
 
     // Request to delete a specific user
@@ -23,6 +23,6 @@ export default {
 
     // Request to update a specific user
     updateUser(id, userData) {
-        return Api().put(`/user/update/${id}`, userData);
+        return Api().put(`/user/${id}`, userData);
     }
 }

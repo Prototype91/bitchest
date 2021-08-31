@@ -54,6 +54,7 @@ export default {
           console.log(this.cryptoCurrencies);
         })
         .catch((error) => {
+          this.isLoading = false;
           console.error(error);
         });
     }

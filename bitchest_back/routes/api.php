@@ -20,22 +20,27 @@ use Illuminate\Support\Facades\Route;
 // Login
 Route::post('login', [LoginController::class, 'login']);
 
-Route::group(['middleware' => ['auth:sanctum']], function() {
+Route::group(['middleware' => ['auth:sanctum']], function () {
     // Logout
     Route::post('/logout', [LoginController::class, 'logout']);
-
-    // Users
-    Route::post('/add', [UsersController::class, 'store']);
-    Route::delete('/user/{id}', [UsersController::class, 'destroy']);
+/*
+|--------------------------------------------------------------------------
+| Users Routes
+|--------------------------------------------------------------------------
+*/
     Route::get('/user/{id}', [UsersController::class, 'show']);
-    Route::put('/user/update/{id}', [UsersController::class, 'update']);
+    Route::get('/users', [UsersController::class, 'index']);
+    Route::post('/user', [UsersController::class, 'store']);
+    Route::delete('/user/{id}', [UsersController::class, 'destroy']);
+    Route::put('/user/{id}', [UsersController::class, 'update']);
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-    Route::get('/users', [UsersController::class, 'index']);
-
-    // Transactions
-    Route::post('/transactions', [TransactionsController::class, 'store']);
+/*
+|--------------------------------------------------------------------------
+| Transactions Routes
+|--------------------------------------------------------------------------
+*/
     Route::get('/transactions', [TransactionsController::class, 'index']);
-
+    Route::post('/transactions', [TransactionsController::class, 'store']);
 });

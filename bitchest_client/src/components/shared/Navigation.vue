@@ -95,9 +95,8 @@ export default {
       this.isLoading = true;
       AuthService.logout()
         .then(() => {
-          // Removes the token in localStorage
-          window.localStorage.removeItem("user");
-          window.localStorage.removeItem("cryptoCurrencies");
+          // Clears all the Local Storage
+          LocalStorageService.clearLocalStorage();
 
           this.isLoading = false;
 
