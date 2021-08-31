@@ -29,27 +29,36 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $user = User::create($request->all());
+        $fields = $request->validate([
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'email' => 'required|string|unique:users,email',
+            'password' => 'min:8|required_with:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'min:8',
+            'phone' => 'required|string',
+            'address' => 'required|string'
+        ]);
 
-        // // image
-        // $im = $request->file('picture');
+        $user = User::create([
+            'firstname' => $fields['firstname'],
+            'lastname' => $fields['lastname'],
+            'email' => $fields['email'],
+            'phone' => $fields['phone'],
+            'address' => $fields['address'],
+            'password' => bcrypt($fields['password']),
+            'elevation' => 'user',
+            'balance' => 0,
+            'created_at' => now(),
+        ]);
 
-        // // si on associe une image à un product
-        // if (!empty($im)) {
-        //     $link = $request->file('picture')->store($category->gender);
+        $token = $user->createToken('bitchest')->plainTextToken;
 
-        //     // mettre à jour la table picture pour le lien vers l'image dans la base de données
-        //     $product->picture()->create([
-        //         'link' => $link,
-        //     ]);
-
-        //     $product->save();
-        // }
-
-        return response([
+        $response = [
             'user' => $user,
-            'message' => 'Utilisateur ajouté avec succès'
-        ], 200);
+            'token' => $token
+        ];
+
+        return response($response, 201);
     }
 
     /**
@@ -72,6 +81,16 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            "firstname" => "required",
+            "lastname" => "required",
+            "phone" => "required",
+            "address" => "required",
+            "email" => "required",
+            "password" => "required",
+            "elevation" => "required",
+        ]);
+
         $user = User::find($id);
 
         $user->update($request->all());

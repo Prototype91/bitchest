@@ -19,8 +19,8 @@ class UserTableSeeder extends Seeder
             [
                 'firstname' => 'Dylan',
                 'lastname' => 'Lecomte',
-                'address' => '24 Avenue Gambetta',
-                'phone' => '+33606060606',
+                'address' => '24 avenue Gambetta',
+                'phone' => '0606060606',
                 'email' => 'dylan@dylan.fr',
                 'balance' => 1567.66,
                 'password' => Hash::make('dylan'),
@@ -29,8 +29,8 @@ class UserTableSeeder extends Seeder
             [
                 'firstname' => 'Kenny',
                 'lastname' => 'Herillard',
-                'address' => '54 Boulevard Bessières',
-                'phone' => '+33606060607',
+                'address' => '54 boulevar Bessières',
+                'phone' => '0606060607',
                 'email' => 'kenny@kenny.fr',
                 'balance' => 1567.66,
                 'password' => Hash::make('kenny'),

@@ -23,16 +23,19 @@ Route::post('login', [LoginController::class, 'login']);
 Route::group(['middleware' => ['auth:sanctum']], function() {
     // Logout
     Route::post('/logout', [LoginController::class, 'logout']);
+
+    // Users
     Route::post('/add', [UsersController::class, 'store']);
     Route::delete('/user/{id}', [UsersController::class, 'destroy']);
     Route::get('/user/{id}', [UsersController::class, 'show']);
     Route::put('/user/update/{id}', [UsersController::class, 'update']);
-
-    Route::post('/transactions', [TransactionsController::class, 'store']);
-    Route::get('/transactions', [TransactionsController::class, 'index']);
-
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
     Route::get('/users', [UsersController::class, 'index']);
+
+    // Transactions
+    Route::post('/transactions', [TransactionsController::class, 'store']);
+    Route::get('/transactions', [TransactionsController::class, 'index']);
+
 });

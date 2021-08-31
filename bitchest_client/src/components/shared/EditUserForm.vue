@@ -12,7 +12,11 @@
           id="lastname"
           placeholder="Nom"
           required
+          @blur="v$.$touch"
         />
+        <div class="error" v-if="v$.user.lastname.$error">
+          {{ v$.user.lastname.$errors[0].$message }}
+        </div>
       </div>
       <div>
         <label for="firstname">Prénom : </label>
@@ -24,7 +28,11 @@
           id="firstname"
           placeholder="Prénom"
           required
+          @blur="v$.$touch"
         />
+        <div class="error" v-if="v$.user.firstname.$error">
+          {{ v$.user.firstname.$errors[0].$message }}
+        </div>
       </div>
       <div>
         <label for="mail">Mail : </label>
@@ -36,7 +44,11 @@
           id="mail"
           type="mail"
           placeholder="Adresse mail"
+          @blur="v$.$touch"
         />
+        <div class="error" v-if="v$.user.email.$error">
+          {{ v$.user.email.$errors[0].$message }}
+        </div>
       </div>
       <div>
         <label for="address">Adresse : </label>
@@ -48,7 +60,11 @@
           id="address"
           placeholder="Lieu de résidence"
           required
+          @blur="v$.$touch"
         />
+        <div class="error" v-if="v$.user.address.$error">
+          {{ v$.user.address.$errors[0].$message }}
+        </div>
       </div>
       <div>
         <label for="phone">Téléphone : </label>
@@ -59,7 +75,11 @@
           v-model="user.phone"
           type="tel"
           placeholder="Mobile"
+          @blur="v$.$touch"
         />
+        <div class="error" v-if="v$.user.phone.$error">
+          {{ v$.user.phone.$errors[0].$message }}
+        </div>
       </div>
       <div>
         <label for="password">Mot de passe : </label>
@@ -72,19 +92,28 @@
           placeholder="Mot de passe"
           autocomplete="off"
           required
+          @blur="v$.$touch"
         />
+        <div class="error" v-if="v$.user.password.$error">
+          {{ v$.user.password.$errors[0].$message }}
+        </div>
       </div>
       <div>
         <label for="password-confirm">Confirmer le mot de passe : </label>
         <input
           name="password-confirm"
           class="form-control"
+          v-model="user.password_confirmation"
           type="password"
           id="password-confirm"
           placeholder="Confirmation du mot de passe"
           autocomplete="off"
           required
+          @blur="v$.$touch"
         />
+        <div class="error" v-if="v$.user.password_confirmation.$error">
+          {{ v$.user.password_confirmation.$errors[0].$message }}
+        </div>
       </div>
       <div class="radio-ctn" v-if="displayRadios == true">
         <label>
@@ -105,15 +134,26 @@
           />
           Client
         </label>
+        <div class="error" v-if="v$.user.elevation.$error">
+          {{ v$.user.elevation.$errors[0].$message }}
+        </div>
       </div>
-      <button class="btn btn-primary" type="submit">
-        Modifier
-      </button>
+      <button class="btn btn-primary" type="submit">Modifier</button>
     </form>
   </div>
 </template>
 
 <script>
+import useVuelidate from "@vuelidate/core";
+import {
+  required,
+  email,
+  minLength,
+  numeric,
+  alphaNum,
+  maxLength,
+  sameAs,
+} from "@vuelidate/validators";
 import UsersService from "../../services/users/users.service";
 import Loader from "../shared/Loader.vue";
 
@@ -128,7 +168,7 @@ export default {
     displayRadios: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   data() {
     return {
@@ -138,14 +178,43 @@ export default {
         email: this.currentUserData.email,
         phone: this.currentUserData.phone,
         address: this.currentUserData.address,
-        password: null,
+        password: this.currentUserData.password,
+        password_confirmation: null,
         elevation: this.currentUserData.elevation,
       },
       isLoading: false,
     };
   },
+  validations() {
+    return {
+      user: {
+        firstname: { required, minLength: minLength(2) },
+        lastname: { required, minLength: minLength(2) },
+        email: { required, email },
+        password: { required, minLength: minLength(8), alphaNum },
+        password_confirmation: { required, sameAs: sameAs(this.user.password) },
+        phone: {
+          required,
+          numeric,
+          minLength: minLength(10),
+          maxLength: maxLength(10),
+        },
+        address: { required },
+        elevation: { required },
+      },
+    };
+  },
+  setup() {
+    return { v$: useVuelidate() };
+  },
   methods: {
     editUser(id, user) {
+      this.v$.$validate();
+
+      if (this.v$.$error) {
+        return false;
+      }
+
       this.isLoading = true;
       UsersService.updateUser(id, user)
         .then((response) => {
@@ -171,6 +240,11 @@ export default {
   align-items: center;
 }
 
+.admin-ctn .error {
+  color: red;
+  padding: 7.5px 0px;
+}
+
 .admin-ctn h1 {
   font-size: 2rem;
   padding-bottom: 35px;
@@ -188,7 +262,7 @@ export default {
 }
 
 .admin-ctn form label {
-      padding-bottom: 2px;
-    margin-right: 10px;
+  padding-bottom: 2px;
+  margin-right: 10px;
 }
 </style>
