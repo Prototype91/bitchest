@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
 
-class CurrencyTableSeeder extends Seeder
+class CurrenciesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -50,7 +50,7 @@ class CurrencyTableSeeder extends Seeder
         $eachResponseArray = array_map($returnValue, $responsesArray);
 
         foreach ($eachResponseArray as $value) {
-            DB::table('currency')->insert([$value]);
+            DB::table('currencies')->insert([$value]);
         };
     }
 }
