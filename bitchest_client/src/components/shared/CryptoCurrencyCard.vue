@@ -2,7 +2,7 @@
   <div class="card">
     <img :src="image" alt="">
     <p>{{ name }}</p>
-    <p>{{ price.toFixed(2) }}€</p>
+    <p>{{ price.toLocaleString(undefined, { maximumFractionDigits: 2 }) }}€</p>
     <p>{{ fluctuation.toFixed(2) }}%</p>
   </div>
 </template>
