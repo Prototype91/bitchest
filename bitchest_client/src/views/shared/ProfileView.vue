@@ -8,7 +8,7 @@
           Bonjour <span>{{ userData.firstname }}</span
           >, voici vos informations personnelles :
         </h1>
-        <EditUserForm :currentUserData="userData" :displayRadios="false"/>
+        <EditUserForm :currentUserData="userData" :displayRadios="false" :updatePassword="true"/>
       </div>
     </section>
   </main>

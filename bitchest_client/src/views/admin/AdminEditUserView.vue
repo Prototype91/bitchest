@@ -8,6 +8,7 @@
         v-if="userData"
         :currentUserData="userData"
         :displayRadios="true"
+        :updatePassword="false"
       />
     </div>
   </main>

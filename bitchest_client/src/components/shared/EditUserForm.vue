@@ -81,7 +81,7 @@
           {{ v$.user.phone.$errors[0].$message }}
         </div>
       </div>
-      <div>
+      <div v-if="updatePassword == true">
         <label for="password">Mot de passe : </label>
         <input
           name="password"
@@ -98,7 +98,7 @@
           {{ v$.user.password.$errors[0].$message }}
         </div>
       </div>
-      <div>
+      <div v-if="updatePassword == true">
         <label for="password-confirm">Confirmer le mot de passe : </label>
         <input
           name="password-confirm"
@@ -169,6 +169,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    updatePassword: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
@@ -179,7 +183,7 @@ export default {
         phone: this.currentUserData.phone,
         address: this.currentUserData.address,
         password: this.currentUserData.password,
-        password_confirmation: null,
+        password_confirmation: this.currentUserData.password,
         elevation: this.currentUserData.elevation,
       },
       isLoading: false,
@@ -191,8 +195,8 @@ export default {
         firstname: { required, minLength: minLength(2) },
         lastname: { required, minLength: minLength(2) },
         email: { required, email },
-        password: { required, minLength: minLength(8), alphaNum },
-        password_confirmation: { required, sameAs: sameAs(this.user.password) },
+        password: { minLength: minLength(8), alphaNum },
+        password_confirmation: { sameAs: sameAs(this.user.password) },
         phone: {
           required,
           numeric,
