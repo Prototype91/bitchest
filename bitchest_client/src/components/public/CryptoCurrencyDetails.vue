@@ -33,36 +33,38 @@ export default {
       label: "",
       isLoading: false,
       balance: null,
+      userData: {},
     };
   },
   methods: {
     getHistoricalCoinValues(cryptoCurrencyId) {
       CryptoCurrencyService.getHistoricalCoinValues(cryptoCurrencyId)
-      .then((response) => {
-        this.cryptoCurrencyData =
-          CryptoCurrencyMapper.mapCryptoCurrencyHistory(response);
-      })
-      .catch((error) => {
-        this.isLoading = false;
-        console.error(error);
-      });
+        .then((response) => {
+          console.log(response);
+          this.cryptoCurrencyData =
+            CryptoCurrencyMapper.mapCryptoCurrencyHistory(response);
+        })
+        .catch((error) => {
+          this.isLoading = false;
+          console.error(error);
+        });
     },
     getUserTransactions(userData, cryptoCurrencyId) {
       TransactionsService.getUserTransactions(userData.id)
-      .then((response) => {
-        this.transactions = response.data.filter(
-          (transaction) => transaction.name == cryptoCurrencyId
-        );
+        .then((response) => {
+          this.transactions = response.data.filter(
+            (transaction) => transaction.name == cryptoCurrencyId
+          );
 
-        console.log(response, this.cryptoCurrencyData);
-        this.isLoading = false;
-        console.log("Transactions", this.transactions);
-      })
-      .catch((error) => {
-        this.isLoading = false;
-        console.error(error);
-      });
-    }
+          console.log(response, this.cryptoCurrencyData);
+          this.isLoading = false;
+          console.log("Transactions", this.transactions);
+        })
+        .catch((error) => {
+          this.isLoading = false;
+          console.error(error);
+        });
+    },
   },
   mounted() {
     const cryptoCurrencyId = this.$route.params.id;
@@ -71,10 +73,10 @@ export default {
 
     this.getHistoricalCoinValues(cryptoCurrencyId);
 
-    const userData = LocalStorageService.getUserLocalStorage();
-    this.balance = userData.balance;
+    this.userData = LocalStorageService.getUserLocalStorage();
+    this.balance = this.userData.balance;
 
-    this.getUserTransactions(userData, cryptoCurrencyId);
+    this.getUserTransactions(this.userData, cryptoCurrencyId);
   },
 };
 </script>
@@ -84,6 +86,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 80%;
   margin: 0 auto;
   padding: 10px;
 }

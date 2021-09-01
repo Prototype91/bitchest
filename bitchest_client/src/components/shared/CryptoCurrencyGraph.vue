@@ -4,7 +4,8 @@
     suffix="€"
     :min="minValue"
     :max="maxValue"
-    :precision="3"
+    precision="9"
+    decimal=","
   ></line-chart>
 </template>
 

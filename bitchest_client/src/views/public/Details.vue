@@ -1,8 +1,8 @@
 <template>
-  <main>
+  <div>
     <Navigation />
     <CryptoCurrencyDetails />
-  </main>
+  </div>
 </template>
 
 <script>
@@ -15,7 +15,4 @@ export default {
 </script>
 
 <style>
-main {
-  display: block;
-}
 </style>
