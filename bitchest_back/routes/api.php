@@ -28,9 +28,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 | Users Routes
 |--------------------------------------------------------------------------
 */
-    Route::get('/user/{id}', [UsersController::class, 'show']);
     Route::get('/users', [UsersController::class, 'index']);
     Route::post('/user', [UsersController::class, 'store']);
+    Route::get('/user/{id}', [UsersController::class, 'show']);
+
+
     Route::delete('/user/{id}', [UsersController::class, 'destroy']);
     Route::put('/user/{id}', [UsersController::class, 'update']);
     Route::get('/user', function (Request $request) {
@@ -41,6 +43,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 | Transactions Routes
 |--------------------------------------------------------------------------
 */
-    Route::get('/transactions', [TransactionsController::class, 'index']);
+    Route::get('/transactions/user/{id}', [UsersController::class, 'getTransactionsByUserId']);
     Route::post('/transactions', [TransactionsController::class, 'store']);
 });

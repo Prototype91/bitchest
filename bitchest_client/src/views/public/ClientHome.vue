@@ -58,7 +58,6 @@ export default {
           console.error(error);
         });
     }
-
     this.userData = LocalStorageService.getUserLocalStorage();
   },
 };

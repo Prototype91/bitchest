@@ -4,7 +4,11 @@
     <Loader :isLoading="!userData" />
     <div>
       <h1>Modification de l'utilisateur</h1>
-      <EditUserForm v-if="userData" :currentUserData="userData" :displayRadios="true"/>
+      <EditUserForm
+        v-if="userData"
+        :currentUserData="userData"
+        :displayRadios="true"
+      />
     </div>
   </main>
 </template>
@@ -25,10 +29,14 @@ export default {
   },
   mounted() {
     const userId = this.$route.params.id;
-    UsersService.getUser(userId).then((response) => {
-      console.log(response.data);
-      this.userData = response.data;
-    });
+    UsersService.getUser(userId)
+      .then((response) => {
+        console.log(response.data);
+        this.userData = response.data;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   },
 };
 </script>
@@ -41,10 +49,10 @@ h1 {
 }
 
 main > div {
-      width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 </style>

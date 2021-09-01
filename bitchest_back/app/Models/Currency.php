@@ -19,4 +19,8 @@ class Currency extends Model
         'symbol',
         'name',
     ];
+
+    public function users() {
+        return $this->belongsTo(User::class);
+    }
 }

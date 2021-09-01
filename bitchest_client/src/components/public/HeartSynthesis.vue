@@ -31,7 +31,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .cards-ctn {
   display: flex;
   flex-wrap: wrap;

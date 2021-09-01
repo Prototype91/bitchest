@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -19,6 +20,12 @@ class UsersController extends Controller
             'users' => $users,
             'message' => 'Utilisateurs récupérés avec succès'
         ], 200);
+    }
+
+    public function getTransactionsByUserId($id)
+    {
+        $user = User::find($id);
+        return $user->transactions;
     }
 
     /**
@@ -110,6 +117,8 @@ class UsersController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
+
+        $user->transactions()->delete();
 
         $user->delete();
 
