@@ -145,7 +145,6 @@ main {
   flex-direction: row;
   height: 100vh;
   width: 100vw;
-  padding: 15px 10px;
   overflow-x: hidden;
 }
 
@@ -192,5 +191,33 @@ button.btn a:hover {
 
 .modal-content p {
   font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  main {
+    padding: 0px;
+    flex-direction: column;
+  }
+
+  main > div,
+  main > section {
+    width: 100%;
+    margin-left: 0px;
+    margin-top: 70px; /* 70px de hauteur nav + 10px de margin */
+    padding: 7.5px 5px;
+  }
+}
+
+@media (min-width: 769px) {
+  main {
+    padding: 15px 10px;
+  }
+
+  main > div,
+  main > section {
+    width: calc(100% - 130px);
+    margin-left: 130px; /* 120px de largeur nav + 10px de margin */
+    padding : 0px;
+  }
 }
 </style>

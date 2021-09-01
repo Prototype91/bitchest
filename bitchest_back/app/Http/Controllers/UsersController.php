@@ -37,12 +37,12 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $fields = $request->validate([
-            'firstname' => 'required|string',
-            'lastname' => 'required|string',
+            'firstname' => 'required|string|min:2',
+            'lastname' => 'required|string|min:2',
             'email' => 'required|string|unique:users,email',
             'password' => 'min:8|required_with:password_confirmation|same:password_confirmation',
             'password_confirmation' => 'min:8',
-            'phone' => 'required|string',
+            'phone' => 'required|string|min:10|max:10',
             'address' => 'required|string'
         ]);
 

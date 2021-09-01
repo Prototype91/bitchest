@@ -21,13 +21,6 @@ export default {
 </script>
 
 <style scoped>
-main {
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-  padding: 15px 10px;
-}
-
 .buy,
 .sell {
   width: 50%;
@@ -37,7 +30,7 @@ main {
 .market-ctn {
   display: flex;
   justify-content: center;
-  width: 80%;
-  margin: 0 auto;
+  width: calc(100% - 120px);
+  margin-left: 130px;
 }
 </style>

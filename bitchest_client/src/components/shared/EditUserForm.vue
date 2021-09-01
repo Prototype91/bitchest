@@ -6,12 +6,10 @@
         <label for="lastname">Nom :</label> <br />
         <input
           type="text"
-          name="lastname"
           v-model="user.lastname"
           class="form-control"
           id="lastname"
           placeholder="Nom"
-          required
           @blur="v$.$touch"
         />
         <div class="error" v-if="v$.user.lastname.$error">
@@ -21,13 +19,11 @@
       <div>
         <label for="firstname">Prénom : </label>
         <input
-          name="firstname"
           class="form-control"
           v-model="user.firstname"
           type="text"
           id="firstname"
           placeholder="Prénom"
-          required
           @blur="v$.$touch"
         />
         <div class="error" v-if="v$.user.firstname.$error">
@@ -37,9 +33,7 @@
       <div>
         <label for="mail">Mail : </label>
         <input
-          name="mail"
           class="form-control"
-          required
           v-model="user.email"
           id="mail"
           type="mail"
@@ -53,13 +47,11 @@
       <div>
         <label for="address">Adresse : </label>
         <input
-          name="address"
           class="form-control"
           v-model="user.address"
           type="text"
           id="address"
           placeholder="Lieu de résidence"
-          required
           @blur="v$.$touch"
         />
         <div class="error" v-if="v$.user.address.$error">
@@ -69,7 +61,6 @@
       <div>
         <label for="phone">Téléphone : </label>
         <input
-          name="phone"
           class="form-control"
           id="phone"
           v-model="user.phone"
@@ -81,34 +72,30 @@
           {{ v$.user.phone.$errors[0].$message }}
         </div>
       </div>
-      <div>
+      <div v-if="updatePassword == true">
         <label for="password">Mot de passe : </label>
         <input
-          name="password"
           class="form-control"
           v-model="user.password"
           type="password"
           id="password"
           placeholder="Mot de passe"
           autocomplete="off"
-          required
           @blur="v$.$touch"
         />
         <div class="error" v-if="v$.user.password.$error">
           {{ v$.user.password.$errors[0].$message }}
         </div>
       </div>
-      <div>
+      <div v-if="updatePassword == true">
         <label for="password-confirm">Confirmer le mot de passe : </label>
         <input
-          name="password-confirm"
           class="form-control"
           v-model="user.password_confirmation"
           type="password"
           id="password-confirm"
           placeholder="Confirmation du mot de passe"
           autocomplete="off"
-          required
           @blur="v$.$touch"
         />
         <div class="error" v-if="v$.user.password_confirmation.$error">
@@ -169,6 +156,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    updatePassword: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
@@ -179,7 +170,7 @@ export default {
         phone: this.currentUserData.phone,
         address: this.currentUserData.address,
         password: this.currentUserData.password,
-        password_confirmation: null,
+        password_confirmation: this.currentUserData.password,
         elevation: this.currentUserData.elevation,
       },
       isLoading: false,
@@ -191,8 +182,8 @@ export default {
         firstname: { required, minLength: minLength(2) },
         lastname: { required, minLength: minLength(2) },
         email: { required, email },
-        password: { required, minLength: minLength(8), alphaNum },
-        password_confirmation: { required, sameAs: sameAs(this.user.password) },
+        password: { minLength: minLength(8), alphaNum },
+        password_confirmation: { sameAs: sameAs(this.user.password) },
         phone: {
           required,
           numeric,

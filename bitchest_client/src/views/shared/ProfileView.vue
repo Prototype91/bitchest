@@ -8,7 +8,7 @@
           Bonjour <span>{{ userData.firstname }}</span
           >, voici vos informations personnelles :
         </h1>
-        <EditUserForm :currentUserData="userData" :displayRadios="false"/>
+        <EditUserForm :currentUserData="userData" :displayRadios="false" :updatePassword="true"/>
       </div>
     </section>
   </main>
@@ -45,7 +45,6 @@ export default {
 
 <style scoped>
 section {
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;

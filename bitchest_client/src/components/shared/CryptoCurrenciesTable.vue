@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="section-ctn">
     <div class="container">
       <div>
         <table class="table table-striped">
@@ -60,6 +60,10 @@ export default {
 </script>
 
 <style scoped>
+.section-ctn .container {
+  padding: 0;
+}
+
 table,
 td {
   color: white;
