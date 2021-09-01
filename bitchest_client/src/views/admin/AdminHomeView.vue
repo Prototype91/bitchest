@@ -15,10 +15,4 @@ export default {
 </script>
 
 <style>
-main {
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-  padding: 15px 10px;
-}
 </style>

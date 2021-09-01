@@ -21,13 +21,6 @@ export default {
 </script>
 
 <style scoped>
-main {
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-  padding: 15px 10px;
-}
-
 .buy,
 .sell {
   width: 50%;

@@ -74,12 +74,7 @@ h1 {
   margin-left: 130px;
 }
 
-@media screen and (max-width: 768px) {
-  main {
-    padding: 7.5px 5px;
-    flex-direction: column;
-  }
-}
+
 
 @media screen and (max-width: 917px) {
   .synthesis-ctn {

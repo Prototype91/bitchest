@@ -51,10 +51,6 @@ export default {
 </script>
 
 <style scoped>
-.manage-users-ctn {
-  width: calc(100% - 130px);
-  margin-left: 130px;
-}
 
 h1 {
   text-align: center;
