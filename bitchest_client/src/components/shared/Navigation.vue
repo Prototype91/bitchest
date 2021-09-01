@@ -116,8 +116,6 @@ export default {
   },
   mounted() {
     const localStorageData = LocalStorageService.getUserLocalStorage();
-
-    console.log(localStorageData);
     this.userElevation = localStorageData.elevation;
     this.elevationPath = localStorageData.elevation == "user" ? "client" : "admin";
     this.id = localStorageData.id;

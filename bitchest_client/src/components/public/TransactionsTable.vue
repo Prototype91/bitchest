@@ -9,26 +9,64 @@
               <th>Cryptomonnaie</th>
               <th>Débit</th>
               <th>Crédit</th>
+              <th>RSI</th>
               <th>Date</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(transaction, index) in this.transactions" :key="index">
               <td>
-                <i class="fas fa-arrow-alt-circle-down"></i>
+                <i
+                  :class="[
+                    !transaction.type
+                      ? 'fas fa-arrow-alt-circle-down'
+                      : 'fas fa-arrow-alt-circle-up',
+                  ]"
+                ></i>
               </td>
 
               <td class="name">
                 {{ transaction.name }}
               </td>
 
-              <td>{{ transaction.amount }} €</td>
+              <td v-if="transaction.type">
+                -{{
+                  transaction.amount.toLocaleString(undefined, {
+                    maximumFractionDigits: 2,
+                  })
+                }}
+                €
+              </td>
+              <td v-if="!transaction.type">
+                -{{ transaction.currency_value }}
+                {{ transaction.symbol.toUpperCase() }}
+              </td>
 
-              <td>{{ transaction.currency_value }} {{ transaction.symbol.toUpperCase() }}</td>
+              <td v-if="transaction.type">
+                +{{ transaction.currency_value }}
+                {{ transaction.symbol.toUpperCase() }}
+              </td>
+              <td v-if="!transaction.type">
+                +{{
+                  transaction.amount.toLocaleString(undefined, {
+                    maximumFractionDigits: 2,
+                  })
+                }}
+                €
+              </td>
 
               <td>
-                {{ transaction.created_at }}
+                {{
+                  getReturnOnInvest(
+                    transaction.name,
+                    transaction.amount,
+                    transaction.currency_value
+                  )
+                }}
+                €
               </td>
+
+              <td>{{ this.formatDate(transaction.created_at) }}</td>
             </tr>
           </tbody>
         </table>
@@ -38,12 +76,35 @@
 </template>
 
 <script>
+import moment from "moment";
+import LocalStorageService from "../../services/localStorage/localStorage.service";
+
 export default {
   name: "TransactionsTable",
   props: {
     transactions: {
       type: Array,
       required: true,
+    },
+  },
+  methods: {
+    formatDate(date) {
+      return moment(date).utc().format("DD/MM/YYYY-hh:mm");
+    },
+    getReturnOnInvest(cryptoCurrencyName, boughtValue, currencyValue) {
+      const cryptoCurrencies =
+        LocalStorageService.getCryptoCurrenciesLocalStorage();
+
+      const cryptoCurrencyData = cryptoCurrencies.find(
+        (cryptoCurrency) => cryptoCurrency.id === cryptoCurrencyName
+      );
+
+      const returnOnInvest =
+        (cryptoCurrencyData.current_price -
+          boughtValue / Number(currencyValue)) *
+        Number(currencyValue);
+
+      return returnOnInvest >= 0 ? `+${returnOnInvest}` : returnOnInvest;
     },
   },
 };
@@ -56,7 +117,7 @@ td {
 }
 
 .name {
-    text-transform: capitalize;
+  text-transform: capitalize;
 }
 
 .positive {
@@ -68,7 +129,7 @@ td {
 }
 
 .container {
-    padding: 0;
+  padding: 0;
 }
 table img {
   vertical-align: middle;

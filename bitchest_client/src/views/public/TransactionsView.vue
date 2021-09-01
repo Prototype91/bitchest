@@ -32,7 +32,7 @@ export default {
       .then((response) => {
         this.transactions = response.data.reverse();
         this.isLoading = false;
-        console.log(response.data);
+        console.log('Transactions', this.transactions);
       })
       .catch((error) => {
         this.isLoading = false;

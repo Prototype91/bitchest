@@ -8,5 +8,5 @@ export default {
     // Adds a new Transaction
     addNewUserTransaction(id, transaction) {
         return Api().post(`/transactions/${id}`, transaction);
-    },
+    }
 };
