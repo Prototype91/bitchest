@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="manage-users-ctn">
     <Loader :isLoading="isLoading" />
     <div v-if="users.length" class="user-table">
       <h1>Liste des utilisateurs</h1>
@@ -51,6 +51,11 @@ export default {
 </script>
 
 <style scoped>
+.manage-users-ctn {
+  width: calc(100% - 130px);
+  margin-left: 130px;
+}
+
 h1 {
   text-align: center;
   font-size: 30px;
