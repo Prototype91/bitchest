@@ -39,6 +39,7 @@ class LoginController extends Controller
 
     public function logout()
     {
+        /** @var \App\Models\User */
         $currentUser = auth()->user();
         $currentUser->tokens()->delete();
 

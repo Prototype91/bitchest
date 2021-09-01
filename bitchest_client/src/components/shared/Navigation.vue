@@ -50,6 +50,11 @@
           <i class="fas fa-coins"></i>
         </router-link>
       </li>
+      <li v-if="userElevation == 'user'">
+        <router-link title="Historique des transactions" class="link-menu" to="/client/transactions">
+          <i class="fas fa-exchange-alt"></i>
+        </router-link>
+      </li>
       <li v-if="userElevation == 'admin'">
         <router-link title="Cours des cryptomonaies" class="link-menu" to="/admin/crypto-prices">
           <i class="fas fa-chart-line"></i>

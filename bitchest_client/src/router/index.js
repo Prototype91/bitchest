@@ -10,6 +10,7 @@ import ProfileView from '../views/shared/ProfileView.vue';
 import ClientHome from '../views/public/ClientHome.vue';
 import Details from "../views/public/Details.vue";
 import MarketPlace from '../views/public/MarketPlace.vue';
+import TransactionsView from '../views/public/TransactionsView.vue';
 
 const routes = [
   {
@@ -34,6 +35,12 @@ const routes = [
     path: '/client/market',
     name: 'MarketPlace',
     component: MarketPlace,
+    meta: { userOnly: true }
+  },
+  {
+    path: '/client/transactions',
+    name: 'Transactions',
+    component: TransactionsView,
     meta: { userOnly: true }
   },
   {
