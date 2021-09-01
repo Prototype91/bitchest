@@ -73,7 +73,7 @@
 
 <script>
 import moment from "moment";
-import LocalStorageService from "../../services/localStorage/localStorage.service";
+import TransactionsMapper from '../../services/transactions/transactions.mapper';
 
 export default {
   name: "TransactionsTable",
@@ -88,19 +88,7 @@ export default {
       return moment(date).utc().format("DD/MM/YYYY-hh:mm");
     },
     getReturnOnInvest(cryptoCurrencyName, boughtValue, currencyValue) {
-      const cryptoCurrencies =
-        LocalStorageService.getCryptoCurrenciesLocalStorage();
-
-      const cryptoCurrencyData = cryptoCurrencies.find(
-        (cryptoCurrency) => cryptoCurrency.id === cryptoCurrencyName
-      );
-
-      const returnOnInvest =
-        (cryptoCurrencyData.current_price -
-          boughtValue / Number(currencyValue)) *
-        Number(currencyValue);
-
-      return returnOnInvest >= 0 ? `+${returnOnInvest.toFixed(2)}` : returnOnInvest.toFixed(2);
+      return TransactionsMapper.getReturnOnInvest(cryptoCurrencyName, boughtValue, currencyValue);
     },
   },
 };

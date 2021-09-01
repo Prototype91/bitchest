@@ -26,4 +26,4 @@ export default {
         window.localStorage.removeItem("user");
         window.localStorage.removeItem("cryptoCurrencies");
     }
-}
+};

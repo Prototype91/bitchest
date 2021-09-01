@@ -25,4 +25,4 @@ export default {
     updateUser(id, userData) {
         return Api().put(`/user/${id}`, userData);
     }
-}
+};

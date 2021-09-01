@@ -24,8 +24,6 @@ export default {
             mappedValues = { ...mappedValues, [finalTime]: price.toFixed(2) };
         }
 
-        console.log(mappedValues);
-
         return mappedValues;
     }
-}
+};

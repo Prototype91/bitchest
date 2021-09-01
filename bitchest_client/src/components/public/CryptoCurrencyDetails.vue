@@ -24,6 +24,7 @@ import Loader from "../shared/Loader.vue";
 import LocalStorageService from "../../services/localStorage/localStorage.service";
 import TransactionsService from "../../services/transactions/transactions.service";
 import Balance from "./Balance.vue";
+import usersService from '../../services/users/users.service';
 
 export default {
   name: "CryptoCurrencyDetails",
@@ -34,7 +35,7 @@ export default {
       transactions: [],
       label: "",
       isLoading: false,
-      balance: null,
+      balance: 0,
       userData: {},
       currencyId: null,
       allCryptoCurrencies: [
@@ -53,10 +54,24 @@ export default {
     };
   },
   methods: {
+    init() {
+      this.cryptoCurrencyId = this.$route.params.id;
+      this.label = this.cryptoCurrencyId.toUpperCase();
+      this.isLoading = true;
+
+      this.getHistoricalCoinValues(this.cryptoCurrencyId);
+
+      this.userData = LocalStorageService.getUserLocalStorage();
+
+      usersService.getUser(this.userData.id).then(response => {
+        this.balance = response.data.balance
+      });
+
+      this.getUserTransactions(this.userData, this.cryptoCurrencyId);
+    },
     getHistoricalCoinValues(cryptoCurrencyId) {
       CryptoCurrencyService.getHistoricalCoinValues(cryptoCurrencyId)
         .then((response) => {
-          console.log(response);
           this.cryptoCurrencyData =
             CryptoCurrencyMapper.mapCryptoCurrencyHistory(response);
         })
@@ -72,7 +87,6 @@ export default {
             .filter((transaction) => transaction.name == cryptoCurrencyId)
             .reverse();
 
-          console.log(response, this.cryptoCurrencyData);
           this.isLoading = false;
           console.log("Transactions", this.transactions);
         })
@@ -87,10 +101,6 @@ export default {
 
       const localStorageData =
         LocalStorageService.getCryptoCurrenciesLocalStorage();
-      
-      this.userData.balance = this.userData.balance - lastValue;
-
-      LocalStorageService.setUserLocalStorage(this.userData);
 
       const currentCurrencyData = localStorageData.filter(
         (cryptoCurrency) => cryptoCurrency.id === this.cryptoCurrencyId
@@ -107,21 +117,14 @@ export default {
         name: this.cryptoCurrencyId,
         symbol: currentCurrencyData[0].symbol,
       };
-      
+
       TransactionsService.addNewUserTransaction(transactionData);
+
+      this.init();
     },
   },
   mounted() {
-    this.cryptoCurrencyId = this.$route.params.id;
-    this.label = this.cryptoCurrencyId.toUpperCase();
-    this.isLoading = true;
-
-    this.getHistoricalCoinValues(this.cryptoCurrencyId);
-
-    this.userData = LocalStorageService.getUserLocalStorage();
-    this.balance = this.userData.balance;
-
-    this.getUserTransactions(this.userData, this.cryptoCurrencyId);
+    this.init();
   },
 };
 </script>

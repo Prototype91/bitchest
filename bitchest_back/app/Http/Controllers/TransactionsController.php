@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Transaction;
-
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TransactionsController extends Controller
@@ -38,7 +38,17 @@ class TransactionsController extends Controller
             "amount" => "required"
         ]);
 
-        return Transaction::create($request->all());
+        Transaction::create($request->all());
+
+        $user = User::find($request->user_id);
+
+        $user->balance = $user->balance - $request->amount;
+
+        $user->save();
+
+        return response([
+            'message' => 'Transactions créée avec succès'
+        ], 200);
     }
 
     /**

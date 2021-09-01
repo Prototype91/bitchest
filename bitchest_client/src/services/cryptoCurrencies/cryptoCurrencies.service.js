@@ -33,4 +33,4 @@ export default {
         // Returns the cryptocurrency historical values for 30 days
         return axios.get(`${baseUrl}${cryptoCurrency}${endUrl}`);
     }
-}
+};
