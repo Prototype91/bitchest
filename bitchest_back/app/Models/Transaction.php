@@ -20,6 +20,8 @@ class Transaction extends Model
         'currency_value',
         'amount',
         'type',
+        'name',
+        'symbol'
     ];
 
     public function users() {
