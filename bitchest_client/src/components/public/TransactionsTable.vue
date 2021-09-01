@@ -24,7 +24,6 @@
                   ]"
                 ></i>
               </td>
-
               <td class="name">
                 {{ transaction.name }}
               </td>
@@ -41,7 +40,6 @@
                 -{{ transaction.currency_value }}
                 {{ transaction.symbol.toUpperCase() }}
               </td>
-
               <td v-if="transaction.type">
                 +{{ transaction.currency_value }}
                 {{ transaction.symbol.toUpperCase() }}
@@ -54,7 +52,6 @@
                 }}
                 €
               </td>
-
               <td>
                 {{
                   getReturnOnInvest(
@@ -65,7 +62,6 @@
                 }}
                 €
               </td>
-
               <td>{{ this.formatDate(transaction.created_at) }}</td>
             </tr>
           </tbody>
@@ -104,7 +100,7 @@ export default {
           boughtValue / Number(currencyValue)) *
         Number(currencyValue);
 
-      return returnOnInvest >= 0 ? `+${returnOnInvest}` : returnOnInvest;
+      return returnOnInvest >= 0 ? `+${returnOnInvest.toFixed(2)}` : returnOnInvest.toFixed(2);
     },
   },
 };
