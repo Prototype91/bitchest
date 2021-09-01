@@ -94,13 +94,16 @@ class UsersController extends Controller
             "phone" => "required",
             "address" => "required",
             "email" => "required",
-            "password" => "required",
+            'password' => 'min:8|required_with:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'min:8',
             "elevation" => "required",
         ]);
 
         $user = User::find($id);
-
+        
         $user->update($request->all());
+        $user->password = bcrypt($user->password);
+        $user->save();
 
         return response([
             'user' => $user,
