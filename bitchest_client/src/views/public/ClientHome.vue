@@ -70,8 +70,8 @@ h1 {
 }
 
 .synthesis-ctn {
-  width: 80%;
-  margin: 0 auto;
+  width: calc(100% - 120px);
+  margin-left: 120px;
 }
 
 @media screen and (max-width: 768px) {

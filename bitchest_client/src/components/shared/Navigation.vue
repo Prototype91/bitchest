@@ -130,7 +130,8 @@ nav {
   padding: 15px;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.5);
-  height: 100%;
+  height: calc(100% - 30px);
+  position: fixed;
 }
 
 #menu {
