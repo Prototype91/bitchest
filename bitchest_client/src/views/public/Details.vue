@@ -15,4 +15,7 @@ export default {
 </script>
 
 <style>
+main {
+  display: block;
+}
 </style>

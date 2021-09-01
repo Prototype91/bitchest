@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "HeaderSynthesis",
+  name: "Balance",
   props: {
     balance: {
       type: Number,

@@ -2,6 +2,7 @@
   <main>
     <Navigation />
     <Loader :isLoading="isLoading" />
+    <Balance :balance="balance" />
     <div v-if="transactions.length">
       <h1>Historique des transactions :</h1>
       <TransactionsTable :transactions="transactions" />
@@ -15,24 +16,28 @@ import TransactionsService from "../../services/transactions/transactions.servic
 import LocalStorageService from "../../services/localStorage/localStorage.service";
 import TransactionsTable from "../../components/public/TransactionsTable.vue";
 import Loader from "../../components/shared/Loader.vue";
+import Balance from "../../components/public/Balance.vue";
 
 export default {
   name: "TransactionsView",
-  components: { Navigation, TransactionsTable, Loader },
+  components: { Navigation, TransactionsTable, Loader, Balance },
   data() {
     return {
       transactions: [],
       isLoading: false,
+      balance: 0,
     };
   },
   mounted() {
     const userData = LocalStorageService.getUserLocalStorage();
+
+    this.balance = userData.balance;
     this.isLoading = true;
     TransactionsService.getUserTransactions(userData.id)
       .then((response) => {
         this.transactions = response.data.reverse();
         this.isLoading = false;
-        console.log('Transactions', this.transactions);
+        console.log("Transactions", this.transactions);
       })
       .catch((error) => {
         this.isLoading = false;
@@ -46,6 +51,10 @@ export default {
 div {
   width: 80%;
   margin: 0 auto;
+}
+
+main {
+    display: block;
 }
 
 h1 {

@@ -5,7 +5,7 @@
       <Navigation />
       <section class="synthesis-ctn">
         <h1>Bonjour {{ userData.firstname }}</h1>
-        <HeaderSynthesis :balance="userData.balance" />
+        <Balance :balance="userData.balance" />
         <HeartSynthesis :cryptoCurrencies="cryptoCurrencies" />
       </section>
     </main>
@@ -14,7 +14,7 @@
 
 <script>
 import Navigation from "../../components/shared/Navigation.vue";
-import HeaderSynthesis from "../../components/public/HeaderSythesis.vue";
+import Balance from "../../components/public/Balance.vue";
 import HeartSynthesis from "../../components/public/HeartSynthesis.vue";
 import CryptoCurrencyService from "../../services/cryptoCurrencies/cryptoCurrencies.service";
 import CryptoCurrencyMapper from "../../services/cryptoCurrencies/cryptoCurrencies.mapper";
@@ -23,7 +23,7 @@ import Loader from "../../components/shared/Loader.vue";
 
 export default {
   name: "Home",
-  components: { Navigation, HeaderSynthesis, HeartSynthesis, Loader },
+  components: { Navigation, Balance, HeartSynthesis, Loader },
   data() {
     return {
       userData: null,
