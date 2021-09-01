@@ -37,7 +37,7 @@ main {
 .market-ctn {
   display: flex;
   justify-content: center;
-  width: 80%;
-  margin: 0 auto;
+  width: calc(100% - 120px);
+  margin-left: 130px;
 }
 </style>

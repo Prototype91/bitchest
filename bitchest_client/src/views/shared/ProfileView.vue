@@ -45,7 +45,8 @@ export default {
 
 <style scoped>
 section {
-  width: 100%;
+  width: calc(100% - 130px);
+  margin-left: 130px;
   display: flex;
   flex-direction: column;
   justify-content: center;

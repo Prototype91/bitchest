@@ -71,7 +71,7 @@ h1 {
 
 .synthesis-ctn {
   width: calc(100% - 120px);
-  margin-left: 120px;
+  margin-left: 130px;
 }
 
 @media screen and (max-width: 768px) {
