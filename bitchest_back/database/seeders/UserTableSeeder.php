@@ -22,7 +22,7 @@ class UserTableSeeder extends Seeder
                 'address' => '24 Avenue Gambetta',
                 'phone' => '0680789255',
                 'email' => 'dylan@dylan.fr',
-                'balance' => 1567.66,
+                'balance' => 50000,
                 'password' => Hash::make('dylan'),
                 'elevation' => 'admin'
             ],
@@ -32,7 +32,7 @@ class UserTableSeeder extends Seeder
                 'address' => '88 Avenue Gambetta',
                 'phone' => '0690872635',
                 'email' => 'sandrine@oyarsabal.fr',
-                'balance' => 1567.66,
+                'balance' => 50000,
                 'password' => Hash::make('sandrine'),
                 'elevation' => 'admin'
             ],
@@ -42,7 +42,7 @@ class UserTableSeeder extends Seeder
                 'address' => '54 Boulevard Bessières',
                 'phone' => '0687253891',
                 'email' => 'kenny@kenny.fr',
-                'balance' => 1567.66,
+                'balance' => 50000,
                 'password' => Hash::make('kenny'),
                 'elevation' => 'user'
             ],
@@ -52,7 +52,7 @@ class UserTableSeeder extends Seeder
                 'address' => '45 Boulevard Raspail',
                 'phone' => '0658927367',
                 'email' => 'jean@dupont.fr',
-                'balance' => 1567.66,
+                'balance' => 50000,
                 'password' => Hash::make('jean'),
                 'elevation' => 'user'
             ],

@@ -24,7 +24,7 @@ import Loader from "../shared/Loader.vue";
 import LocalStorageService from "../../services/localStorage/localStorage.service";
 import TransactionsService from "../../services/transactions/transactions.service";
 import Balance from "./Balance.vue";
-import usersService from '../../services/users/users.service';
+import usersService from "../../services/users/users.service";
 
 export default {
   name: "CryptoCurrencyDetails",
@@ -63,9 +63,16 @@ export default {
 
       this.userData = LocalStorageService.getUserLocalStorage();
 
-      usersService.getUser(this.userData.id).then(response => {
-        this.balance = response.data.balance
-      });
+      usersService
+        .getUser(this.userData.id)
+        .then((response) => {
+          this.balance = response.data.balance;
+          this.userData.balance = response.data.balance;
+          LocalStorageService.setUserLocalStorage(this.userData);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
 
       this.getUserTransactions(this.userData, this.cryptoCurrencyId);
     },
@@ -98,6 +105,10 @@ export default {
     buyCryptoCurrency() {
       const values = Object.values(this.cryptoCurrencyData);
       const lastValue = values[values.length - 1];
+
+      if(lastValue > this.balance) {
+        return
+      }
 
       const localStorageData =
         LocalStorageService.getCryptoCurrenciesLocalStorage();
