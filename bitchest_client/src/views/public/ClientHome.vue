@@ -47,7 +47,7 @@ export default {
             CryptoCurrencyMapper.mapCryptoCurrencies(response);
 
           this.cryptoCurrencies = mappedValues;
-          
+
           LocalStorageService.setCryptoCurrenciesLocalStorage(mappedValues);
 
           this.isLoading = false;
@@ -69,16 +69,10 @@ h1 {
   font-size: 2rem;
 }
 
-.synthesis-ctn {
-  width: calc(100% - 120px);
-  margin-left: 130px;
-}
-
-
-
-@media screen and (max-width: 917px) {
+@media (min-width: 769px) {
   .synthesis-ctn {
-    width: 100%;
+    width: calc(100% - 120px);
+    margin-left: 130px;
   }
 }
 </style>
