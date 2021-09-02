@@ -33,7 +33,7 @@
                 <input id="vendre" type="text" v-model="this.crypto_amount" />
               </div>
               <div class="select-ctn">
-                <img src="" alt="icone de la cryptomonnaie choisie" />
+                <img :src="currencyImg" alt="icone de la cryptomonnaie choisie" />
                 <select
                   name="crypto-select"
                   id="crypto-select"
@@ -72,6 +72,7 @@ export default {
     return {
       userData: null,
       currencySelected: "bitcoin",
+      currencyImg: "",
       currencySymbol: "",
       currencyPrice: 0,
       exchange_value: 0,
@@ -83,9 +84,9 @@ export default {
     this.userData = localStorageService.getUserLocalStorage();
 
     cryptoCurrenciesService.getCryptoCurrencies().then((response) => {
-      this.cryptoCurrenciesData =
-        cryptoCurrenciesMapper.mapCryptoCurrencies(response);
-      console.log(this.cryptoCurrenciesData);
+      this.cryptoCurrenciesData = cryptoCurrenciesMapper.mapCryptoCurrencies(response);
+      console.log(this.cryptoCurrenciesData)
+      this.setCurrentCurrency();
     });
   },
   methods: {
@@ -93,12 +94,12 @@ export default {
       this.crypto_amount = this.exchange_value / this.currencyPrice;
     },
     setCurrentCurrency() {
-      console.log("MAIS NIQUE TOIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
       const currencyData = this.cryptoCurrenciesData.filter(
         (currency) => currency.id === this.currencySelected
       );
       this.currencySymbol = currencyData[0].symbol;
       this.currencyPrice = currencyData[0].current_price;
+      this.currencyImg = currencyData[0].image;
     },
     startTransfert() {
       let currency_id;
@@ -117,7 +118,8 @@ export default {
           name: this.currencySelected,
           symbol: this.currencySymbol,
         };
-        console.log("data : ", data);
+
+        // Ajout de la transaction
         transactionsService
           .addNewUserTransaction(data)
           .then((response) => {
