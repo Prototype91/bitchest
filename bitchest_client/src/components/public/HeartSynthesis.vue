@@ -5,6 +5,9 @@
         v-for="(userCryptoCurrency, index) in this.userCryptoCurrencies"
         :name="userCryptoCurrency.name"
         :price="userCryptoCurrency.currency_value"
+        :image="userCryptoCurrency.image"
+        :symbol="userCryptoCurrency.symbol"
+        :amount="userCryptoCurrency.amount"
         :key="index"
       />
     </section>
@@ -19,6 +22,7 @@ import CryptoCurrencyCard from "../shared/CryptoCurrencyCard.vue";
 import CryptoCurrenciesTable from "../shared/CryptoCurrenciesTable.vue";
 import transactionsService from "../../services/transactions/transactions.service";
 import transactionsMapper from "../../services/transactions/transactions.mapper";
+import cryptoCurrenciesMapper from "../../services/cryptoCurrencies/cryptoCurrencies.mapper";
 export default {
   name: "HeartSynthesis",
   components: { CryptoCurrencyCard, CryptoCurrenciesTable },
@@ -29,6 +33,7 @@ export default {
     },
     userId: {
       type: Number,
+      required: true
     },
   },
   data() {
@@ -36,14 +41,25 @@ export default {
       userCryptoCurrencies: [],
     };
   },
+  methods: {
+    getUserCryptoCurrencies() {
+      transactionsService
+        .getUserTransactions(this.userId)
+        .then((response) => {
+          this.userCryptoCurrencies =
+            cryptoCurrenciesMapper.mapUserCryptoCurrencies(
+              transactionsMapper.sortUserCryptoCurrencies(response.data),
+              this.cryptoCurrencies
+            );
+          console.log("User Cryptos", this.userCryptoCurrencies);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+  },
   mounted() {
-    transactionsService.getUserTransactions(this.userId).then((response) => {
-      console.log(response);
-      this.userCryptoCurrencies = transactionsMapper.sortUserCryptoCurrencies(
-        response.data
-      );
-      console.log("User Cryptos", this.userCryptoCurrencies);
-    });
+    this.getUserCryptoCurrencies();
   },
 };
 </script>

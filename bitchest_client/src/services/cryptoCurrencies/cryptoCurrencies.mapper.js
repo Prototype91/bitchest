@@ -12,6 +12,22 @@ export default {
         return cryptoCurrencies;
     },
 
+    mapUserCryptoCurrencies(userCryptoCurrencies, cryptoCurrencies) {
+        let result = userCryptoCurrencies;
+        for (let i = 0; i < result.length; i++) {
+            const currencyData = cryptoCurrencies.filter(
+                (currency) => currency.id === result[i].name
+            );
+            result[i].amount =
+                result[i].currency_value *
+                currencyData[0].current_price;
+            result[i].image = currencyData[0].image;
+            result[i].symbol = currencyData[0].symbol;
+        }
+
+        return result;
+    },
+
     mapCryptoCurrencyHistory(response) {
         const thirtyDaysValues = response.data.prices;
 

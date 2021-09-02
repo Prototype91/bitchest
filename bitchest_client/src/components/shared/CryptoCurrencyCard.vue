@@ -1,8 +1,9 @@
 <template>
   <div class="card">
-    <img src="" alt="">
+    <img :src="image" alt="">
     <p>{{ name }}</p>
-    <p>{{ price.toLocaleString(undefined, { maximumFractionDigits: 7 }) }}</p>
+    <p>{{ price }} {{symbol}}</p>
+    <p>{{ amount }} €</p>
   </div>
 </template>
 
@@ -16,6 +17,18 @@ export default {
     },
     price: {
       type: Number,
+      required: true,
+    },
+    amount: {
+      type: Number,
+      required: true,
+    },
+    symbol: {
+      type: String,
+      required: true,
+    },
+    image: {
+      type: String,
       required: true,
     }
   },

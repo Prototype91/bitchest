@@ -28,7 +28,6 @@ export default {
     return {
       userData: null,
       cryptoCurrencies: [],
-      userCryptoCurrencies: [],
       isLoading: false,
     };
   },
