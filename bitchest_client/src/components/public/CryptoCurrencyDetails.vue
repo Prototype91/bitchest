@@ -1,10 +1,10 @@
 <template>
   <section class="graph-ctn">
     <Loader :isLoading="isLoading" />
-    <div v-if="Object.entries(cryptoCurrencyData).length && !isLoading">
+    <div v-if="Object.entries(graphData).length && !isLoading">
       <Balance :balance="balance" />
-      <h1>Voici l'évolution du {{ label }} sur 30 jours :</h1>
-      <CryptoCurrencyGraph :cryptoCurrencyData="cryptoCurrencyData" />
+      <h1>Voici l'évolution du {{ this.cryptoCurrencyId.toUpperCase() }} sur 30 jours :</h1>
+      <CryptoCurrencyGraph :graphData="graphData" />
       <button @click="buyCryptoCurrency" class="btn btn-primary">
         Acheter
       </button>
@@ -22,47 +22,61 @@ import CryptoCurrencyMapper from "../../services/cryptoCurrencies/cryptoCurrenci
 import TransactionsTable from "../../components/public/TransactionsTable.vue";
 import Loader from "../shared/Loader.vue";
 import LocalStorageService from "../../services/localStorage/localStorage.service";
-import TransactionsService from "../../services/transactions/transactions.service";
 import Balance from "./Balance.vue";
 import usersService from "../../services/users/users.service";
+import transactionsService from "../../services/transactions/transactions.service";
 
 export default {
   name: "CryptoCurrencyDetails",
   components: { CryptoCurrencyGraph, Loader, TransactionsTable, Balance },
   data() {
     return {
-      cryptoCurrencyData: {},
+      graphData: {},
+      allCryptoCurrencies: [],
+      userData: {},
+      cryptoCurrencyId: null,
       transactions: [],
-      label: "",
       isLoading: false,
       balance: 0,
-      userData: {},
-      currencyId: null,
-      allCryptoCurrencies: [
-        "none",
-        "ethereum",
-        "ripple",
-        "iota",
-        "cardano",
-        "stella",
-        "bitcoin-cash",
-        "nem",
-        "bitcoin",
-        "litecoin",
-        "dash",
-      ],
     };
   },
   methods: {
     init() {
+      // Gets the coin_id
       this.cryptoCurrencyId = this.$route.params.id;
-      this.label = this.cryptoCurrencyId.toUpperCase();
+
+      // Starts the Loader
       this.isLoading = true;
 
+      // Gets the history (30 days) of the coin
       this.getHistoricalCoinValues(this.cryptoCurrencyId);
 
+      // Gets the user data from the local storage
       this.userData = LocalStorageService.getUserLocalStorage();
 
+      // Gets all the currencies that you can buy
+      this.getCurrencies();
+
+      // Gets the user's data
+      this.getUser();
+
+      // Gets all the users's transactions
+      this.getUserTransactions(this.userData, this.cryptoCurrencyId);
+    },
+
+    getCurrencies() {
+      transactionsService
+        .getCurrencies()
+        .then((response) => {
+          console.log(response);
+          this.allCryptoCurrencies = response.data.currencies;
+          console.log("All currencies", response.data.currencies);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    getUser() {
       usersService
         .getUser(this.userData.id)
         .then((response) => {
@@ -73,13 +87,11 @@ export default {
         .catch((error) => {
           console.error(error);
         });
-
-      this.getUserTransactions(this.userData, this.cryptoCurrencyId);
     },
     getHistoricalCoinValues(cryptoCurrencyId) {
       CryptoCurrencyService.getHistoricalCoinValues(cryptoCurrencyId)
         .then((response) => {
-          this.cryptoCurrencyData =
+          this.graphData =
             CryptoCurrencyMapper.mapCryptoCurrencyHistory(response);
         })
         .catch((error) => {
@@ -88,7 +100,8 @@ export default {
         });
     },
     getUserTransactions(userData, cryptoCurrencyId) {
-      TransactionsService.getUserTransactions(userData.id)
+      transactionsService
+        .getUserTransactions(userData.id)
         .then((response) => {
           this.transactions = response.data
             .filter((transaction) => transaction.name == cryptoCurrencyId)
@@ -103,11 +116,11 @@ export default {
         });
     },
     buyCryptoCurrency() {
-      const values = Object.values(this.cryptoCurrencyData);
+      const values = Object.values(this.graphData);
       const lastValue = values[values.length - 1];
 
-      if(lastValue > this.balance) {
-        return
+      if (lastValue > this.balance) {
+        return;
       }
 
       const localStorageData =
@@ -117,10 +130,14 @@ export default {
         (cryptoCurrency) => cryptoCurrency.id === this.cryptoCurrencyId
       );
 
-      const id = this.allCryptoCurrencies.indexOf(this.cryptoCurrencyId);
+      const currencyId = this.allCryptoCurrencies.filter(
+        (currency) => currency.coin_id === this.cryptoCurrencyId
+      )[0].id;
+
+      console.log("currencyId", currencyId);
 
       const transactionData = {
-        currency_id: id,
+        currency_id: currencyId,
         user_id: this.userData.id,
         amount: lastValue,
         currency_value: 1,
@@ -129,8 +146,9 @@ export default {
         symbol: currentCurrencyData[0].symbol,
       };
 
-      TransactionsService.addNewUserTransaction(transactionData);
+      transactionsService.addNewUserTransaction(transactionData);
 
+      // Reloads all the data
       this.init();
     },
   },

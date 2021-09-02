@@ -18,7 +18,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Login
+/*
+|--------------------------------------------------------------------------
+| Authentication Routes
+|--------------------------------------------------------------------------
+*/
 Route::post('login', [LoginController::class, 'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -47,5 +51,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/transactions/user/{id}', [UsersController::class, 'getTransactionsByUserId']);
     Route::post('/transactions', [TransactionsController::class, 'store']);
 
+/*
+|--------------------------------------------------------------------------
+| Currencies Routes
+|--------------------------------------------------------------------------
+*/
     Route::get('/currencies', [CurrenciesController::class, 'index']);
 });
