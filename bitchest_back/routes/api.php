@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CurrenciesController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\UsersController;
@@ -45,4 +46,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 */
     Route::get('/transactions/user/{id}', [UsersController::class, 'getTransactionsByUserId']);
     Route::post('/transactions', [TransactionsController::class, 'store']);
+
+    Route::get('/currencies', [CurrenciesController::class, 'index']);
 });
