@@ -1,6 +1,14 @@
 <template>
   <div class="balance-ctn">
-    <p>Solde : {{ balance }} €</p>
+    <p>
+      Solde :
+      {{
+        balance.toLocaleString(undefined, {
+          maximumFractionDigits: 2,
+        })
+      }}
+      €
+    </p>
   </div>
 </template>
 
