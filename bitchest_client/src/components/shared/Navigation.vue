@@ -80,9 +80,9 @@
 
 <script>
 import BurgerMenu from "./BurgerMenu.vue";
-import AuthService from "../../services/authentication/auth.service";
+import authService from "../../services/authentication/auth.service";
 import Loader from "./Loader.vue";
-import LocalStorageService from '../../services/localStorage/localStorage.service';
+import localStorageService from '../../services/localStorage/localStorage.service';
 
 export default {
   components: { BurgerMenu, Loader },
@@ -98,10 +98,10 @@ export default {
   methods: {
     logout() {
       this.isLoading = true;
-      AuthService.logout()
+      authService.logout()
         .then(() => {
           // Clears all the Local Storage
-          LocalStorageService.clearLocalStorage();
+          localStorageService.clearLocalStorage();
 
           this.isLoading = false;
 
@@ -115,7 +115,7 @@ export default {
     },
   },
   mounted() {
-    const localStorageData = LocalStorageService.getUserLocalStorage();
+    const localStorageData = localStorageService.getUserLocalStorage();
     this.userElevation = localStorageData.elevation;
     this.elevationPath = localStorageData.elevation == "user" ? "client" : "admin";
     this.id = localStorageData.id;

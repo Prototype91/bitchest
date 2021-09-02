@@ -11,10 +11,10 @@
 <script>
 import Navigation from "../../components/shared/Navigation.vue";
 import CryptoCurrenciesTable from "../../components/shared/CryptoCurrenciesTable.vue";
-import CryptoCurrencyService from "../../services/cryptoCurrencies/cryptoCurrencies.service";
-import CryptoCurrencyMapper from "../../services/cryptoCurrencies/cryptoCurrencies.mapper";
+import cryptoCurrencyService from "../../services/cryptoCurrencies/cryptoCurrencies.service";
+import cryptoCurrencyMapper from "../../services/cryptoCurrencies/cryptoCurrencies.mapper";
 import Loader from "../../components/shared/Loader.vue";
-import LocalStorageService from "../../services/localStorage/localStorage.service";
+import localStorageService from "../../services/localStorage/localStorage.service";
 
 export default {
   name: "CryptoCurrenciesPricesView",
@@ -29,20 +29,20 @@ export default {
     this.isLoading = true;
 
     const cryptosLocalStorageData =
-      LocalStorageService.getCryptoCurrenciesLocalStorage();
+      localStorageService.getCryptoCurrenciesLocalStorage();
 
     if (cryptosLocalStorageData?.length) {
       this.cryptoCurrencies = cryptosLocalStorageData;
       this.isLoading = false;
     } else {
-      CryptoCurrencyService.getCryptoCurrencies()
+      cryptoCurrencyService.getCryptoCurrencies()
         .then((response) => {
           const mappedValues =
-            CryptoCurrencyMapper.mapCryptoCurrencies(response);
+            cryptoCurrencyMapper.mapCryptoCurrencies(response);
 
           this.cryptoCurrencies = mappedValues;
 
-          LocalStorageService.setCryptoCurrenciesLocalStorage(mappedValues);
+          localStorageService.setCryptoCurrenciesLocalStorage(mappedValues);
 
           this.isLoading = false;
 

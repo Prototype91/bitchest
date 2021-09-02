@@ -12,11 +12,12 @@
 
 <script>
 import Navigation from "../../components/shared/Navigation.vue";
-import TransactionsService from "../../services/transactions/transactions.service";
-import LocalStorageService from "../../services/localStorage/localStorage.service";
+import transactionsService from "../../services/transactions/transactions.service";
 import TransactionsTable from "../../components/public/TransactionsTable.vue";
 import Loader from "../../components/shared/Loader.vue";
 import Balance from "../../components/public/Balance.vue";
+import usersService from '../../services/users/users.service';
+import localStorageService from '../../services/localStorage/localStorage.service';
 
 export default {
   name: "TransactionsView",
@@ -26,14 +27,17 @@ export default {
       transactions: [],
       isLoading: false,
       balance: 0,
+      userData: {}
     };
   },
   mounted() {
-    const userData = LocalStorageService.getUserLocalStorage();
-
-    this.balance = userData.balance;
+    const userId = localStorageService.getUserLocalStorage().id;
+    usersService.getUser(userId).then(response => {
+      this.userData = response.data;
+      this.balance = response.data.balance;
+    });
     this.isLoading = true;
-    TransactionsService.getUserTransactions(userData.id)
+    transactionsService.getUserTransactions(userId)
       .then((response) => {
         this.transactions = response.data.reverse();
         this.isLoading = false;

@@ -76,7 +76,7 @@
 
 <script>
 import moment from "moment";
-import TransactionsMapper from "../../services/transactions/transactions.mapper";
+import transactionsMapper from "../../services/transactions/transactions.mapper";
 
 export default {
   name: "TransactionsTable",
@@ -100,7 +100,7 @@ export default {
       return moment(date).utc().format("DD/MM/YYYY-hh:mm");
     },
     getReturnOnInvest(cryptoCurrencyName, boughtValue, currencyValue) {
-      const returnOnInvest = TransactionsMapper.getReturnOnInvest(
+      const returnOnInvest = transactionsMapper.getReturnOnInvest(
         cryptoCurrencyName,
         boughtValue,
         currencyValue

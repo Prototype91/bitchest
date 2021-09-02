@@ -1,12 +1,12 @@
 import axios from "axios";
-import LocalStorageService from '../localStorage/localStorage.service';
+import localStorageService from '../localStorage/localStorage.service';
 
 let server = axios.create({
     baseURL: 'http://127.0.0.1:8000/api'
 });
 
 let Api = () => {
-    let localStorageData = LocalStorageService.getUserLocalStorage();
+    let localStorageData = localStorageService.getUserLocalStorage();
 
     if (localStorageData?.token) {
         server.defaults.headers.common["Authorization"] = `Bearer ${localStorageData.token}`;

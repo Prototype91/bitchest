@@ -147,7 +147,7 @@ import {
   maxLength,
   sameAs,
 } from "@vuelidate/validators";
-import UsersService from "../../services/users/users.service";
+import usersService from "../../services/users/users.service";
 import Loader from "../shared/Loader.vue";
 export default {
   name: "CreateUser",
@@ -198,7 +198,7 @@ export default {
       }
 
       this.isLoading = true;
-      UsersService.addUser(this.user)
+      usersService.addUser(this.user)
         .then((response) => {
           this.isLoading = false;
           this.$router.push("/admin");

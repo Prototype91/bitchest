@@ -18,8 +18,8 @@
 import EditUserForm from "../../components/shared/EditUserForm.vue";
 import Navigation from "../../components/shared/Navigation.vue";
 import Loader from "../../components/shared/Loader.vue";
-import UsersService from "../../services/users/users.service";
-import LocalStorageService from "../../services/localStorage/localStorage.service";
+import usersService from "../../services/users/users.service";
+import localStorageService from "../../services/localStorage/localStorage.service";
 
 export default {
   name: "ProfileView",
@@ -30,12 +30,12 @@ export default {
     };
   },
   mounted() {
-    const localStorageData = LocalStorageService.getUserLocalStorage();
+    const localStorageData = localStorageService.getUserLocalStorage();
     const userId = localStorageData.id;
 
     console.log(localStorageData);
 
-    UsersService.getUser(userId).then((response) => {
+    usersService.getUser(userId).then((response) => {
       console.log(response.data);
       this.userData = response.data;
     });

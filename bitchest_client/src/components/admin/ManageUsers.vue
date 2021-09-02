@@ -11,7 +11,7 @@
 
 <script>
 import UsersTable from "./UsersTable.vue";
-import UsersService from "../../services/users/users.service";
+import usersService from "../../services/users/users.service";
 import Loader from "../shared/Loader.vue";
 
 export default {
@@ -32,7 +32,7 @@ export default {
     },
     loadUsers() {
       this.isLoading = true;
-      UsersService.getUsers()
+      usersService.getUsers()
         .then((response) => {
           this.users = response.data.users;
           this.isLoading = false;

@@ -17,7 +17,7 @@
 <script>
 import Navigation from "../../components/shared/Navigation.vue";
 import EditUserForm from "../../components/shared/EditUserForm.vue";
-import UsersService from "../../services/users/users.service";
+import usersService from "../../services/users/users.service";
 import Loader from "../../components/shared/Loader.vue";
 
 export default {
@@ -30,7 +30,7 @@ export default {
   },
   mounted() {
     const userId = this.$route.params.id;
-    UsersService.getUser(userId)
+    usersService.getUser(userId)
       .then((response) => {
         console.log(response.data);
         this.userData = response.data;

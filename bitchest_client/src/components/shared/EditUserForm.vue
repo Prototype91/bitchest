@@ -141,7 +141,7 @@ import {
   maxLength,
   sameAs,
 } from "@vuelidate/validators";
-import UsersService from "../../services/users/users.service";
+import usersService from "../../services/users/users.service";
 import Loader from "../shared/Loader.vue";
 
 export default {
@@ -207,7 +207,7 @@ export default {
       }
 
       this.isLoading = true;
-      UsersService.updateUser(id, user)
+      usersService.updateUser(id, user)
         .then((response) => {
           console.log(response);
           this.isLoading = false;

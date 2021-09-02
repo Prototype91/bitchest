@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import LocalStorageService from '../services/localStorage/localStorage.service';
+import localStorageService from '../services/localStorage/localStorage.service';
 import AdminCreateUserView from '../views/admin/AdminCreateUserView.vue';
 import AdminEditUserView from "../views/admin/AdminEditUserView";
 import AdminHomeView from '../views/admin/AdminHomeView.vue';
@@ -92,12 +92,12 @@ const router = createRouter({
 });
 
 const isLoggedIn = () => {
-  const localStorageData = LocalStorageService.getUserLocalStorage();
+  const localStorageData = localStorageService.getUserLocalStorage();
   return !!localStorageData?.token;
 }
 
 const isClient = () => {
-  const localStorageData = LocalStorageService.getUserLocalStorage();
+  const localStorageData = localStorageService.getUserLocalStorage();
   return localStorageData?.elevation == 'user';
 }
 

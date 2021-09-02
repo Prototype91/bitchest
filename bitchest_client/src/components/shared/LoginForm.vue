@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import AuthService from "../../services/authentication/auth.service";
-import LocalStorageService from '../../services/localStorage/localStorage.service';
+import authService from "../../services/authentication/auth.service";
+import localStorageService from '../../services/localStorage/localStorage.service';
 import Loader from "./Loader.vue";
 
 export default {
@@ -56,7 +56,7 @@ export default {
     login() {
       this.isLoading = true;
 
-      AuthService.login(this.email, this.password)
+      authService.login(this.email, this.password)
         .then((response) => {
           const user = response.data.user;
 
@@ -74,7 +74,7 @@ export default {
             email: user.email
           };
 
-          LocalStorageService.setUserLocalStorage(dataToPush);
+          localStorageService.setUserLocalStorage(dataToPush);
 
           this.isLoading = false;
 

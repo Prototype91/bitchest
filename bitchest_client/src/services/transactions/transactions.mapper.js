@@ -1,10 +1,10 @@
-import LocalStorageService from "../localStorage/localStorage.service";
+import localStorageService from "../localStorage/localStorage.service";
 
 export default {
     // Return On Invesment
     getReturnOnInvest(cryptoCurrencyName, boughtValue, currencyValue) {
         const cryptoCurrencies =
-            LocalStorageService.getCryptoCurrenciesLocalStorage();
+            localStorageService.getCryptoCurrenciesLocalStorage();
 
         const cryptoCurrencyData = cryptoCurrencies.find(
             (cryptoCurrency) => cryptoCurrency.id === cryptoCurrencyName

@@ -21,7 +21,13 @@
                 <span class="responsive">{{ cryptoCurrency.name }}</span>
                 ({{ cryptoCurrency.symbol.toUpperCase() }})
               </td>
-              <td>{{ cryptoCurrency.current_price.toLocaleString(undefined, { maximumFractionDigits: 2 }) }}€</td>
+              <td>
+                {{
+                  cryptoCurrency.current_price.toLocaleString(undefined, {
+                    maximumFractionDigits: 2,
+                  })
+                }}€
+              </td>
               <td
                 :class="[
                   'responsive-xs',

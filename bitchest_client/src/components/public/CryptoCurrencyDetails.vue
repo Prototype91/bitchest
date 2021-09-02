@@ -17,11 +17,11 @@
 
 <script>
 import CryptoCurrencyGraph from "../shared/CryptoCurrencyGraph.vue";
-import CryptoCurrencyService from "../../services/cryptoCurrencies/cryptoCurrencies.service";
-import CryptoCurrencyMapper from "../../services/cryptoCurrencies/cryptoCurrencies.mapper";
+import cryptoCurrencyService from "../../services/cryptoCurrencies/cryptoCurrencies.service";
+import cryptoCurrencyMapper from "../../services/cryptoCurrencies/cryptoCurrencies.mapper";
 import TransactionsTable from "../../components/public/TransactionsTable.vue";
 import Loader from "../shared/Loader.vue";
-import LocalStorageService from "../../services/localStorage/localStorage.service";
+import localStorageService from "../../services/localStorage/localStorage.service";
 import Balance from "./Balance.vue";
 import usersService from "../../services/users/users.service";
 import transactionsService from "../../services/transactions/transactions.service";
@@ -52,7 +52,7 @@ export default {
       this.getHistoricalCoinValues(this.cryptoCurrencyId);
 
       // Gets the user data from the local storage
-      this.userData = LocalStorageService.getUserLocalStorage();
+      this.userData = localStorageService.getUserLocalStorage();
 
       // Gets all the currencies that you can buy
       this.getCurrencies();
@@ -82,17 +82,17 @@ export default {
         .then((response) => {
           this.balance = response.data.balance;
           this.userData.balance = response.data.balance;
-          LocalStorageService.setUserLocalStorage(this.userData);
+          localStorageService.setUserLocalStorage(this.userData);
         })
         .catch((error) => {
           console.error(error);
         });
     },
     getHistoricalCoinValues(cryptoCurrencyId) {
-      CryptoCurrencyService.getHistoricalCoinValues(cryptoCurrencyId)
+      cryptoCurrencyService.getHistoricalCoinValues(cryptoCurrencyId)
         .then((response) => {
           this.graphData =
-            CryptoCurrencyMapper.mapCryptoCurrencyHistory(response);
+            cryptoCurrencyMapper.mapCryptoCurrencyHistory(response);
         })
         .catch((error) => {
           this.isLoading = false;
@@ -124,7 +124,7 @@ export default {
       }
 
       const localStorageData =
-        LocalStorageService.getCryptoCurrenciesLocalStorage();
+        localStorageService.getCryptoCurrenciesLocalStorage();
 
       const currentCurrencyData = localStorageData.filter(
         (cryptoCurrency) => cryptoCurrency.id === this.cryptoCurrencyId
