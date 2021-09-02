@@ -154,9 +154,15 @@ export default {
   margin-top: 25px;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 992px) {
   .login-ctn {
-    width: 90%;
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-ctn {
+    width: 70%;
   }
 }
 </style>

@@ -7,7 +7,7 @@
             <tr>
               <th>Cryptomonnaie</th>
               <th>Prix</th>
-              <th class="responsive">Fluctuation (24h)</th>
+              <th class="responsive-xs">Fluctuation (24h)</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -24,7 +24,7 @@
               <td>{{ cryptoCurrency.current_price.toLocaleString(undefined, { maximumFractionDigits: 2 }) }}€</td>
               <td
                 :class="[
-                  'responsive',
+                  'responsive-xs',
                   cryptoCurrency.price_change_percentage_24h > 0
                     ? 'positive'
                     : 'negative',
@@ -86,14 +86,21 @@ table img {
   padding: 20px;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .responsive {
     display: none;
   }
 
   table img {
-    width: 40%;
+    width: 70px;
     padding: 10px;
+    margin-right: 5px;
+  }
+}
+
+@media (max-width: 500px) {
+  .responsive-xs {
+    display: none;
   }
 }
 </style>
