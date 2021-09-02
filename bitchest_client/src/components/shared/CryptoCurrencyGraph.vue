@@ -1,6 +1,6 @@
 <template>
   <line-chart
-    :data="cryptoCurrencyData"
+    :data="graphData"
     suffix="€"
     :min="minValue"
     :max="maxValue"
@@ -13,7 +13,7 @@
 export default {
   name: "CryptoCurrencyGraph",
   props: {
-    cryptoCurrencyData: {
+    graphData: {
       type: Object,
       required: true,
     },
@@ -26,11 +26,11 @@ export default {
   },
   methods: {
     getMinValue() {
-      let values = Object.values(this.cryptoCurrencyData);
+      let values = Object.values(this.graphData);
       this.minValue =  Math.min(...values);
     },
     getMaxValue() {
-      let values = Object.values(this.cryptoCurrencyData);
+      let values = Object.values(this.graphData);
       this.maxValue =  Math.max(...values);
     }
   },
