@@ -2,6 +2,9 @@
   <section>
     <div class="container">
       <div>
+        <h2>
+          Retour sur investissement total en cas de vente : {{ total.toFixed(2) }} €
+        </h2>
         <table class="table table-striped">
           <thead>
             <tr>
@@ -73,7 +76,7 @@
 
 <script>
 import moment from "moment";
-import TransactionsMapper from '../../services/transactions/transactions.mapper';
+import TransactionsMapper from "../../services/transactions/transactions.mapper";
 
 export default {
   name: "TransactionsTable",
@@ -83,12 +86,31 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      roiValues: [],
+      total: 0,
+    };
+  },
+  mounted() {
+    this.total = this.getTotalReturnOnInvest();
+  },
   methods: {
     formatDate(date) {
       return moment(date).utc().format("DD/MM/YYYY-hh:mm");
     },
     getReturnOnInvest(cryptoCurrencyName, boughtValue, currencyValue) {
-      return TransactionsMapper.getReturnOnInvest(cryptoCurrencyName, boughtValue, currencyValue);
+      const returnOnInvest = TransactionsMapper.getReturnOnInvest(
+        cryptoCurrencyName,
+        boughtValue,
+        currencyValue
+      );
+      this.roiValues.push(returnOnInvest);
+      return returnOnInvest;
+    },
+
+    getTotalReturnOnInvest() {
+      return this.roiValues.reduce((total, value) => Number(total) + Number(value));
     },
   },
 };
