@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <main>
     <Navigation />
     <CryptoCurrencyDetails />
-  </div>
+  </main>
 </template>
 
 <script>

@@ -133,10 +133,7 @@ export default {
 .graph-ctn {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 80%;
-  margin: 0 auto;
-  padding: 10px;
+  justify-content: flex-start;
 }
 .graph-ctn h1 {
   margin-bottom: 30px;
