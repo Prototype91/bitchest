@@ -1,9 +1,8 @@
 <template>
   <div class="card">
-    <img :src="image" alt="">
+    <img src="" alt="">
     <p>{{ name }}</p>
-    <p>{{ price.toLocaleString(undefined, { maximumFractionDigits: 2 }) }}€</p>
-    <p>{{ fluctuation.toFixed(2) }}%</p>
+    <p>{{ price.toLocaleString(undefined, { maximumFractionDigits: 7 }) }}</p>
   </div>
 </template>
 
@@ -18,14 +17,6 @@ export default {
     price: {
       type: Number,
       required: true,
-    },
-    fluctuation: {
-      type: Number,
-      required: true,
-    },
-    image: {
-      type: String,
-      required: true
     }
   },
 };

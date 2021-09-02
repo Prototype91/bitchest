@@ -110,7 +110,8 @@ export default {
       cryptoCurrenciesService
         .getCryptoCurrencies()
         .then((response) => {
-          this.cryptoCurrenciesData = cryptoCurrenciesMapper.mapCryptoCurrencies(response);
+          this.cryptoCurrenciesData =
+            cryptoCurrenciesMapper.mapCryptoCurrencies(response);
           console.log(this.cryptoCurrenciesData);
           this.setCurrentCurrency();
           this.isLoading = false;

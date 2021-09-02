@@ -54,7 +54,7 @@ div {
 }
 
 main {
-    display: block;
+  display: block;
 }
 
 h1 {

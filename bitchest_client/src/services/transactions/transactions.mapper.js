@@ -17,4 +17,15 @@ export default {
 
         return returnOnInvest >= 0 ? `+${returnOnInvest.toFixed(2)}` : returnOnInvest.toFixed(2);
     },
+
+    // Returns all the sorted user's crypto currencies
+    sortUserCryptoCurrencies(transactions) {
+        return Array.from(
+            transactions.reduce(
+              (map, { name, currency_value }) => map.set(name, (map.get(name) || 0) + Number(currency_value)),
+              new Map()
+            ),
+            ([name, currency_value]) => ({ name, currency_value })
+          );
+    }
 };

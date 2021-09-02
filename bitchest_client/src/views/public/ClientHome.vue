@@ -6,7 +6,7 @@
       <section class="synthesis-ctn">
         <h1>Bonjour {{ userData.firstname }}</h1>
         <Balance :balance="userData.balance" />
-        <HeartSynthesis :cryptoCurrencies="cryptoCurrencies" />
+        <HeartSynthesis :userId="userData.id" :cryptoCurrencies="cryptoCurrencies" />
       </section>
     </main>
   </div>
@@ -28,6 +28,7 @@ export default {
     return {
       userData: null,
       cryptoCurrencies: [],
+      userCryptoCurrencies: [],
       isLoading: false,
     };
   },
