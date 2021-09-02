@@ -1,10 +1,11 @@
 <template>
   <main>
     <Navigation />
-    <div class="market-ctn">
+    <Loader :isLoading="isLoading" />
+    <div class="market-ctn" v-if="!isLoading">
       <section class="sell" v-if="this.userData">
-        <h1 >Bonjour {{this.userData.firstname}}</h1>
-        <Balance :balance="this.userData.balance"/>
+        <h1>Bonjour {{ this.userData.firstname }}</h1>
+        <Balance :balance="this.userData.balance" />
         <div class="btn-ctn">
           <button class="btn btn-primary">Acheter</button>
           <button class="btn btn-secondary">Vendre</button>
@@ -35,7 +36,10 @@
                 <input id="vendre" type="text" v-model="this.crypto_amount" />
               </div>
               <div class="select-ctn">
-                <img :src="currencyImg" alt="icone de la cryptomonnaie choisie" />
+                <img
+                  :src="currencyImg"
+                  alt="icone de la cryptomonnaie choisie"
+                />
                 <select
                   name="crypto-select"
                   id="crypto-select"
@@ -61,19 +65,21 @@
 </template>
 
 <script>
-import Balance from '../../components/public/Balance.vue';
+import Balance from "../../components/public/Balance.vue";
+import Loader from "../../components/shared/Loader.vue";
 import Navigation from "../../components/shared/Navigation.vue";
 import cryptoCurrenciesMapper from "../../services/cryptoCurrencies/cryptoCurrencies.mapper";
 import cryptoCurrenciesService from "../../services/cryptoCurrencies/cryptoCurrencies.service";
 import localStorageService from "../../services/localStorage/localStorage.service";
 import transactionsService from "../../services/transactions/transactions.service";
-import usersService from '../../services/users/users.service';
+import usersService from "../../services/users/users.service";
 
 export default {
   name: "MarketPlace",
-  components: { Navigation, Balance },
+  components: { Navigation, Balance, Loader },
   data() {
     return {
+      isLoading: false,
       userData: null,
       currencySelected: "bitcoin",
       currencyImg: "",
@@ -85,18 +91,35 @@ export default {
     };
   },
   mounted() {
-    const userid = localStorageService.getUserLocalStorage().id;
-    usersService.getUser(userid).then(response => {
-      this.userData = response.data;
-    });
-
-    cryptoCurrenciesService.getCryptoCurrencies().then((response) => {
-      this.cryptoCurrenciesData = cryptoCurrenciesMapper.mapCryptoCurrencies(response);
-      console.log(this.cryptoCurrenciesData)
-      this.setCurrentCurrency();
-    });
+    this.init();
   },
   methods: {
+    init() {
+      this.isLoading = true;
+      const userid = localStorageService.getUserLocalStorage().id;
+      usersService
+        .getUser(userid)
+        .then((response) => {
+          this.userData = response.data;
+        })
+        .catch((error) => {
+          this.isLoading = false;
+          console.error(error);
+        });
+
+      cryptoCurrenciesService
+        .getCryptoCurrencies()
+        .then((response) => {
+          this.cryptoCurrenciesData = cryptoCurrenciesMapper.mapCryptoCurrencies(response);
+          console.log(this.cryptoCurrenciesData);
+          this.setCurrentCurrency();
+          this.isLoading = false;
+        })
+        .catch((error) => {
+          this.isLoading = false;
+          console.error(error);
+        });
+    },
     calculate() {
       this.crypto_amount = this.exchange_value / this.currencyPrice;
     },
@@ -131,6 +154,7 @@ export default {
           .addNewUserTransaction(data)
           .then((response) => {
             console.log(response);
+            this.init();
           })
           .catch((error) => {
             console.log(error);
