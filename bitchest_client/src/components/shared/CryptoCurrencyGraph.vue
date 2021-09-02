@@ -6,6 +6,7 @@
     :max="maxValue"
     precision="9"
     decimal=","
+    :curve="false"
   ></line-chart>
 </template>
 
@@ -20,18 +21,18 @@ export default {
   },
   data() {
     return {
-      minValue: null,
-      maxValue: null,
+      minValue: this.getMinValue().toFixed(2),
+      maxValue: this.getMaxValue().toFixed(2),
     };
   },
   methods: {
     getMinValue() {
       let values = Object.values(this.graphData);
-      this.minValue =  Math.min(...values);
+      return Math.min(...values) - (Math.min(...values) / 50);
     },
     getMaxValue() {
       let values = Object.values(this.graphData);
-      this.maxValue =  Math.max(...values);
+      return Math.max(...values) + (Math.min(...values) / 50);
     }
   },
 };

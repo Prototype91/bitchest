@@ -3,7 +3,7 @@
     <div class="container">
       <div>
         <h2>
-          Retour sur investissement total en cas de vente : {{ total.toFixed(2) }} €
+          Retour sur investissement total en cas de vente : {{ total }} €
         </h2>
         <table class="table table-striped">
           <thead>
