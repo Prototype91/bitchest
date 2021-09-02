@@ -2,7 +2,9 @@
   <main>
     <Navigation />
     <div class="market-ctn">
-      <section class="sell">
+      <section class="sell" v-if="this.userData">
+        <h1 >Bonjour {{this.userData.firstname}}</h1>
+        <Balance :balance="this.userData.balance"/>
         <div class="btn-ctn">
           <button class="btn btn-primary">Acheter</button>
           <button class="btn btn-secondary">Vendre</button>
@@ -59,15 +61,17 @@
 </template>
 
 <script>
+import Balance from '../../components/public/Balance.vue';
 import Navigation from "../../components/shared/Navigation.vue";
 import cryptoCurrenciesMapper from "../../services/cryptoCurrencies/cryptoCurrencies.mapper";
 import cryptoCurrenciesService from "../../services/cryptoCurrencies/cryptoCurrencies.service";
 import localStorageService from "../../services/localStorage/localStorage.service";
 import transactionsService from "../../services/transactions/transactions.service";
+import usersService from '../../services/users/users.service';
 
 export default {
   name: "MarketPlace",
-  components: { Navigation },
+  components: { Navigation, Balance },
   data() {
     return {
       userData: null,
@@ -81,7 +85,10 @@ export default {
     };
   },
   mounted() {
-    this.userData = localStorageService.getUserLocalStorage();
+    const userid = localStorageService.getUserLocalStorage().id;
+    usersService.getUser(userid).then(response => {
+      this.userData = response.data;
+    });
 
     cryptoCurrenciesService.getCryptoCurrencies().then((response) => {
       this.cryptoCurrenciesData = cryptoCurrenciesMapper.mapCryptoCurrencies(response);
