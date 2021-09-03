@@ -10,7 +10,7 @@ export default {
 
 <style>
 /* FONT */
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
 body {
   background-color: #212121 !important;
@@ -105,7 +105,7 @@ video {
   border: 0;
   font-size: 100%;
   vertical-align: baseline;
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
 }
 /* HTML5 display-role reset for older browsers */
 article,
