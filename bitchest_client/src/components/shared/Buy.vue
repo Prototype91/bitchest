@@ -1,29 +1,66 @@
 <template>
-  <main>
-    <Navigation />
-    <Loader :isLoading="isLoading" />
-    <div class="market-ctn" v-if="!isLoading">
-      <section class="sell" v-if="this.userData">
-        <h1>Bonjour {{ this.userData.firstname }}</h1>
-        <Balance :balance="this.userData.balance" />
-
-        <div class="btn-ctn">
-          <button class="btn btn-primary">Acheter</button>
-          <button class="btn btn-secondary">Vendre</button>
-        </div>
-
-        <Buy />
-
-      </section>
+  <div class="ctn">
+    <div class="error" v-if="errorBalance">
+      <h1>
+        Vous n'avez pas les fonds requis pour effectuer cette transaction.
+      </h1>
     </div>
-  </main>
+
+    <form @submit.prevent="startTransfert" class="inputs">
+      <div class="input-euro">
+        <label for="acheter">Dépenser</label>
+        <div class="input-ctn">
+          <div>
+            <input
+              id="acheter"
+              type="number"
+              placeholder="Veuillez entrer le montant"
+              v-model="exchange_value"
+              @keyup="calculate"
+            />
+          </div>
+          <div class="select-ctn">
+            <i class="fas fa-euro-sign"></i>
+            <span>EUR</span>
+          </div>
+        </div>
+      </div>
+      <div class="input-crypto">
+        <label for="vendre">Recevoir</label>
+        <div class="input-ctn">
+          <div>
+            <input
+              id="vendre"
+              type="text"
+              placeholder="0.00"
+              v-model="this.crypto_amount"
+            />
+          </div>
+          <div class="select-ctn">
+            <img :src="currencyImg" alt="icone de la cryptomonnaie choisie" />
+            <select
+              name="crypto-select"
+              id="crypto-select"
+              v-model="currencySelected"
+              @change="setCurrentCurrency"
+            >
+              <option
+                v-for="(currency, index) in this.cryptoCurrenciesData"
+                :key="index"
+                :value="currency.id"
+              >
+                {{ currency.id }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-success" type="submit">Conclure</button>
+    </form>
+  </div>
 </template>
 
 <script>
-import Balance from "../../components/public/Balance.vue";
-import Loader from "../../components/shared/Loader.vue";
-import Buy from "../../components/shared/Buy.vue";
-import Navigation from "../../components/shared/Navigation.vue";
 import cryptoCurrenciesMapper from "../../services/cryptoCurrencies/cryptoCurrencies.mapper";
 import cryptoCurrenciesService from "../../services/cryptoCurrencies/cryptoCurrencies.service";
 import localStorageService from "../../services/localStorage/localStorage.service";
@@ -32,7 +69,6 @@ import usersService from "../../services/users/users.service";
 
 export default {
   name: "MarketPlace",
-  components: { Navigation, Balance, Loader, Buy },
   data() {
     return {
       isLoading: false,
@@ -132,143 +168,20 @@ export default {
 };
 </script>
 
-<style>
-.market-ctn {
+<style scoped>
+.ctn {
   display: flex;
-  justify-content: center;
-}
-
-.market-ctn section {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  justify-content: space-evenly;
   flex-direction: column;
+  align-items: center;
+  height: 50%;
 }
 
-.market-ctn form > div {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  width: 100%;
-  border-radius: 8px;
-  padding-top: 14px;
-  padding-bottom: 14px;
-  padding-left: 16px;
-  padding-right: 16px;
-  border: 1px solid grey;
-  background-color: rgb(39, 40, 39);
-}
-
-.market-ctn .btn-ctn {
-  width: 250px;
+form {
   display: flex;
   justify-content: space-evenly;
-  margin-bottom: 25px;
-}
-
-.market-ctn .input-ctn {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  margin-top: 10px;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
+  flex-direction: column;
   align-items: center;
-}
-
-.market-ctn .input-ctn img,
-.market-ctn .input-ctn svg {
-  box-sizing: border-box;
-  margin: 0;
-  max-width: 100%;
-  width: 24px;
-  height: 24px;
-}
-
-.market-ctn .input-ctn input {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  width: 100%;
-  height: 40px;
-  font-size: 20px;
-  outline: none;
-  border: 0 none;
-  line-height: 21px;
-  font-family: inherit;
-  font-weight: mediumm;
-  color: rgb(208, 202, 192);
-  outline-color: initial;
-  background-color: rgb(39, 40, 39);
-  border-color: initial;
-}
-
-.market-ctn .select-ctn {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  background-color: darkslategrey;
-  border-radius: 50px;
-  padding: 8px;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  justify-content: space-evenly;
-  cursor: pointer;
-  width: 170px;
-  height: 40px;
-}
-
-.market-ctn .input-euro .select-ctn {
-  cursor: default;
-}
-
-.market-ctn .input-euro .select-ctn > span {
-  width: 110px;
-}
-
-.market-ctn select {
-  background-color: transparent;
-  border-color: transparent;
-  color: white;
-  outline: none;
-  width: 110px;
-}
-
-.market-ctn select option {
-  background-color: darkslategrey;
-}
-
-.market-ctn .error {
-  color: red;
-  padding: 15px;
-}
-
-/* Remove arrows on input type number */
-
-/* Chrome, Safari, Edge, Opera */
-.market-ctn input::-webkit-outer-spin-button,
-.market-ctn input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-.market-ctn input[type="number"] {
-  -moz-appearance: textfield;
+  height: 100%;
 }
 </style>
