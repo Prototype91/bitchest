@@ -26,6 +26,7 @@
                 <input
                   id="acheter"
                   type="number"
+                  placeholder="Veuillez entrer le montant"
                   v-model="exchange_value"
                   @keyup="calculate"
                 />
@@ -40,7 +41,7 @@
             <label for="vendre">Recevoir</label>
             <div class="input-ctn">
               <div>
-                <input id="vendre" type="text" v-model="this.crypto_amount" />
+                <input id="vendre" type="text" placeholder="0.00" v-model="this.crypto_amount" />
               </div>
               <div class="select-ctn">
                 <img
@@ -93,8 +94,8 @@ export default {
       currencyImg: "",
       currencySymbol: "",
       currencyPrice: 0,
-      exchange_value: 0,
-      crypto_amount: 0,
+      exchange_value: null,
+      crypto_amount: null,
       cryptoCurrenciesData: [],
     };
   },
@@ -130,7 +131,8 @@ export default {
         });
     },
     calculate() {
-      this.crypto_amount = this.exchange_value / this.currencyPrice;
+      if (this.exchange_value) this.crypto_amount = this.exchange_value / this.currencyPrice;
+      else this.crypto_amount = null;
     },
     setCurrentCurrency() {
       const currencyData = this.cryptoCurrenciesData.filter(

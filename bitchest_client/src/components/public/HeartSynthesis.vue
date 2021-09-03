@@ -1,6 +1,7 @@
 <template>
   <div>
-    <Loader :isLoading="!userCryptoCurrencies.length" />
+    <!-- <Loader :isLoading="!userCryptoCurrencies.length" /> -->
+    <Loader :isLoading="false" />
     <h2 class="total">Montant total de vos cryptomonnaies : {{this.getTotalCryptoCurrenciesAmount()}} €</h2>
     <section class="cards-ctn" v-if="userCryptoCurrencies.length">
       <CryptoCurrencyCard
