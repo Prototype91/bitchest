@@ -1,5 +1,7 @@
 <template>
   <div class="ctn">
+    <Loader :isLoading="isLoading" />
+
     <div class="error" v-if="errorBalance">
       <h1>
         Vous n'avez pas les fonds requis pour effectuer cette transaction.
@@ -66,9 +68,11 @@ import cryptoCurrenciesService from "../../services/cryptoCurrencies/cryptoCurre
 import localStorageService from "../../services/localStorage/localStorage.service";
 import transactionsService from "../../services/transactions/transactions.service";
 import usersService from "../../services/users/users.service";
+import Loader from "./Loader.vue";
 
 export default {
   name: "MarketPlace",
+  components: { Loader },
   data() {
     return {
       isLoading: false,
@@ -157,6 +161,7 @@ export default {
           .addNewUserTransaction(data)
           .then((response) => {
             console.log(response);
+            this.$emit('transfer');
             this.init();
           })
           .catch((error) => {
