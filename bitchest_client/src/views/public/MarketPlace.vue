@@ -31,7 +31,7 @@
                 />
               </div>
               <div class="select-ctn">
-                <img src="" alt="Symbole de la monnaie utilisée" />
+                <i class="fas fa-euro-sign"></i>
                 <span>EUR</span>
               </div>
             </div>
@@ -194,6 +194,28 @@ export default {
   flex-direction: column;
 }
 
+.market-ctn form {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  height: 50%;
+}
+
+.market-ctn form > div {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  width: 100%;
+  border-radius: 8px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border: 1px solid grey;
+  background-color: rgb(39, 40, 39);
+}
+
 .market-ctn .btn-ctn {
   width: 250px;
   display: flex;
@@ -219,16 +241,22 @@ export default {
   align-items: center;
 }
 
+.input-ctn img, .input-ctn svg {
+  box-sizing: border-box;
+  margin: 0;
+  max-width: 100%;
+  width: 24px;
+  height: 24px;
+}
+
 .input-ctn input {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
   width: 100%;
-  height: 24px;
-  color: #1e2329;
+  height: 40px;
   font-size: 20px;
   outline: none;
-  background-color: #fafafa;
   border: 0 none;
   line-height: 21px;
   font-family: inherit;
@@ -254,16 +282,48 @@ export default {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+  justify-content: space-evenly;
   cursor: pointer;
-  width: 116px;
+  width: 170px;
+  height: 40px;
+}
+
+.input-euro .select-ctn {
+  cursor: default;
+}
+
+.input-euro .select-ctn > span {
+  width: 110px;
+}
+
+select {
+  background-color: transparent;
+    border-color: transparent;
+    color: white;
+    outline: none;
+    width: 110px;
+}
+
+select option {
+  background-color: darkslategrey;
 }
 
 .error {
   color: red;
   padding: 7.5px 0px;
+}
+
+/* Remove arrows on input type number */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 </style>
