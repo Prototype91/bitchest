@@ -2,13 +2,15 @@
   <div class="balance-ctn">
     <p>
       Solde :
-      {{
-        balance.toLocaleString("fr-FR", {
-          style: "currency",
-          currency: "EUR",
-          maximumFractionDigits: 2,
-        })
-      }}
+      <span class="green"
+        >+{{
+          balance.toLocaleString("fr-FR", {
+            style: "currency",
+            currency: "EUR",
+            maximumFractionDigits: 2,
+          })
+        }}</span
+      >
     </p>
   </div>
 </template>

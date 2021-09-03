@@ -2,8 +2,16 @@
   <div class="card">
     <img :src="image" alt="" />
     <p class="name">{{ name }}</p>
-    <p>{{ price.toFixed(2) }} {{ symbol.toUpperCase() }}</p>
-    <p class="end green">{{ amount.toFixed(2) }} €</p>
+    <p class="orange">+{{ price.toFixed(2) }} {{ symbol.toUpperCase() }}</p>
+    <p class="end green">
+      +{{
+        amount.toLocaleString("fr-FR", {
+          style: "currency",
+          currency: "EUR",
+          maximumFractionDigits: 2,
+        })
+      }}
+    </p>
   </div>
 </template>
 
@@ -50,10 +58,9 @@ export default {
   text-transform: capitalize;
 }
 
-.green {
-  color: green!important;;
+.orange {
+  color: #454a75 !important;
 }
-
 
 .card p {
   margin: 0;
@@ -62,7 +69,7 @@ export default {
 }
 
 .end {
-  text-align: end!important;
+  text-align: end !important;
 }
 
 .card img {

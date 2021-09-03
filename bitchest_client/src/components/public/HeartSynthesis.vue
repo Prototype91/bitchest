@@ -1,7 +1,10 @@
 <template>
   <div>
     <Loader :isLoading="isLoading" />
-    <h2 class="total">Montant total de vos cryptomonnaies : {{this.getTotalCryptoCurrenciesAmount()}} €</h2>
+    <h2 class="total">
+      Montant total de vos cryptomonnaies :
+      <span class="green">+{{ this.getTotalCryptoCurrenciesAmount() }}</span>
+    </h2>
     <section class="cards-ctn" v-if="userCryptoCurrencies.length">
       <CryptoCurrencyCard
         v-for="(userCryptoCurrency, index) in this.userCryptoCurrencies"
@@ -25,7 +28,7 @@ import CryptoCurrenciesTable from "../shared/CryptoCurrenciesTable.vue";
 import transactionsService from "../../services/transactions/transactions.service";
 import transactionsMapper from "../../services/transactions/transactions.mapper";
 import cryptoCurrenciesMapper from "../../services/cryptoCurrencies/cryptoCurrencies.mapper";
-import Loader from '../shared/Loader.vue';
+import Loader from "../shared/Loader.vue";
 export default {
   name: "HeartSynthesis",
   components: { CryptoCurrencyCard, CryptoCurrenciesTable, Loader },
@@ -36,11 +39,12 @@ export default {
     },
     userId: {
       type: Number,
-      required: true
+      required: true,
     },
   },
   data() {
     return {
+      isLoading: false,
       userCryptoCurrencies: [],
     };
   },
@@ -64,8 +68,14 @@ export default {
     },
 
     getTotalCryptoCurrenciesAmount() {
-      return this.userCryptoCurrencies.reduce((total, currency) => total + currency.amount, 0).toFixed(2);
-    }
+      return this.userCryptoCurrencies
+        .reduce((total, currency) => total + currency.amount, 0)
+        .toLocaleString("fr-FR", {
+          style: "currency",
+          currency: "EUR",
+          maximumFractionDigits: 2,
+        });
+    },
   },
   mounted() {
     this.getUserCryptoCurrencies();
