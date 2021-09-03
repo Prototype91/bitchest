@@ -11,8 +11,17 @@
           <button class="btn btn-secondary">Vendre</button>
         </div>
 
-        <Buy @transfer="init"/>
-
+        <div style="display: none">
+          <Buy v-if="cryptoCurrenciesData.length"
+            @transfer="init"
+            :cryptoCurrenciesData="this.cryptoCurrenciesData"
+          />
+        </div>
+        <Sell v-if="cryptoCurrenciesData.length"
+          @transfer="init"
+          :cryptoCurrenciesData="this.cryptoCurrenciesData"
+          :userData="this.userData"
+        />
       </section>
     </div>
   </main>
@@ -22,15 +31,19 @@
 import Balance from "../../components/public/Balance.vue";
 import Buy from "../../components/shared/Buy.vue";
 import Navigation from "../../components/shared/Navigation.vue";
+import Sell from "../../components/shared/Sell.vue";
+import cryptoCurrenciesMapper from "../../services/cryptoCurrencies/cryptoCurrencies.mapper";
+import cryptoCurrenciesService from "../../services/cryptoCurrencies/cryptoCurrencies.service";
 import localStorageService from "../../services/localStorage/localStorage.service";
 import usersService from "../../services/users/users.service";
 
 export default {
   name: "MarketPlace",
-  components: { Navigation, Balance, Buy },
+  components: { Navigation, Balance, Buy, Sell },
   data() {
     return {
       userData: null,
+      cryptoCurrenciesData: [],
     };
   },
   mounted() {
@@ -45,6 +58,19 @@ export default {
           this.userData = response.data;
         })
         .catch((error) => {
+          console.error(error);
+        });
+
+      cryptoCurrenciesService
+        .getCryptoCurrencies()
+        .then((response) => {
+          this.cryptoCurrenciesData =
+            cryptoCurrenciesMapper.mapCryptoCurrencies(response);
+          console.log(this.cryptoCurrenciesData);
+          this.isLoading = false;
+        })
+        .catch((error) => {
+          this.isLoading = false;
           console.error(error);
         });
     },

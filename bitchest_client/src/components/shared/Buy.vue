@@ -63,16 +63,20 @@
 </template>
 
 <script>
-import cryptoCurrenciesMapper from "../../services/cryptoCurrencies/cryptoCurrencies.mapper";
-import cryptoCurrenciesService from "../../services/cryptoCurrencies/cryptoCurrencies.service";
 import localStorageService from "../../services/localStorage/localStorage.service";
 import transactionsService from "../../services/transactions/transactions.service";
 import usersService from "../../services/users/users.service";
 import Loader from "./Loader.vue";
 
 export default {
-  name: "MarketPlace",
+  name: "Buy",
   components: { Loader },
+  props: {
+      cryptoCurrenciesData: {
+          type: Array,
+          required: true
+      }
+  },
   data() {
     return {
       isLoading: false,
@@ -84,7 +88,6 @@ export default {
       currencyPrice: 0,
       exchange_value: null,
       crypto_amount: null,
-      cryptoCurrenciesData: [],
     };
   },
   mounted() {
@@ -104,19 +107,7 @@ export default {
           console.error(error);
         });
 
-      cryptoCurrenciesService
-        .getCryptoCurrencies()
-        .then((response) => {
-          this.cryptoCurrenciesData =
-            cryptoCurrenciesMapper.mapCryptoCurrencies(response);
-          console.log(this.cryptoCurrenciesData);
-          this.setCurrentCurrency();
-          this.isLoading = false;
-        })
-        .catch((error) => {
-          this.isLoading = false;
-          console.error(error);
-        });
+      this.setCurrentCurrency();
     },
     calculate() {
       if (this.exchange_value)
