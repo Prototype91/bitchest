@@ -19,7 +19,7 @@
               <td>
                 <img :src="cryptoCurrency.image" class="prices-icon" alt="" />
                 <span class="responsive">{{ cryptoCurrency.name }}</span>
-                ({{ cryptoCurrency.symbol.toUpperCase() }})
+                <span>({{ cryptoCurrency.symbol.toUpperCase() }})</span>
               </td>
               <td>
                 {{
@@ -83,6 +83,11 @@ td {
   color: red;
 }
 
+table {
+  width: 80%;
+  margin: 0 auto;
+}
+
 table img {
   vertical-align: middle;
   margin-right: 20px;
@@ -108,5 +113,8 @@ table img {
   .responsive-xs {
     display: none;
   }
+  table {
+    width: 90%
+  };
 }
 </style>
