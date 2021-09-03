@@ -13,7 +13,7 @@ export default {
     },
 
     mapUserCryptoCurrencies(userCryptoCurrencies, cryptoCurrencies) {
-        let result = userCryptoCurrencies;
+        let result = userCryptoCurrencies.filter(currency => currency.currency_value > 0);
         for (let i = 0; i < result.length; i++) {
             const currencyData = cryptoCurrencies.filter(
                 (currency) => currency.id === result[i].name
