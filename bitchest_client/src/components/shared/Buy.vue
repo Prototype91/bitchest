@@ -72,10 +72,10 @@ export default {
   name: "Buy",
   components: { Loader },
   props: {
-      cryptoCurrenciesData: {
-          type: Array,
-          required: true
-      }
+    cryptoCurrenciesData: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
@@ -124,41 +124,35 @@ export default {
       this.calculate();
     },
     startTransfert() {
-      let currency_id;
-      let data;
-
       if (this.userData.balance < this.exchange_value) {
         this.errorBalance = true;
         return;
       }
+      const currency_id = localStorageService
+        .getDataBaseCurrenciesLocalStorage()
+        .filter((currency) => currency.coin_id === this.currencySelected)[0].id;
 
-      transactionsService.getCurrencies().then((response) => {
-        currency_id = response.data.currencies.filter(
-          (currency) => currency.coin_id === this.currencySelected
-        )[0].id;
+      const data = {
+        currency_id,
+        currency_value: this.crypto_amount,
+        user_id: this.userData.id,
+        amount: this.exchange_value,
+        type: true,
+        name: this.currencySelected,
+        symbol: this.currencySymbol,
+      };
 
-        data = {
-          currency_id: currency_id,
-          currency_value: this.crypto_amount,
-          user_id: this.userData.id,
-          amount: this.exchange_value,
-          type: true,
-          name: this.currencySelected,
-          symbol: this.currencySymbol,
-        };
-
-        // Ajout de la transaction
-        transactionsService
-          .addNewUserTransaction(data)
-          .then((response) => {
-            console.log(response);
-            this.$emit('transfer');
-            this.init();
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      });
+      // Ajout de la transaction
+      transactionsService
+        .addNewUserTransaction(data)
+        .then((response) => {
+          console.log(response);
+          this.$emit("transfer");
+          this.init();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };

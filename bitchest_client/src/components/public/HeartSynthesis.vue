@@ -1,24 +1,26 @@
 <template>
   <div>
-    <Loader :isLoading="isLoading" />
-    <h2 class="total">
-      Montant total de vos cryptomonnaies :
-      <span class="green">+{{ this.getTotalCryptoCurrenciesAmount() }}</span>
-    </h2>
-    <section class="cards-ctn" v-if="userCryptoCurrencies.length">
-      <CryptoCurrencyCard
-        v-for="(userCryptoCurrency, index) in this.userCryptoCurrencies"
-        :name="userCryptoCurrency.name"
-        :price="userCryptoCurrency.currency_value"
-        :image="userCryptoCurrency.image"
-        :symbol="userCryptoCurrency.symbol"
-        :amount="userCryptoCurrency.amount"
-        :key="index"
-      />
-    </section>
-    <section>
-      <CryptoCurrenciesTable :cryptoCurrencies="this.cryptoCurrencies" />
-    </section>
+    <Loader :isLoading="!loaded" />
+    <div v-if="loaded">
+      <h2 v-if="userCryptoCurrencies.length" class="total">
+        Montant total de vos cryptomonnaies :
+        <span class="green">+{{ this.getTotalCryptoCurrenciesAmount() }}</span>
+      </h2>
+      <section class="cards-ctn" v-if="userCryptoCurrencies.length">
+        <CryptoCurrencyCard
+          v-for="(userCryptoCurrency, index) in this.userCryptoCurrencies"
+          :name="userCryptoCurrency.name"
+          :price="userCryptoCurrency.currency_value"
+          :image="userCryptoCurrency.image"
+          :symbol="userCryptoCurrency.symbol"
+          :amount="userCryptoCurrency.amount"
+          :key="index"
+        />
+      </section>
+      <section>
+        <CryptoCurrenciesTable :cryptoCurrencies="this.cryptoCurrencies" />
+      </section>
+    </div>
   </div>
 </template>
 
@@ -44,8 +46,8 @@ export default {
   },
   data() {
     return {
-      isLoading: false,
       userCryptoCurrencies: [],
+      loaded: false,
     };
   },
   methods: {
@@ -54,13 +56,15 @@ export default {
       transactionsService
         .getUserTransactions(this.userId)
         .then((response) => {
-          this.userCryptoCurrencies =
-            cryptoCurrenciesMapper.mapUserCryptoCurrencies(
-              transactionsMapper.sortUserCryptoCurrencies(response.data),
-              this.cryptoCurrencies
-            );
-          console.log("User Cryptos", this.userCryptoCurrencies);
-          this.isLoading = false;
+          if (response.data.length) {
+            this.userCryptoCurrencies =
+              cryptoCurrenciesMapper.mapUserCryptoCurrencies(
+                transactionsMapper.sortUserCryptoCurrencies(response.data),
+                this.cryptoCurrencies
+              );
+            console.log("User Cryptos", this.userCryptoCurrencies);
+          }
+          this.loaded = true;
         })
         .catch((error) => {
           console.error(error);

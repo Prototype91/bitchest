@@ -2,7 +2,7 @@
   <main>
     <Navigation />
     <Loader :isLoading="isLoading" />
-    <Balance :balance="balance" />
+    <Balance v-if="balance" :balance="balance" />
     <div v-if="transactions.length">
       <h1>Historique des transactions :</h1>
       <TransactionsTable :transactions="transactions" />
@@ -26,7 +26,7 @@ export default {
     return {
       transactions: [],
       isLoading: false,
-      balance: 0,
+      balance: null,
       userData: {}
     };
   },

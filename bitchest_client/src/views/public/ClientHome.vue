@@ -34,6 +34,8 @@ export default {
       userData: null,
       cryptoCurrencies: [],
       isLoading: false,
+      allLoaded: false,
+      loaded: false
     };
   },
   mounted() {

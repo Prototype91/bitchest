@@ -36,7 +36,8 @@
 
 <script>
 import authService from "../../services/authentication/auth.service";
-import localStorageService from '../../services/localStorage/localStorage.service';
+import localStorageService from "../../services/localStorage/localStorage.service";
+import transactionsService from '../../services/transactions/transactions.service';
 import Loader from "./Loader.vue";
 
 export default {
@@ -56,13 +57,14 @@ export default {
     login() {
       this.isLoading = true;
 
-      authService.login(this.email, this.password)
+      authService
+        .login(this.email, this.password)
         .then((response) => {
           const user = response.data.user;
 
           console.log(user);
 
-          const dataToPush = {
+          const userData = {
             token: response.data.token,
             elevation: user.elevation,
             firstname: user.firstname,
@@ -71,10 +73,23 @@ export default {
             phone: user.phone,
             id: user.id,
             balance: user.balance,
-            email: user.email
+            email: user.email,
           };
 
-          localStorageService.setUserLocalStorage(dataToPush);
+          localStorageService.setUserLocalStorage(userData);
+
+          transactionsService
+            .getCurrencies()
+            .then((response) => {
+              const currenciesData = response.data;
+              console.log(currenciesData);
+              localStorageService.setDataBaseCurrenciesLocalStorage(
+                currenciesData
+              );
+            })
+            .catch((error) => {
+              console.error(error);
+            });
 
           this.isLoading = false;
 
