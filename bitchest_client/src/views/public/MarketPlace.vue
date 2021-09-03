@@ -139,6 +139,7 @@ export default {
       this.currencySymbol = currencyData[0].symbol;
       this.currencyPrice = currencyData[0].current_price;
       this.currencyImg = currencyData[0].image;
+      this.calculate(); 
     },
     startTransfert() {
       let currency_id;
@@ -310,7 +311,7 @@ select option {
 
 .error {
   color: red;
-  padding: 7.5px 0px;
+  padding: 15px;
 }
 
 /* Remove arrows on input type number */
