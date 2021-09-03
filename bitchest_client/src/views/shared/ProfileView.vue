@@ -8,7 +8,11 @@
           Bonjour <span>{{ userData.firstname }}</span
           >, voici vos informations personnelles :
         </h1>
-        <EditUserForm :currentUserData="userData" :displayRadios="false" :updatePassword="true"/>
+        <EditUserForm
+          :currentUserData="userData"
+          :displayRadios="false"
+          :updatePassword="true"
+        />
       </div>
     </section>
   </main>
@@ -33,12 +37,15 @@ export default {
     const localStorageData = localStorageService.getUserLocalStorage();
     const userId = localStorageData.id;
 
-    console.log(localStorageData);
-
-    usersService.getUser(userId).then((response) => {
-      console.log(response.data);
-      this.userData = response.data;
-    });
+    usersService
+      .getUser(userId)
+      .then((response) => {
+        console.log(response.data);
+        this.userData = response.data;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   },
 };
 </script>

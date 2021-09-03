@@ -1,7 +1,7 @@
 import localStorageService from "../localStorage/localStorage.service";
 
 export default {
-    // Return On Invesment
+    // Return On Investment
     getReturnOnInvest(cryptoCurrencyName, boughtValue, currencyValue) {
         const cryptoCurrencies =
             localStorageService.getCryptoCurrenciesLocalStorage();
