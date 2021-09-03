@@ -6,6 +6,13 @@
       <section class="sell" v-if="this.userData">
         <h1>Bonjour {{ this.userData.firstname }}</h1>
         <Balance :balance="this.userData.balance" />
+
+        <div class="error" v-if="errorBalance">
+          <h1>
+            Vous n'avez pas les fonds requis pour effectuer cette transaction.
+          </h1>
+        </div>
+
         <div class="btn-ctn">
           <button class="btn btn-primary">Acheter</button>
           <button class="btn btn-secondary">Vendre</button>
@@ -81,6 +88,7 @@ export default {
     return {
       isLoading: false,
       userData: null,
+      errorBalance: false,
       currencySelected: "bitcoin",
       currencyImg: "",
       currencySymbol: "",
@@ -135,6 +143,12 @@ export default {
     startTransfert() {
       let currency_id;
       let data;
+
+      if (this.userData.balance < this.exchange_value) {
+        this.errorBalance = true;
+        return;
+      }
+
       transactionsService.getCurrencies().then((response) => {
         currency_id = response.data.currencies.filter(
           (currency) => currency.coin_id === this.currencySelected
@@ -246,5 +260,10 @@ export default {
   justify-content: center;
   cursor: pointer;
   width: 116px;
+}
+
+.error {
+  color: red;
+  padding: 7.5px 0px;
 }
 </style>
