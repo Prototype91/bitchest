@@ -42,7 +42,9 @@ class TransactionsController extends Controller
 
         $user = User::find($request->user_id);
 
-        $user->balance = $user->balance - $request->amount;
+        // Need to know if we buy or sell something
+        if ($request->type) $user->balance = $user->balance - $request->amount;
+        else $user->balance = $user->balance + $request->amount;
 
         $user->save();
 
