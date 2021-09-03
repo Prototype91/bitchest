@@ -3,11 +3,12 @@
     <p>
       Solde :
       {{
-        balance.toLocaleString(undefined, {
+        balance.toLocaleString("fr-FR", {
+          style: "currency",
+          currency: "EUR",
           maximumFractionDigits: 2,
         })
       }}
-      €
     </p>
   </div>
 </template>

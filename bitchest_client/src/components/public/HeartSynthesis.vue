@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Loader :isLoading="!userCryptoCurrencies.length" />
+    <Loader :isLoading="isLoading" />
     <h2 class="total">Montant total de vos cryptomonnaies : {{this.getTotalCryptoCurrenciesAmount()}} €</h2>
     <section class="cards-ctn" v-if="userCryptoCurrencies.length">
       <CryptoCurrencyCard
@@ -46,6 +46,7 @@ export default {
   },
   methods: {
     getUserCryptoCurrencies() {
+      this.isLoading = true;
       transactionsService
         .getUserTransactions(this.userId)
         .then((response) => {
@@ -55,6 +56,7 @@ export default {
               this.cryptoCurrencies
             );
           console.log("User Cryptos", this.userCryptoCurrencies);
+          this.isLoading = false;
         })
         .catch((error) => {
           console.error(error);

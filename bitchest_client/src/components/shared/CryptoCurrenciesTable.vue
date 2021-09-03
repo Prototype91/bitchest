@@ -23,10 +23,12 @@
               </td>
               <td>
                 {{
-                  cryptoCurrency.current_price.toLocaleString(undefined, {
+                  cryptoCurrency.current_price.toLocaleString("fr-FR", {
+                    style: "currency",
+                    currency: "EUR",
                     maximumFractionDigits: 2,
                   })
-                }}€
+                }}
               </td>
               <td
                 :class="[

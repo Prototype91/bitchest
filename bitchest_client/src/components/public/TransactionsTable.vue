@@ -2,9 +2,7 @@
   <section>
     <div class="container">
       <div>
-        <h2>
-          Retour sur investissement total en cas de vente : {{ total }} €
-        </h2>
+        <h2>Retour sur investissement total en cas de vente : {{ total }} €</h2>
         <table class="table table-striped">
           <thead>
             <tr>
@@ -33,11 +31,12 @@
 
               <td v-if="transaction.type">
                 -{{
-                  transaction.amount.toLocaleString(undefined, {
+                  transaction.amount.toLocaleString("fr-FR", {
+                    style: "currency",
+                    currency: "EUR",
                     maximumFractionDigits: 2,
                   })
                 }}
-                €
               </td>
               <td v-if="!transaction.type">
                 -{{ transaction.currency_value }}
@@ -49,7 +48,9 @@
               </td>
               <td v-if="!transaction.type">
                 +{{
-                  transaction.amount.toLocaleString(undefined, {
+                  transaction.amount.toLocaleString("fr-FR", {
+                    style: "currency",
+                    currency: "EUR",
                     maximumFractionDigits: 2,
                   })
                 }}
@@ -110,7 +111,9 @@ export default {
     },
 
     getTotalReturnOnInvest() {
-      return this.roiValues.reduce((total, value) => Number(total) + Number(value));
+      return this.roiValues.reduce(
+        (total, value) => Number(total) + Number(value)
+      );
     },
   },
 };
