@@ -34,7 +34,7 @@
                 :class="[
                   'responsive-xs',
                   cryptoCurrency.price_change_percentage_24h > 0
-                    ? 'positive'
+                    ? 'green'
                     : 'negative',
                 ]"
               >
@@ -77,12 +77,8 @@ td {
   color: white;
 }
 
-.positive {
-  color: green;
-}
-
 .negative {
-  color: red;
+  color: #DF393E;
 }
 
 table {

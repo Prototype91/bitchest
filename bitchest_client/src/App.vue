@@ -172,6 +172,10 @@ button.btn a:hover {
   color: white;
 }
 
+.green {
+  color: #0bc18d !important;
+}
+
 /* MODAL STYLE */
 .modal-content {
   display: flex;
