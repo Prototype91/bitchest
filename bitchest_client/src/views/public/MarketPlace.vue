@@ -2,14 +2,10 @@
   <main>
     <Navigation />
     <div class="market-ctn">
+      <Loader :isLoading="isLoading" />
       <section class="sell" v-if="this.userData">
-        <h1>Bonjour {{ this.userData.firstname }}</h1>
-        <Balance :balance="this.userData.balance" />
-
-        <div class="btn-ctn">
-          <button class="btn btn-primary">Acheter</button>
-          <button class="btn btn-secondary">Vendre</button>
-        </div>
+        <h1 v-if="!isLoading">Bonjour {{ this.userData.firstname }}</h1>
+        <Balance v-if="!isLoading" :balance="this.userData.balance" />
 
           <Buy v-if="cryptoCurrenciesData.length && buyMode"
             @transfer="init"
@@ -17,6 +13,7 @@
           />
         <Sell v-if="cryptoCurrenciesData.length && !buyMode"
           @transfer="init"
+          @loaded="isLoading = false;"
           :cryptoCurrenciesData="this.cryptoCurrenciesData"
           :userData="this.userData"
         />
@@ -28,21 +25,21 @@
 <script>
 import Balance from "../../components/public/Balance.vue";
 import Buy from "../../components/shared/Buy.vue";
+import Loader from "../../components/shared/Loader.vue";
 import Navigation from "../../components/shared/Navigation.vue";
 import Sell from "../../components/shared/Sell.vue";
-import cryptoCurrenciesMapper from "../../services/cryptoCurrencies/cryptoCurrencies.mapper";
-import cryptoCurrenciesService from "../../services/cryptoCurrencies/cryptoCurrencies.service";
 import localStorageService from "../../services/localStorage/localStorage.service";
 import usersService from "../../services/users/users.service";
 
 export default {
   name: "MarketPlace",
-  components: { Navigation, Balance, Buy, Sell },
+  components: { Navigation, Balance, Buy, Sell, Loader },
   data() {
     return {
       userData: null,
       cryptoCurrenciesData: [],
       buyMode: true, 
+      isLoading: false,
     };
   },
   mounted() {
@@ -50,6 +47,7 @@ export default {
   },
   methods: {
     init() {
+      this.isLoading = true;
       const userid = localStorageService.getUserLocalStorage().id;
       usersService
         .getUser(userid)
@@ -60,18 +58,8 @@ export default {
           console.error(error);
         });
 
-      cryptoCurrenciesService
-        .getCryptoCurrencies()
-        .then((response) => {
-          this.cryptoCurrenciesData =
-            cryptoCurrenciesMapper.mapCryptoCurrencies(response);
-          console.log(this.cryptoCurrenciesData);
-          this.isLoading = false;
-        })
-        .catch((error) => {
-          this.isLoading = false;
-          console.error(error);
-        });
+      this.cryptoCurrenciesData =
+        localStorageService.getCryptoCurrenciesLocalStorage();
     },
   },
 };

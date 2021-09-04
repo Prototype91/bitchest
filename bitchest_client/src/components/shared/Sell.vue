@@ -1,8 +1,6 @@
 <template>
   <div class="ctn-form">
-    <Loader :isLoading="isLoading" />
-
-    <form @submit.prevent="startTransfert" class="inputs">
+    <form @submit.prevent="startTransfert" class="inputs" v-if="!isLoading && userCryptoCurrencies.length">
       <div class="input-crypto">
         <label for="vendre">Vendre</label>
         <div class="input-ctn">
@@ -61,11 +59,11 @@
 import cryptoCurrenciesMapper from "../../services/cryptoCurrencies/cryptoCurrencies.mapper";
 import transactionsService from "../../services/transactions/transactions.service";
 import transactionsMapper from "../../services/transactions/transactions.mapper";
-import Loader from "./Loader.vue";
+import localStorageService from "../../services/localStorage/localStorage.service";
 
 export default {
   name: "Sell",
-  components: { Loader },
+  emits: ["loaded", "transfer"],
   props: {
     userData: {
       type: Object,
@@ -78,8 +76,8 @@ export default {
   },
   data() {
     return {
-      isLoading: false,
       currencySelected: "",
+      isLoading: true,
       currencyImg: "",
       currencySymbol: "",
       currencyTotalPrice: 0,
@@ -92,8 +90,6 @@ export default {
   },
   methods: {
     init() {
-      this.isLoading = true;
-
       transactionsService
         .getUserTransactions(this.userData.id)
         .then((response) => {
@@ -105,6 +101,7 @@ export default {
           console.log("User Cryptos", this.userCryptoCurrencies);
           this.currencySelected = this.userCryptoCurrencies[0].name;
           this.setCurrentCurrency();
+          this.$emit("loaded");
           this.isLoading = false;
         })
         .catch((error) => {
@@ -121,36 +118,35 @@ export default {
       this.crypto_amount = currencyData[0].currency_value;
     },
     startTransfert() {
-      let currency_id;
-      let data;
+      const currency_id = localStorageService
+        .getDataBaseCurrenciesLocalStorage()
+        .filter((currency) => currency.coin_id === this.currencySelected)[0].id;
 
-      transactionsService.getCurrencies().then((response) => {
-        currency_id = response.data.currencies.filter(
-          (currency) => currency.coin_id === this.currencySelected
-        )[0].id;
+      console.log(currency_id);
 
-        data = {
-          currency_id: currency_id,
-          currency_value: this.crypto_amount * -1,
-          user_id: this.userData.id,
-          amount: this.currencyTotalPrice,
-          type: false,
-          name: this.currencySelected,
-          symbol: this.currencySymbol,
-        };
+      const data = {
+        currency_id,
+        currency_value: this.crypto_amount * -1,
+        user_id: this.userData.id,
+        amount: this.currencyTotalPrice,
+        type: false,
+        name: this.currencySelected,
+        symbol: this.currencySymbol,
+      };
 
-        // Ajout de la transaction
-        transactionsService
-          .addNewUserTransaction(data)
-          .then((response) => {
-            console.log(response);
-            this.$emit("transfer");
-            this.init();
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      });
+      console.log(data);
+
+      // Ajout de la transaction
+      transactionsService
+        .addNewUserTransaction(data)
+        .then((response) => {
+          console.log(response);
+          this.$emit("transfer");
+          this.init();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
