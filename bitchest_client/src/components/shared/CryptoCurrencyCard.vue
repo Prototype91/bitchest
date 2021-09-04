@@ -2,7 +2,7 @@
   <div class="card">
     <img :src="image" alt="" />
     <p class="name">{{ name }}</p>
-    <p class="orange">+{{ price.toFixed(2) }} {{ symbol.toUpperCase() }}</p>
+    <p class="orange">+{{ price.toFixed(9) }} {{ symbol.toUpperCase() }}</p>
     <p class="end green">
       +{{
         amount.toLocaleString("fr-FR", {

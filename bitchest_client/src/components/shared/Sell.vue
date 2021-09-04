@@ -101,9 +101,9 @@ export default {
         (currency) => currency.name === this.currencySelected
       );
       this.currencySymbol = currencyData[0].symbol;
-      this.currencyTotalPrice = currencyData[0].amount;
+      this.currencyTotalPrice = currencyData[0].amount.toFixed(2);
       this.currencyImg = currencyData[0].image;
-      this.crypto_amount = currencyData[0].currency_value;
+      this.crypto_amount = currencyData[0].currency_value.toFixed(9);
     },
     startTransfert() {
       const currency_id = localStorageService
