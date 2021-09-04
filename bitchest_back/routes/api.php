@@ -34,11 +34,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 |--------------------------------------------------------------------------
 */
     Route::get('/users', [UsersController::class, 'index']);
-    Route::post('/user', [UsersController::class, 'store']);
     Route::get('/user/{id}', [UsersController::class, 'show']);
+    Route::post('/user', [UsersController::class, 'store']);
 
 
     Route::delete('/user/{id}', [UsersController::class, 'destroy']);
+    Route::put('/loggedUser/{id}', [UsersController::class, 'updateLoggedUser']);
     Route::put('/user/{id}', [UsersController::class, 'update']);
     Route::get('/user', function (Request $request) {
         return $request->user();

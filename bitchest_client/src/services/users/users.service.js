@@ -22,7 +22,7 @@ export default {
     },
 
     // Request to update a specific user
-    updateUser(id, userData) {
-        return Api().put(`/user/${id}`, userData);
+    updateUser(id, userData, updatePassword) {
+        return updatePassword ? Api().put(`/loggedUser/${id}`, userData) : Api().put(`/user/${id}`, userData)
     }
 };

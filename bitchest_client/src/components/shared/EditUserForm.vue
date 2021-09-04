@@ -207,7 +207,7 @@ export default {
       }
 
       this.isLoading = true;
-      usersService.updateUser(id, user)
+      usersService.updateUser(id, user, this.updatePassword)
         .then((response) => {
           console.log(response);
           this.isLoading = false;

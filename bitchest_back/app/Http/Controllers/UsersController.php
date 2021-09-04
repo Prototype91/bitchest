@@ -88,6 +88,36 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = User::find($id);
+
+        $request->validate([
+            "firstname" => "required",
+            "lastname" => "required",
+            "phone" => "required",
+            "address" => "required",
+            "email" => "required",
+            "elevation" => "required",
+        ]);
+
+        $user->update($request->all());
+
+        return response([
+            'user' => $user,
+            'message' => 'Utilisateur mis à jour'
+        ], 200);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateLoggedUser(Request $request, $id)
+    {
+        $user = User::find($id);
+        
         $request->validate([
             "firstname" => "required",
             "lastname" => "required",
@@ -99,8 +129,6 @@ class UsersController extends Controller
             "elevation" => "required",
         ]);
 
-        $user = User::find($id);
-        
         $user->update($request->all());
         $user->password = bcrypt($user->password);
         $user->save();
