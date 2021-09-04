@@ -11,13 +11,11 @@
           <button class="btn btn-secondary">Vendre</button>
         </div>
 
-        <div style="display: none">
-          <Buy v-if="cryptoCurrenciesData.length"
+          <Buy v-if="cryptoCurrenciesData.length && buyMode"
             @transfer="init"
             :cryptoCurrenciesData="this.cryptoCurrenciesData"
           />
-        </div>
-        <Sell v-if="cryptoCurrenciesData.length"
+        <Sell v-if="cryptoCurrenciesData.length && !buyMode"
           @transfer="init"
           :cryptoCurrenciesData="this.cryptoCurrenciesData"
           :userData="this.userData"
@@ -44,6 +42,7 @@ export default {
     return {
       userData: null,
       cryptoCurrenciesData: [],
+      buyMode: true, 
     };
   },
   mounted() {
