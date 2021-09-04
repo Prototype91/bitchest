@@ -1,7 +1,5 @@
 <template>
   <div class="ctn">
-    <Loader :isLoading="isLoading" />
-
     <div class="error" v-if="errorBalance">
       <h1>
         Vous n'avez pas les fonds requis pour effectuer cette transaction.
@@ -65,22 +63,21 @@
 <script>
 import localStorageService from "../../services/localStorage/localStorage.service";
 import transactionsService from "../../services/transactions/transactions.service";
-import usersService from "../../services/users/users.service";
-import Loader from "./Loader.vue";
 
 export default {
   name: "Buy",
-  components: { Loader },
   props: {
     cryptoCurrenciesData: {
       type: Array,
       required: true,
     },
+    userData: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
-      isLoading: false,
-      userData: null,
       errorBalance: false,
       currencySelected: "bitcoin",
       currencyImg: "",
@@ -95,18 +92,6 @@ export default {
   },
   methods: {
     init() {
-      this.isLoading = true;
-      const userid = localStorageService.getUserLocalStorage().id;
-      usersService
-        .getUser(userid)
-        .then((response) => {
-          this.userData = response.data;
-        })
-        .catch((error) => {
-          this.isLoading = false;
-          console.error(error);
-        });
-
       this.setCurrentCurrency();
     },
     calculate() {

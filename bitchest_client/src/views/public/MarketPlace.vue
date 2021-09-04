@@ -6,18 +6,17 @@
       <section class="sell" v-if="this.userData">
         <h1 v-if="!isLoading">Bonjour {{ this.userData.firstname }}</h1>
         <Balance v-if="!isLoading" :balance="this.userData.balance" />
-
-        <div style="display: none">
-          <Buy
-            v-if="cryptoCurrenciesData.length"
-            @transfer="init"
-            :cryptoCurrenciesData="this.cryptoCurrenciesData"
-          />
-        </div>
-        <Sell
+        <Buy
+          v-if="cryptoCurrenciesData.length"
           @transfer="init"
-          @loaded="isLoading = false;"
           :cryptoCurrenciesData="this.cryptoCurrenciesData"
+          :userData="this.userData"
+        />
+        <Sell
+          v-if="userCryptoCurrencies.length && cryptoCurrenciesData.length"
+          @transfer="init"
+          :cryptoCurrenciesData="cryptoCurrenciesData"
+          :userCryptoCurrencies="userCryptoCurrencies"
           :userData="this.userData"
         />
       </section>
@@ -31,7 +30,10 @@ import Buy from "../../components/shared/Buy.vue";
 import Loader from "../../components/shared/Loader.vue";
 import Navigation from "../../components/shared/Navigation.vue";
 import Sell from "../../components/shared/Sell.vue";
+import cryptoCurrenciesMapper from "../../services/cryptoCurrencies/cryptoCurrencies.mapper";
 import localStorageService from "../../services/localStorage/localStorage.service";
+import transactionsMapper from "../../services/transactions/transactions.mapper";
+import transactionsService from "../../services/transactions/transactions.service";
 import usersService from "../../services/users/users.service";
 
 export default {
@@ -41,6 +43,7 @@ export default {
     return {
       userData: null,
       cryptoCurrenciesData: [],
+      userCryptoCurrencies: [],
       isLoading: false,
     };
   },
@@ -55,6 +58,20 @@ export default {
         .getUser(userid)
         .then((response) => {
           this.userData = response.data;
+          transactionsService
+            .getUserTransactions(response.data.id)
+            .then((response) => {
+              this.userCryptoCurrencies =
+                cryptoCurrenciesMapper.mapUserCryptoCurrencies(
+                  transactionsMapper.sortUserCryptoCurrencies(response.data),
+                  this.cryptoCurrenciesData
+                );
+              console.log("User Cryptos", this.userCryptoCurrencies);
+              this.isLoading = false;
+            })
+            .catch((error) => {
+              console.error(error);
+            });
         })
         .catch((error) => {
           console.error(error);

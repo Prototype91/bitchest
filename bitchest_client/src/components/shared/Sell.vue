@@ -1,6 +1,10 @@
 <template>
   <div class="ctn-form">
-    <form @submit.prevent="startTransfert" class="inputs" v-if="!isLoading && userCryptoCurrencies.length">
+    <form
+      @submit.prevent="startTransfert"
+      class="inputs"
+      v-if="userCryptoCurrencies.length"
+    >
       <div class="input-crypto">
         <label for="vendre">Vendre</label>
         <div class="input-ctn">
@@ -56,9 +60,7 @@
 </template>
 
 <script>
-import cryptoCurrenciesMapper from "../../services/cryptoCurrencies/cryptoCurrencies.mapper";
 import transactionsService from "../../services/transactions/transactions.service";
-import transactionsMapper from "../../services/transactions/transactions.mapper";
 import localStorageService from "../../services/localStorage/localStorage.service";
 
 export default {
@@ -73,16 +75,17 @@ export default {
       type: Array,
       required: true,
     },
+    userCryptoCurrencies: {
+      type: Array,
+    },
   },
   data() {
     return {
       currencySelected: "",
-      isLoading: true,
       currencyImg: "",
       currencySymbol: "",
       currencyTotalPrice: 0,
       crypto_amount: null,
-      userCryptoCurrencies: [],
     };
   },
   mounted() {
@@ -90,23 +93,8 @@ export default {
   },
   methods: {
     init() {
-      transactionsService
-        .getUserTransactions(this.userData.id)
-        .then((response) => {
-          this.userCryptoCurrencies =
-            cryptoCurrenciesMapper.mapUserCryptoCurrencies(
-              transactionsMapper.sortUserCryptoCurrencies(response.data),
-              this.cryptoCurrenciesData
-            );
-          console.log("User Cryptos", this.userCryptoCurrencies);
-          this.currencySelected = this.userCryptoCurrencies[0].name;
-          this.setCurrentCurrency();
-          this.$emit("loaded");
-          this.isLoading = false;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      this.currencySelected = this.userCryptoCurrencies[0].name;
+      this.setCurrentCurrency();
     },
     setCurrentCurrency() {
       const currencyData = this.userCryptoCurrencies.filter(
@@ -121,8 +109,6 @@ export default {
       const currency_id = localStorageService
         .getDataBaseCurrenciesLocalStorage()
         .filter((currency) => currency.coin_id === this.currencySelected)[0].id;
-
-      console.log(currency_id);
 
       const data = {
         currency_id,
