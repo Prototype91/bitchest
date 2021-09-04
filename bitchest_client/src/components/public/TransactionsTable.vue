@@ -107,7 +107,8 @@ export default {
   },
   methods: {
     formatDate(date) {
-      return moment(date).utc().format("DD/MM/YYYY-hh:mm");
+      console.log(date);
+      return moment(date).local(true).format("DD/MM/YYYY - HH:mm");
     },
     getReturnOnInvest(cryptoCurrencyName, boughtValue, currencyValue) {
       const returnOnInvest = transactionsMapper.getReturnOnInvest(
