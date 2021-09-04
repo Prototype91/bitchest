@@ -49,7 +49,7 @@
                 :key="index"
                 :value="currency.id"
               >
-                {{ currency.id }}
+                {{ currency.id.toUpperCase() }}
               </option>
             </select>
           </div>

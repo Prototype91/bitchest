@@ -30,7 +30,7 @@
                 :key="index"
                 :value="currency.name"
               >
-                {{ currency.name }}
+                {{ currency.name.toUpperCase() }}
               </option>
             </select>
           </div>
@@ -65,7 +65,7 @@ import localStorageService from "../../services/localStorage/localStorage.servic
 
 export default {
   name: "Sell",
-  emits: ["loaded", "transfer"],
+  emits: ["transfer"],
   props: {
     userData: {
       type: Object,

@@ -48,7 +48,7 @@
                 }}
               </td>
               <td v-if="!transaction.type">
-                -{{ transaction.currency_value }}
+                {{ transaction.currency_value }}
                 {{ transaction.symbol.toUpperCase() }}
               </td>
               <td v-if="transaction.type">
@@ -63,7 +63,7 @@
                     maximumFractionDigits: 2,
                   })
                 }}
-                €
+                
               </td>
               <td>
                 {{

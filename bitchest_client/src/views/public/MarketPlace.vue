@@ -3,21 +3,21 @@
     <Navigation />
     <div class="market-ctn">
       <Loader :isLoading="isLoading" />
-      <section class="sell" v-if="this.userData">
+      <section class="sell" v-if="this.userData && !isLoading">
         <h1 v-if="!isLoading">Bonjour {{ this.userData.firstname }}</h1>
         <Balance v-if="!isLoading" :balance="this.userData.balance" />
         <Buy
           v-if="cryptoCurrenciesData.length"
-          @transfer="init"
           :cryptoCurrenciesData="this.cryptoCurrenciesData"
           :userData="this.userData"
+          @transfer="init"
         />
         <Sell
           v-if="userCryptoCurrencies.length && cryptoCurrenciesData.length"
-          @transfer="init"
           :cryptoCurrenciesData="cryptoCurrenciesData"
           :userCryptoCurrencies="userCryptoCurrencies"
           :userData="this.userData"
+          @transfer="init"
         />
       </section>
     </div>
@@ -70,6 +70,7 @@ export default {
               this.isLoading = false;
             })
             .catch((error) => {
+              this.isLoading = false;
               console.error(error);
             });
         })
