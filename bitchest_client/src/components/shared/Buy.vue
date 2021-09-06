@@ -92,11 +92,12 @@ export default {
   },
   methods: {
     init() {
+      this.setSelectedCurrency();
       this.setCurrentCurrency();
     },
     calculate() {
       if (this.exchange_value)
-        this.crypto_amount = (this.exchange_value / this.currencyPrice);
+        this.crypto_amount = this.exchange_value / this.currencyPrice;
       else this.crypto_amount = null;
     },
     setCurrentCurrency() {
@@ -107,6 +108,17 @@ export default {
       this.currencyPrice = currencyData[0].current_price;
       this.currencyImg = currencyData[0].image;
       this.calculate();
+    },
+    setSelectedCurrency() {
+      const wantedCurrency =
+        localStorageService.getWantedCurrencyLocalStorage();
+
+      wantedCurrency
+        ? (this.currencySelected =
+            localStorageService.getWantedCurrencyLocalStorage())
+        : "bitcoin";
+
+      window.localStorage.removeItem("wanted-currency");
     },
     startTransfert() {
       if (this.userData.balance < this.exchange_value) {
@@ -144,5 +156,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

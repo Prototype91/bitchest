@@ -6,8 +6,16 @@ export default {
     },
 
     getUserLocalStorage() {
-        let dataToGet = localStorage.getItem("user");
+        let dataToGet = window.localStorage.getItem("user");
         return JSON.parse(dataToGet);
+    },
+
+    setWantedCurrencyLocalStorage(currency) {
+        window.localStorage.setItem("wanted-currency", currency);
+    },
+
+    getWantedCurrencyLocalStorage() {
+        return window.localStorage.getItem("wanted-currency");
     },
 
     setDataBaseCurrenciesLocalStorage(data) {
@@ -16,7 +24,7 @@ export default {
     },
 
     getDataBaseCurrenciesLocalStorage() {
-        let dataToGet = localStorage.getItem("dataBaseCurrencies");
+        let dataToGet = window.localStorage.getItem("dataBaseCurrencies");
         return JSON.parse(dataToGet).currencies;
     },
 
@@ -27,7 +35,7 @@ export default {
     },
 
     getCryptoCurrenciesLocalStorage() {
-        let dataToGet = localStorage.getItem("cryptoCurrencies");
+        let dataToGet = window.localStorage.getItem("cryptoCurrencies");
         return JSON.parse(dataToGet);
     },
 
