@@ -18,8 +18,8 @@
 
 <script>
 import Navigation from "../../components/shared/Navigation.vue";
-import Balance from "../../components/public/Balance.vue";
-import HeartSynthesis from "../../components/public/HeartSynthesis.vue";
+import Balance from "../../components/client/Balance.vue";
+import HeartSynthesis from "../../components/client/HeartSynthesis.vue";
 import cryptoCurrencyService from "../../services/cryptoCurrencies/cryptoCurrencies.service";
 import cryptoCurrencyMapper from "../../services/cryptoCurrencies/cryptoCurrencies.mapper";
 import localStorageService from "../../services/localStorage/localStorage.service";

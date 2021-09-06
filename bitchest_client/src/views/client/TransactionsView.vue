@@ -17,9 +17,9 @@
 <script>
 import Navigation from "../../components/shared/Navigation.vue";
 import transactionsService from "../../services/transactions/transactions.service";
-import TransactionsTable from "../../components/public/TransactionsTable.vue";
+import TransactionsTable from "../../components/client/TransactionsTable.vue";
 import Loader from "../../components/shared/Loader.vue";
-import Balance from "../../components/public/Balance.vue";
+import Balance from "../../components/client/Balance.vue";
 import usersService from "../../services/users/users.service";
 import localStorageService from "../../services/localStorage/localStorage.service";
 

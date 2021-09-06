@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import CryptoCurrencyDetails from "../../components/public/CryptoCurrencyDetails.vue";
+import CryptoCurrencyDetails from "../../components/client/CryptoCurrencyDetails.vue";
 import Navigation from '../../components/shared/Navigation.vue'
 
 export default {

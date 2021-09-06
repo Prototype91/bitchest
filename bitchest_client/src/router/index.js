@@ -6,10 +6,10 @@ import AdminHomeView from '../views/admin/AdminHomeView.vue';
 import Login from '../views/shared/Login.vue';
 import PageNotFound from '../views/shared/PageNotFound.vue';
 import ProfileView from '../views/shared/ProfileView.vue';
-import ClientHome from '../views/public/ClientHome.vue';
-import Details from "../views/public/Details.vue";
-import MarketPlace from '../views/public/MarketPlace.vue';
-import TransactionsView from '../views/public/TransactionsView.vue';
+import ClientHome from '../views/client/ClientHome.vue';
+import Details from "../views/client/Details.vue";
+import MarketPlace from '../views/client/MarketPlace.vue';
+import TransactionsView from '../views/client/TransactionsView.vue';
 
 const routes = [
   {
@@ -106,8 +106,7 @@ router.beforeEach((to, from, next) => {
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.guestOnly)) {
     if (isLoggedIn()) {
-      isClient() ? next("/client") : next("/admin");
-      return;
+      next("/client");
     }
     next();
   } else {

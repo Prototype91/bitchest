@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import Balance from "../../components/public/Balance.vue";
+import Balance from "../../components/client/Balance.vue";
 import Buy from "../../components/shared/Buy.vue";
 import Loader from "../../components/shared/Loader.vue";
 import Navigation from "../../components/shared/Navigation.vue";
