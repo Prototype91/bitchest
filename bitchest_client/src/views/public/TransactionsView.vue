@@ -62,11 +62,12 @@ export default {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 50px;
-  padding: 0px 20px;
+  padding: 0px 15px;
 }
 
 .title-div .balance-ctn {
   width: auto;
+  padding: 15px;
 }
 
 main {
@@ -75,5 +76,36 @@ main {
 
 h1 {
   text-align: center;
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .title-div h1 {
+    font-size: 24px;
+  }
+
+  .title-div {
+    margin-bottom: 20px
+  }
+
+  h2 {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .title-div {
+    padding: 0px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    flex-direction: column;
+  }
+
+  .title-div h1 {
+    font-size: 20px;
+  }
+
+  .title-div .balance-ctn {
+    padding: 5px;
+  }
 }
 </style>
