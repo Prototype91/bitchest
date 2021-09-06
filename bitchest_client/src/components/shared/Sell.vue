@@ -1,5 +1,8 @@
 <template>
   <div class="ctn-form">
+    <div class="no-sale" v-if="!this.userCryptoCurrencies.length">
+      <h1>Vous n'avez rien à vendre</h1>
+    </div>
     <form
       @submit.prevent="startTransfert"
       class="inputs"
@@ -30,7 +33,7 @@
                 :key="index"
                 :value="currency.name"
               >
-                {{ currency.name.toUpperCase() }}
+                {{ currency.name }}
               </option>
             </select>
           </div>
@@ -50,7 +53,7 @@
           </div>
           <div class="select-ctn">
             <i class="fas fa-euro-sign"></i>
-            <span>EUR</span>
+            <span>euro</span>
           </div>
         </div>
       </div>
@@ -93,8 +96,10 @@ export default {
   },
   methods: {
     init() {
-      this.currencySelected = this.userCryptoCurrencies[0].name;
-      this.setCurrentCurrency();
+      if (this.userCryptoCurrencies.length) {
+        this.currencySelected = this.userCryptoCurrencies[0].name;
+        this.setCurrentCurrency();
+      }
     },
     setCurrentCurrency() {
       const currencyData = this.userCryptoCurrencies.filter(
@@ -153,5 +158,9 @@ form {
   flex-direction: column;
   align-items: center;
   height: 100%;
+}
+
+.no-sale {
+  padding: 25px 0px;
 }
 </style>
