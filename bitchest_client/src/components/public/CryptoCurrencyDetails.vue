@@ -1,13 +1,14 @@
 <template>
   <section class="graph-ctn">
     <Loader :isLoading="isLoading" />
-    <div v-if="Object.entries(graphData).length && balance">
+    <div v-if="Object.entries(graphData).length && balance && !isLoading">
       <Balance :balance="balance" />
       <h1>
         Voici l'évolution du {{ this.cryptoCurrencyId.toUpperCase() }} sur 30
         jours :
       </h1>
       <CryptoCurrencyGraph :graphData="graphData" />
+      <button @click="onBuyClick" class="btn btn-primary">Acheter</button>
       <div v-if="transactions.length">
         <TransactionsTable :transactions="transactions" />
       </div>
@@ -36,16 +37,13 @@ export default {
       userData: {},
       cryptoCurrencyId: null,
       transactions: [],
-      isLoading: false,
+      isLoading: true,
       balance: null,
     };
   },
   mounted() {
     // Gets the coin_id
     this.cryptoCurrencyId = this.$route.params.id;
-
-    // Starts the Loader
-    this.isLoading = true;
 
     // Gets the history (30 days) of the coin
     this.getHistoricalCoinValues(this.cryptoCurrencyId);
@@ -60,6 +58,11 @@ export default {
     this.getUserTransactions(this.userData, this.cryptoCurrencyId);
   },
   methods: {
+    onBuyClick() {
+      localStorageService.setWantedCurrencyLocalStorage(this.cryptoCurrencyId);
+      this.$router.push("/client/market");
+
+    },
     getHistoricalCoinValues(cryptoCurrencyId) {
       cryptoCurrencyService
         .getHistoricalCoinValues(cryptoCurrencyId)
@@ -94,7 +97,6 @@ export default {
             .filter((transaction) => transaction.name == cryptoCurrencyId)
             .reverse();
 
-          this.isLoading = false;
           console.log("Transactions", this.transactions);
         })
         .catch((error) => {
