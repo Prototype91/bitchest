@@ -37,7 +37,7 @@
 <script>
 import authService from "../../services/authentication/auth.service";
 import localStorageService from "../../services/localStorage/localStorage.service";
-import transactionsService from '../../services/transactions/transactions.service';
+import transactionsService from "../../services/transactions/transactions.service";
 import Loader from "./Loader.vue";
 
 export default {
@@ -93,9 +93,7 @@ export default {
 
           this.isLoading = false;
 
-          user.elevation === "admin"
-            ? this.$router.push("/admin")
-            : this.$router.push("/client");
+          this.$router.push("/client");
         })
         .catch((error) => {
           this.isLoading = false;

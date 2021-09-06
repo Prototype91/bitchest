@@ -34,6 +34,7 @@ export default {
     // Clears all the Local Storage
     clearLocalStorage() {
         window.localStorage.removeItem("user");
-        window.localStorage.removeItem("cryptoCurrencies");
+        // window.localStorage.removeItem("cryptoCurrencies");
+        // window.localStorage.removeItem("dataBaseCurrencies");
     }
 };

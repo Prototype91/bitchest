@@ -4,7 +4,6 @@ import AdminCreateUserView from '../views/admin/AdminCreateUserView.vue';
 import AdminEditUserView from "../views/admin/AdminEditUserView";
 import AdminHomeView from '../views/admin/AdminHomeView.vue';
 import Login from '../views/shared/Login.vue';
-import CryptoCurrenciesPricesView from '../views/admin/CryptoCurrenciesPricesView.vue'
 import PageNotFound from '../views/shared/PageNotFound.vue';
 import ProfileView from '../views/shared/ProfileView.vue';
 import ClientHome from '../views/public/ClientHome.vue';
@@ -53,18 +52,6 @@ const routes = [
     path: '/admin',
     name: 'AdminHomeView',
     component: AdminHomeView,
-    meta: { adminOnly: true }
-  },
-  {
-    path: '/admin/profile',
-    name: 'AdminProfile',
-    component: ProfileView,
-    meta: { adminOnly: true }
-  },
-  {
-    path: '/admin/crypto-prices',
-    name: 'CryptoPrices',
-    component: CryptoCurrenciesPricesView,
     meta: { adminOnly: true }
   },
   {

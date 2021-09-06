@@ -2,7 +2,7 @@
   <nav>
     <Loader :isLoading="isLoading" />
     <div class="logo-ctn">
-      <router-link title="Accueil" class="link-menu" :to="'/' + elevationPath">
+      <router-link title="Accueil" class="link-menu" to="/client">
         <svg
           width="77"
           height="84"
@@ -45,28 +45,40 @@
       </router-link>
     </div>
     <ul id="menu">
-      <li v-if="userElevation == 'user'">
-        <router-link title="Acheter/Vendre" class="link-menu" to="/client/market">
+      <li>
+        <router-link
+          title="Acheter/Vendre"
+          class="link-menu"
+          to="/client/market"
+        >
           <i class="fas fa-coins"></i>
         </router-link>
       </li>
-      <li v-if="userElevation == 'user'">
-        <router-link title="Historique des transactions" class="link-menu" to="/client/transactions">
+      <li>
+        <router-link
+          title="Historique des transactions"
+          class="link-menu"
+          to="/client/transactions"
+        >
           <i class="fas fa-exchange-alt"></i>
-        </router-link>
-      </li>
-      <li v-if="userElevation == 'admin'">
-        <router-link title="Cours des cryptomonaies" class="link-menu" to="/admin/crypto-prices">
-          <i class="fas fa-chart-line"></i>
         </router-link>
       </li>
       <li>
         <router-link
           title="Mes informations"
           class="link-menu"
-          :to="'/' + elevationPath + '/profile'"
+          to="/client/profile"
           ><i class="far fa-user-circle"></i
         ></router-link>
+      </li>
+      <li>
+        <router-link
+          v-if="userElevation === 'admin'"
+          title="Admin"
+          class="link-menu"
+          to="/admin"
+          ><i class="fas fa-users-cog"></i>
+        </router-link>
       </li>
       <li>
         <button @click="logout" title="Déconnexion" class="logout link-menu">
@@ -82,7 +94,7 @@
 import BurgerMenu from "./BurgerMenu.vue";
 import authService from "../../services/authentication/auth.service";
 import Loader from "./Loader.vue";
-import localStorageService from '../../services/localStorage/localStorage.service';
+import localStorageService from "../../services/localStorage/localStorage.service";
 
 export default {
   components: { BurgerMenu, Loader },
@@ -92,13 +104,14 @@ export default {
       isLoading: false,
       elevationPath: null,
       userElevation: null,
-      id: null
+      id: null,
     };
   },
   methods: {
     logout() {
       this.isLoading = true;
-      authService.logout()
+      authService
+        .logout()
         .then(() => {
           // Clears all the Local Storage
           localStorageService.clearLocalStorage();
@@ -117,7 +130,8 @@ export default {
   mounted() {
     const localStorageData = localStorageService.getUserLocalStorage();
     this.userElevation = localStorageData.elevation;
-    this.elevationPath = localStorageData.elevation == "user" ? "client" : "admin";
+    this.elevationPath =
+      localStorageData.elevation == "user" ? "client" : "admin";
     this.id = localStorageData.id;
   },
 };
