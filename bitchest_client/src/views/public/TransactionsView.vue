@@ -2,10 +2,14 @@
   <main>
     <Navigation />
     <Loader :isLoading="isLoading" />
-    <Balance v-if="balance" :balance="balance" />
-    <div v-if="transactions.length">
-      <h1>Historique des transactions :</h1>
-      <TransactionsTable :transactions="transactions" />
+    <div>
+      <div class="title-div">
+        <h1>Historique des transactions :</h1>
+        <Balance v-if="balance" :balance="balance" />
+      </div>
+      <div v-if="transactions.length">
+        <TransactionsTable :transactions="transactions" />
+      </div>
     </div>
   </main>
 </template>
@@ -16,8 +20,8 @@ import transactionsService from "../../services/transactions/transactions.servic
 import TransactionsTable from "../../components/public/TransactionsTable.vue";
 import Loader from "../../components/shared/Loader.vue";
 import Balance from "../../components/public/Balance.vue";
-import usersService from '../../services/users/users.service';
-import localStorageService from '../../services/localStorage/localStorage.service';
+import usersService from "../../services/users/users.service";
+import localStorageService from "../../services/localStorage/localStorage.service";
 
 export default {
   name: "TransactionsView",
@@ -27,17 +31,18 @@ export default {
       transactions: [],
       isLoading: false,
       balance: null,
-      userData: {}
+      userData: {},
     };
   },
   mounted() {
     const userId = localStorageService.getUserLocalStorage().id;
-    usersService.getUser(userId).then(response => {
+    usersService.getUser(userId).then((response) => {
       this.userData = response.data;
       this.balance = response.data.balance;
     });
     this.isLoading = true;
-    transactionsService.getUserTransactions(userId)
+    transactionsService
+      .getUserTransactions(userId)
       .then((response) => {
         this.transactions = response.data.reverse();
         this.isLoading = false;
@@ -52,9 +57,17 @@ export default {
 </script>
 
 <style scoped>
-div {
-  width: 80%;
-  margin: 0 auto;
+.title-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+  padding: 0px 15px;
+}
+
+.title-div .balance-ctn {
+  width: auto;
+  padding: 15px;
 }
 
 main {
@@ -62,7 +75,37 @@ main {
 }
 
 h1 {
-  text-align: left;
-  margin-bottom: 50px;
+  text-align: center;
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .title-div h1 {
+    font-size: 24px;
+  }
+
+  .title-div {
+    margin-bottom: 20px
+  }
+
+  h2 {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .title-div {
+    padding: 0px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    flex-direction: column;
+  }
+
+  .title-div h1 {
+    font-size: 20px;
+  }
+
+  .title-div .balance-ctn {
+    padding: 5px;
+  }
 }
 </style>

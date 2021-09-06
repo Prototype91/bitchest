@@ -38,4 +38,10 @@ export default {
 .balance-ctn p {
   font-size: 24px;
 }
+
+@media (max-width: 768px) {
+  .title-div .balance-ctn p {
+    font-size: 20px;
+  }
+}
 </style>

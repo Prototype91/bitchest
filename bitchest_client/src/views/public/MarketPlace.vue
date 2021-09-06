@@ -109,10 +109,6 @@ export default {
     },
     setMode(mode) {
       this.buyMode = mode;
-
-      console.log(this.cryptoCurrenciesData);
-      console.log(this.userCryptoCurrencies);
-      console.log("this buy mode : ", this.buyMode);
     },
   },
 };
@@ -124,7 +120,7 @@ export default {
   justify-content: center;
 }
 
-.ctn-form {
+.market-ctn .ctn-form {
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
@@ -132,7 +128,7 @@ export default {
   height: 45%;
 }
 
-form {
+.market-ctn form {
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
@@ -151,17 +147,18 @@ form {
 .market-ctn section .btn-choice-ctn {
   display: flex;
   width: 200px;
-  border: 1px solid white;
 }
 
 .market-ctn section .btn-choice-ctn button.active {
-  border-bottom: 5px solid darkslategrey;
+  border-bottom: 5px solid #0bc18d ;
 }
 
 .market-ctn section .btn-choice-ctn button {
   width: 100px;
   background-color: none;
   color: white;
+  box-shadow: none;
+  border-bottom: 5px solid darkslategray;
 }
 
 .market-ctn form > div {

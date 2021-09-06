@@ -16,7 +16,7 @@
               type="number"
               placeholder="Veuillez entrer le montant"
               v-model="exchange_value"
-              @keyup="calculate"
+              @keyup="calculateAmountInCrypto"
             />
           </div>
           <div class="select-ctn">
@@ -34,6 +34,7 @@
               type="text"
               placeholder="0.00"
               v-model="this.crypto_amount"
+              @keyup="calculateAmountInEuro"
             />
           </div>
           <div class="select-ctn">
@@ -95,10 +96,15 @@ export default {
       this.setSelectedCurrency();
       this.setCurrentCurrency();
     },
-    calculate() {
+    calculateAmountInCrypto() {
       if (this.exchange_value)
         this.crypto_amount = this.exchange_value / this.currencyPrice;
       else this.crypto_amount = null;
+    },
+    calculateAmountInEuro() {
+      if (this.crypto_amount)
+        this.exchange_value = this.crypto_amount * this.currencyPrice;
+      else this.exchange_value = null;
     },
     setCurrentCurrency() {
       const currencyData = this.cryptoCurrenciesData.filter(
@@ -107,7 +113,8 @@ export default {
       this.currencySymbol = currencyData[0].symbol;
       this.currencyPrice = currencyData[0].current_price;
       this.currencyImg = currencyData[0].image;
-      this.calculate();
+      this.calculateAmountInCrypto();
+      this.calculateAmountInEuro();
     },
     setSelectedCurrency() {
       const wantedCurrency =

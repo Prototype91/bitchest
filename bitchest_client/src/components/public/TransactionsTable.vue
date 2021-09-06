@@ -19,7 +19,7 @@
                 <i
                   :class="[
                     !transaction.type
-                      ? 'fas fa-arrow-alt-circle-down'
+                      ? 'fas fa-arrow-alt-circle-down green'
                       : 'fas fa-arrow-alt-circle-up',
                   ]"
                 ></i>
@@ -96,12 +96,16 @@ export default {
 h2 {
   font-size: 24px;
   font-weight: bold;
-  margin: 23px 0;
+  margin-bottom: 24px;
 }
 
 table,
 td {
   color: white;
+}
+
+tbody td {
+  padding: 12px 0.5rem;
 }
 
 .name {
@@ -117,7 +121,10 @@ td {
 }
 
 .container {
-  padding: 0;
+  margin: 0 !important;
+  padding: 0px 20px;
+  width: 100%;
+  max-width: none;
 }
 table img {
   vertical-align: middle;
@@ -128,14 +135,23 @@ table img {
   padding: 20px;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .responsive {
     display: none;
   }
 
+.container {
+  padding: 0px;
+}
+
   table img {
     width: 40%;
     padding: 10px;
+  }
+
+  h2 {
+    font-size: 18px;
+    margin-bottom: 16px;
   }
 }
 </style>
