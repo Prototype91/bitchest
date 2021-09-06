@@ -106,6 +106,22 @@ export default {
   justify-content: center;
 }
 
+.ctn-form {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  height: 50%;
+}
+
+form {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
 .market-ctn section {
   width: 100%;
   display: flex;
