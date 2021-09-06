@@ -29,7 +29,7 @@
                 <i
                   :class="[
                     !transaction.type
-                      ? 'fas fa-arrow-alt-circle-down'
+                      ? 'fas fa-arrow-alt-circle-down green'
                       : 'fas fa-arrow-alt-circle-up',
                   ]"
                 ></i>
@@ -63,7 +63,6 @@
                     maximumFractionDigits: 2,
                   })
                 }}
-                
               </td>
               <td>
                 {{
@@ -130,16 +129,19 @@ export default {
 </script>
 
 <style scoped>
-
-h2{
+h2 {
   font-size: 24px;
   font-weight: bold;
-  margin: 23px 0;
+  margin-bottom: 24px;
 }
 
 table,
 td {
   color: white;
+}
+
+tbody td {
+  padding: 12px 0.5rem;
 }
 
 .name {
@@ -155,7 +157,10 @@ td {
 }
 
 .container {
-  padding: 0;
+  margin: 0 !important;
+  padding: 0px 20px;
+  width: 100%;
+  max-width: none;
 }
 table img {
   vertical-align: middle;
