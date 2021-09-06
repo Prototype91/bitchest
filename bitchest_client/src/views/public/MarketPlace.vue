@@ -1,18 +1,35 @@
 <template>
   <main>
     <Navigation />
+    <div class="overlay-market"></div>
     <div class="market-ctn">
       <Loader :isLoading="isLoading" />
-      
+
       <section class="sell" v-if="this.userData && !isLoading">
         <h1 v-if="!isLoading">Bonjour {{ this.userData.firstname }}</h1>
         <Balance v-if="!isLoading" :balance="this.userData.balance" />
-      
+
         <ul class="btn-choice-ctn">
-          <li><button class="btn" :class="this.buyMode ? 'active' : ''" @click="setMode(true)">Acheter</button></li>
-          <li><button class="btn" :class="!this.buyMode ? 'active' : ''" @click="setMode(false)">Vendre</button></li>
+          <li>
+            <button
+              class="btn"
+              :class="this.buyMode ? 'active' : ''"
+              @click="setMode(true)"
+            >
+              Acheter
+            </button>
+          </li>
+          <li>
+            <button
+              class="btn"
+              :class="!this.buyMode ? 'active' : ''"
+              @click="setMode(false)"
+            >
+              Vendre
+            </button>
+          </li>
         </ul>
-      
+
         <Buy
           v-if="cryptoCurrenciesData.length && this.buyMode"
           :cryptoCurrenciesData="this.cryptoCurrenciesData"
@@ -52,7 +69,7 @@ export default {
       cryptoCurrenciesData: [],
       userCryptoCurrencies: [],
       isLoading: false,
-      buyMode: true
+      buyMode: true,
     };
   },
   mounted() {
@@ -92,18 +109,31 @@ export default {
     setMode(mode) {
       this.buyMode = mode;
 
-      console.log(this.cryptoCurrenciesData)
-      console.log(this.userCryptoCurrencies)
-      console.log("this buy mode : ", this.buyMode)
-    }
+      console.log(this.cryptoCurrenciesData);
+      console.log(this.userCryptoCurrencies);
+      console.log("this buy mode : ", this.buyMode);
+    },
   },
 };
 </script>
 
 <style>
+.overlay-market {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  margin: 0;
+}
+
 .market-ctn {
   display: flex;
   justify-content: center;
+  z-index: 11;
 }
 
 .ctn-form {
@@ -111,7 +141,7 @@ export default {
   justify-content: space-evenly;
   flex-direction: column;
   align-items: center;
-  height: 50%;
+  height: 45%;
 }
 
 form {
@@ -125,7 +155,7 @@ form {
 .market-ctn section {
   width: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
 }

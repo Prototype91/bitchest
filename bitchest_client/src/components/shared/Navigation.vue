@@ -130,6 +130,7 @@ nav {
   background-color: rgba(0, 0, 0, 0.5);
   height: calc(100% - 30px);
   position: fixed;
+  z-index: 11;
 }
 
 #menu {
@@ -191,7 +192,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    z-index: 10;
+    z-index: 12;
   }
 
   .logo-ctn {
