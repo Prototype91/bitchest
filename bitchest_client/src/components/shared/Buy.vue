@@ -1,5 +1,5 @@
 <template>
-  <div class="ctn">
+  <div class="ctn-form">
     <div class="error" v-if="errorBalance">
       <h1>
         Vous n'avez pas les fonds requis pour effectuer cette transaction.
@@ -144,19 +144,5 @@ export default {
 </script>
 
 <style scoped>
-.ctn {
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: column;
-  align-items: center;
-  height: 50%;
-}
 
-form {
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-}
 </style>
