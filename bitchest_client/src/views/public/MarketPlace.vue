@@ -1,7 +1,6 @@
 <template>
   <main>
     <Navigation />
-    <div class="overlay-market"></div>
     <div class="market-ctn">
       <Loader :isLoading="isLoading" />
 
@@ -118,22 +117,9 @@ export default {
 </script>
 
 <style>
-.overlay-market {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-color: black;
-  opacity: 0.5;
-  z-index: 10;
-  left: 0;
-  top: 0;
-  margin: 0;
-}
-
 .market-ctn {
   display: flex;
   justify-content: center;
-  z-index: 11;
 }
 
 .ctn-form {
