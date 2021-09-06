@@ -96,7 +96,7 @@ export default {
     },
     calculate() {
       if (this.exchange_value)
-        this.crypto_amount = (this.exchange_value / this.currencyPrice).toFixed(9);
+        this.crypto_amount = (this.exchange_value / this.currencyPrice);
       else this.crypto_amount = null;
     },
     setCurrentCurrency() {

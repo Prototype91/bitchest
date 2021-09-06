@@ -108,7 +108,7 @@ export default {
       this.currencySymbol = currencyData[0].symbol;
       this.currencyTotalPrice = currencyData[0].amount.toFixed(2);
       this.currencyImg = currencyData[0].image;
-      this.crypto_amount = currencyData[0].currency_value.toFixed(9);
+      this.crypto_amount = currencyData[0].currency_value;
     },
     startTransfert() {
       const currency_id = localStorageService
