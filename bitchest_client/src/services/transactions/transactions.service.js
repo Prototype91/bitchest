@@ -10,6 +10,11 @@ export default {
         return Api().get('/currencies');
     },
 
+    // Update the sold status of the currency
+    updateTransactions(name) {
+        return Api().put(`/transactions/${name}`);
+    },
+
     // Adds a new Transaction
     addNewUserTransaction(data) {
         return Api().post(`/transactions`, data);

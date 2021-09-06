@@ -58,6 +58,14 @@
         </div>
       </div>
       <button class="btn btn-success" type="submit">Conclure</button>
+      <h2>RSI : {{ rsi.toLocaleString(
+          "fr-FR",
+          {
+            style: "currency",
+            currency: "EUR",
+            maximumFractionDigits: 2,
+          }
+        ) }}</h2>
     </form>
   </div>
 </template>
@@ -65,21 +73,23 @@
 <script>
 import transactionsService from "../../services/transactions/transactions.service";
 import localStorageService from "../../services/localStorage/localStorage.service";
+import transactionsMapper from "../../services/transactions/transactions.mapper";
 
 export default {
   name: "Sell",
   emits: ["transfer"],
   props: {
     userData: {
-      type: Object,
-      required: true,
+      type: Object
     },
     cryptoCurrenciesData: {
-      type: Array,
-      required: true,
+      type: Array
     },
     userCryptoCurrencies: {
-      type: Array,
+      type: Array
+    },
+    userTransactions: {
+      type: Array
     },
   },
   data() {
@@ -89,6 +99,7 @@ export default {
       currencySymbol: "",
       currencyTotalPrice: 0,
       crypto_amount: null,
+      rsi: 0,
     };
   },
   mounted() {
@@ -109,6 +120,12 @@ export default {
       this.currencyTotalPrice = currencyData[0].amount.toFixed(2);
       this.currencyImg = currencyData[0].image;
       this.crypto_amount = currencyData[0].currency_value;
+
+      let amounts = transactionsMapper.getBoughtAmount(this.userTransactions);
+        let boughtAmount = amounts.filter(
+          (data) => data.name === this.currencySelected
+        )[0].amount;
+        this.rsi = this.currencyTotalPrice - boughtAmount;
     },
     startTransfert() {
       const currency_id = localStorageService
@@ -123,6 +140,8 @@ export default {
         type: false,
         name: this.currencySelected,
         symbol: this.currencySymbol,
+        sold: true,
+        rsi: this.rsi
       };
 
       console.log(data);
@@ -133,6 +152,7 @@ export default {
         .then((response) => {
           console.log(response);
           this.$emit("transfer");
+          transactionsService.updateTransactions(this.currencySelected);
           this.init();
         })
         .catch((error) => {

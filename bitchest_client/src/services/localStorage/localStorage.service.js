@@ -10,6 +10,7 @@ export default {
         return JSON.parse(dataToGet);
     },
 
+    // Local Storage for the wanted currency when you want to buy it
     setWantedCurrencyLocalStorage(currency) {
         window.localStorage.setItem("wanted-currency", currency);
     },
@@ -18,6 +19,7 @@ export default {
         return window.localStorage.getItem("wanted-currency");
     },
 
+    // Local Storage for the DB currencies
     setDataBaseCurrenciesLocalStorage(data) {
         const localStorageData = JSON.stringify(data);
         window.localStorage.setItem("dataBaseCurrencies", localStorageData);
@@ -42,7 +44,7 @@ export default {
     // Clears all the Local Storage
     clearLocalStorage() {
         window.localStorage.removeItem("user");
-        // window.localStorage.removeItem("cryptoCurrencies");
-        // window.localStorage.removeItem("dataBaseCurrencies");
+        window.localStorage.removeItem("cryptoCurrencies");
+        window.localStorage.removeItem("dataBaseCurrencies");
     }
 };

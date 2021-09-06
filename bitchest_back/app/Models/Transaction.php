@@ -21,7 +21,9 @@ class Transaction extends Model
         'amount',
         'type',
         'name',
-        'symbol'
+        'symbol',
+        'sold',
+        'rsi'
     ];
 
     public function users() {

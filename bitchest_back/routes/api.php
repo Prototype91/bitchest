@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 */
     Route::get('/transactions/user/{id}', [UsersController::class, 'getTransactionsByUserId']);
     Route::post('/transactions', [TransactionsController::class, 'store']);
+    Route::put('/transactions/{name}', [TransactionsController::class, 'updateTransactions']);
 
 /*
 |--------------------------------------------------------------------------

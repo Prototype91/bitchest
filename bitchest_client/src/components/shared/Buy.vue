@@ -137,6 +137,7 @@ export default {
         type: true,
         name: this.currencySelected,
         symbol: this.currencySymbol,
+        sold: false
       };
 
       // Ajout de la transaction

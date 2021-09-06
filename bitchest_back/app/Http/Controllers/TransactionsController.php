@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -35,7 +36,8 @@ class TransactionsController extends Controller
             "currency_value" => "required",
             "type" => "required",
             "user_id" => "required",
-            "amount" => "required"
+            "amount" => "required",
+            "sold" => "required"
         ]);
 
         Transaction::create($request->all());
@@ -62,5 +64,20 @@ class TransactionsController extends Controller
     public function show($id)
     {
         return Transaction::find($id);
+    }
+
+    // Updates the sold status of specific transactions
+    public function updateTransactions($name)
+    {
+        $transactions = Transaction::where('name', $name)->get();
+
+        $transactions->map(function($item) {
+            $item->sold = true;
+            $item->save();
+         });
+
+        return response([
+            'message' => 'Transactions mises à jour'
+        ], 200);
     }
 }

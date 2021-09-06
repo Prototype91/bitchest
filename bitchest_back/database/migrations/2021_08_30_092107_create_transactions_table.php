@@ -23,7 +23,9 @@ class CreateTransactionsTable extends Migration
             $table->string('name');
             $table->string('symbol');
             $table->float('amount');
+            $table->float('rsi')->nullable();
             $table->boolean('type');
+            $table->boolean('sold');
             $table->timestamps();
         });
     }

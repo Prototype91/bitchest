@@ -36,10 +36,11 @@
           @transfer="init"
         />
         <Sell
-          v-if="cryptoCurrenciesData.length && !this.buyMode"
+          v-if="cryptoCurrenciesData.length && !this.buyMode && userTransactions.length"
           :cryptoCurrenciesData="cryptoCurrenciesData"
           :userCryptoCurrencies="userCryptoCurrencies"
           :userData="this.userData"
+          :userTransactions="userTransactions"
           @transfer="init"
         />
       </section>
@@ -67,6 +68,7 @@ export default {
       userData: null,
       cryptoCurrenciesData: [],
       userCryptoCurrencies: [],
+      userTransactions: [],
       isLoading: false,
       buyMode: true,
     };
@@ -90,7 +92,7 @@ export default {
                   transactionsMapper.sortUserCryptoCurrencies(response.data),
                   this.cryptoCurrenciesData
                 );
-              console.log("User Cryptos", this.userCryptoCurrencies);
+              this.userTransactions = response.data;
               this.isLoading = false;
             })
             .catch((error) => {
