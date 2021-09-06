@@ -21,7 +21,7 @@
           </div>
           <div class="select-ctn">
             <i class="fas fa-euro-sign"></i>
-            <span>EUR</span>
+            <span>euro</span>
           </div>
         </div>
       </div>
@@ -49,7 +49,7 @@
                 :key="index"
                 :value="currency.id"
               >
-                {{ currency.id.toUpperCase() }}
+                {{ currency.id }}
               </option>
             </select>
           </div>

@@ -3,17 +3,24 @@
     <Navigation />
     <div class="market-ctn">
       <Loader :isLoading="isLoading" />
+      
       <section class="sell" v-if="this.userData && !isLoading">
         <h1 v-if="!isLoading">Bonjour {{ this.userData.firstname }}</h1>
         <Balance v-if="!isLoading" :balance="this.userData.balance" />
+      
+        <ul class="btn-choice-ctn">
+          <li><button class="btn" :class="this.buyMode ? 'active' : ''" @click="setMode(true)">Acheter</button></li>
+          <li><button class="btn" :class="!this.buyMode ? 'active' : ''" @click="setMode(false)">Vendre</button></li>
+        </ul>
+      
         <Buy
-          v-if="cryptoCurrenciesData.length"
+          v-if="cryptoCurrenciesData.length && this.buyMode"
           :cryptoCurrenciesData="this.cryptoCurrenciesData"
           :userData="this.userData"
           @transfer="init"
         />
         <Sell
-          v-if="userCryptoCurrencies.length && cryptoCurrenciesData.length"
+          v-if="cryptoCurrenciesData.length && !this.buyMode"
           :cryptoCurrenciesData="cryptoCurrenciesData"
           :userCryptoCurrencies="userCryptoCurrencies"
           :userData="this.userData"
@@ -45,6 +52,7 @@ export default {
       cryptoCurrenciesData: [],
       userCryptoCurrencies: [],
       isLoading: false,
+      buyMode: true
     };
   },
   mounted() {
@@ -81,6 +89,13 @@ export default {
       this.cryptoCurrenciesData =
         localStorageService.getCryptoCurrenciesLocalStorage();
     },
+    setMode(mode) {
+      this.buyMode = mode;
+
+      console.log(this.cryptoCurrenciesData)
+      console.log(this.userCryptoCurrencies)
+      console.log("this buy mode : ", this.buyMode)
+    }
   },
 };
 </script>
@@ -97,6 +112,22 @@ export default {
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+}
+
+.market-ctn section .btn-choice-ctn {
+  display: flex;
+  width: 200px;
+  border: 1px solid white;
+}
+
+.market-ctn section .btn-choice-ctn button.active {
+  border-bottom: 5px solid darkslategrey;
+}
+
+.market-ctn section .btn-choice-ctn button {
+  width: 100px;
+  background-color: none;
+  color: white;
 }
 
 .market-ctn form > div {
