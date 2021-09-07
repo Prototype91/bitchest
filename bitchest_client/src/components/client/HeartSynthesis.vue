@@ -93,8 +93,8 @@ export default {
   flex-wrap: wrap;
   justify-content: space-evenly;
   gap: 20px;
-  width: 80%;
-  margin: 0 auto 30px;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .total {

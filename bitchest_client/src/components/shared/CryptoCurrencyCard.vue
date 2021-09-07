@@ -1,17 +1,21 @@
 <template>
   <div class="card">
-    <img :src="image" alt="" />
-    <p class="name">{{ name }}</p>
-    <p class="orange">+{{ price.toFixed(9) }} {{ symbol.toUpperCase() }}</p>
-    <p class="end green">
-      +{{
-        amount.toLocaleString("fr-FR", {
-          style: "currency",
-          currency: "EUR",
-          maximumFractionDigits: 2,
-        })
-      }}
-    </p>
+    <div>
+      <img :src="image" alt="" />
+      <p class="name">{{ name }}</p>
+    </div>
+    <div>
+      <p>+{{ price.toFixed(9) }} {{ symbol.toUpperCase() }}</p>
+      <p class="end green">
+        +{{
+          amount.toLocaleString("fr-FR", {
+            style: "currency",
+            currency: "EUR",
+            maximumFractionDigits: 2,
+          })
+        }}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -45,21 +49,29 @@ export default {
 
 <style scoped>
 .card {
-  display: grid;
-  grid-template-columns: repeat(4, 20%);
+  flex-direction: column;
   justify-content: space-around;
-  width: 80%;
+  width: 30%;
   background-color: white;
   border-radius: 25px;
   align-items: center;
   padding: 20px;
 }
-.name {
-  text-transform: capitalize;
+
+.card > div {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
 }
 
-.orange {
-  color: #454a75 !important;
+.card >div:last-of-type {
+  padding-top: 15px;
+}
+
+.name {
+  text-transform: capitalize;
+  font-size: 18px;
 }
 
 .card p {
@@ -73,7 +85,7 @@ export default {
 }
 
 .card img {
-  width: 30%;
+  width: 40px;
 }
 
 @media (max-width: 700px) {
