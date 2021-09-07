@@ -11,7 +11,7 @@ export default {
         // Returns a mapped array of all the cryptocurrencies
         return cryptoCurrencies;
     },
-
+    // Returns the mapped user currencies values
     mapUserCryptoCurrencies(userCryptoCurrencies, cryptoCurrencies) {
         let result = userCryptoCurrencies.filter(currency => currency.currency_value > 0);
         for (let i = 0; i < result.length; i++) {
@@ -24,10 +24,10 @@ export default {
             result[i].image = currencyData[0].image;
             result[i].symbol = currencyData[0].symbol;
         }
-
         return result;
     },
 
+    // Returns the mapped historical currencies values
     mapCryptoCurrencyHistory(response) {
         const thirtyDaysValues = response.data.prices;
 

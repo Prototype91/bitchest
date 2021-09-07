@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\CurrenciesController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Http\Request;
@@ -23,11 +23,11 @@ use Illuminate\Support\Facades\Route;
 | Authentication Routes
 |--------------------------------------------------------------------------
 */
-Route::post('login', [LoginController::class, 'login']);
+Route::post('login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     // Logout
-    Route::post('/logout', [LoginController::class, 'logout']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 /*
 |--------------------------------------------------------------------------
 | Users Routes
