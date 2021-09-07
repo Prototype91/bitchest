@@ -19,8 +19,9 @@
                 <i
                   :class="[
                     !transaction.type
-                      ? 'fas fa-arrow-alt-circle-down green'
+                      ? 'fas fa-arrow-alt-circle-down'
                       : 'fas fa-arrow-alt-circle-up',
+                    !transaction.type && transaction.rsi > 0 ? 'green' : transaction.rsi < 0 ? 'text-danger' : '',
                   ]"
                 ></i>
               </td>
@@ -54,7 +55,7 @@
                   })
                 }}
               </td>
-              <td v-if="!transaction.type">
+              <td v-if="!transaction.type" @click="test">
                 {{
                   transaction.rsi.toLocaleString("fr-FR", {
                     style: "currency",
@@ -84,9 +85,22 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      classRsi: "",
+    };
+  },
   methods: {
     formatDate(date) {
       return moment(date).local(true).format("DD/MM/YYYY - HH:mm");
+    },
+  },
+  created() {
+    for (let i = 0; i < this.transactions.length; i++) {
+      if (!this.transactions[i].type) {
+        if (this.transactions[i].rsi > 0) this.classRsi = "green";
+        else if (this.transactions[i].rsi < 0) this.classRsi = "text-danger";
+      }
     }
   },
 };
@@ -140,9 +154,9 @@ table img {
     display: none;
   }
 
-.container {
-  padding: 0px;
-}
+  .container {
+    padding: 0px;
+  }
 
   table img {
     width: 40%;
