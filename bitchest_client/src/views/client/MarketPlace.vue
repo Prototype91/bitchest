@@ -36,7 +36,11 @@
           @transfer="init"
         />
         <Sell
-          v-if="cryptoCurrenciesData.length && !this.buyMode && userTransactions.length"
+          v-if="
+            cryptoCurrenciesData.length &&
+            !this.buyMode &&
+            userTransactions.length
+          "
           :cryptoCurrenciesData="cryptoCurrenciesData"
           :userCryptoCurrencies="userCryptoCurrencies"
           :userData="this.userData"
@@ -92,6 +96,7 @@ export default {
                   transactionsMapper.sortUserCryptoCurrencies(response.data),
                   this.cryptoCurrenciesData
                 );
+              console.log(this.cryptoCurrenciesData);
               this.userTransactions = response.data;
               this.isLoading = false;
             })
@@ -118,6 +123,7 @@ export default {
 .market-ctn {
   display: flex;
   justify-content: center;
+  height: 100%;
 }
 
 .market-ctn .ctn-form {
@@ -150,7 +156,7 @@ export default {
 }
 
 .market-ctn section .btn-choice-ctn button.active {
-  border-bottom: 5px solid #0bc18d ;
+  border-bottom: 5px solid #0bc18d;
 }
 
 .market-ctn section .btn-choice-ctn button {
@@ -244,7 +250,8 @@ export default {
   align-items: center;
   justify-content: space-evenly;
   cursor: pointer;
-  width: 170px;
+  width: 120px;
+  min-width: 120px;
   height: 40px;
 }
 
@@ -253,7 +260,7 @@ export default {
 }
 
 .market-ctn .input-euro .select-ctn > span {
-  width: 110px;
+  width: 75px;
 }
 
 .market-ctn select {
@@ -261,7 +268,7 @@ export default {
   border-color: transparent;
   color: white;
   outline: none;
-  width: 110px;
+  width: 75px;
 }
 
 .market-ctn select option {
