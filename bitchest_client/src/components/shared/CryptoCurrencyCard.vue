@@ -65,7 +65,7 @@ export default {
   justify-content: space-between;
 }
 
-.card >div:last-of-type {
+.card > div:last-of-type {
   padding-top: 15px;
 }
 
@@ -88,7 +88,25 @@ export default {
   width: 40px;
 }
 
-@media (max-width: 700px) {
+@media (min-width: 1440px) {
+  .card {
+    width: 24%;
+  }
+}
+
+@media (max-width: 992px) {
+  .card {
+    width: 45%;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 49%;
+  }
+}
+
+@media (max-width: 560px) {
   .card {
     width: 100%;
   }

@@ -102,9 +102,26 @@ export default {
   padding: 30px;
 }
 
-@media (max-width: 700px) {
+@media (min-width: 1440px) {
   .cards-ctn {
     width: 90%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 992px) {
+  .cards-ctn {
+    width: 90%;
+    gap: 10px;
+    margin: 0 auto;
+    margin-bottom: 10px;  
+  }
+}
+
+@media (max-width: 560px) {
+  .cards-ctn {
+    gap: 20px;
   }
 }
 </style>
