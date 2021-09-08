@@ -33,14 +33,17 @@
                 :key="index"
                 :value="currency.name"
               >
-                {{ currency.name }}
+                {{ currency.symbol.toUpperCase() }}
               </option>
             </select>
           </div>
         </div>
       </div>
       <div class="input-euro">
-        <p>Valeur actuelle du {{ this.currencySelected }} : {{ this.currencyPrice }}</p>
+        <p>
+          Valeur actuelle du {{ this.currencySelected }} :
+          {{ this.currencyPrice }}
+        </p>
         <label for="recevoir">Recevoir</label>
         <div class="input-ctn">
           <div>
@@ -59,14 +62,16 @@
         </div>
       </div>
       <button class="btn btn-success" type="submit">Conclure</button>
-      <h2>Retour sur investissement prévisionnel : {{ rsi.toLocaleString(
-          "fr-FR",
-          {
+      <h2>
+        Retour sur investissement prévisionnel :
+        {{
+          rsi.toLocaleString("fr-FR", {
             style: "currency",
             currency: "EUR",
             maximumFractionDigits: 2,
-          }
-        ) }}</h2>
+          })
+        }}
+      </h2>
     </form>
   </div>
 </template>
@@ -81,16 +86,16 @@ export default {
   emits: ["transfer"],
   props: {
     userData: {
-      type: Object
+      type: Object,
     },
     cryptoCurrenciesData: {
-      type: Array
+      type: Array,
     },
     userCryptoCurrencies: {
-      type: Array
+      type: Array,
     },
     userTransactions: {
-      type: Array
+      type: Array,
     },
   },
   data() {
@@ -123,10 +128,10 @@ export default {
       this.crypto_amount = currencyData[0].currency_value;
 
       let amounts = transactionsMapper.getBoughtAmount(this.userTransactions);
-        let boughtAmount = amounts.filter(
-          (data) => data.name === this.currencySelected
-        )[0].amount;
-        this.rsi = this.currencyTotalPrice - boughtAmount;
+      let boughtAmount = amounts.filter(
+        (data) => data.name === this.currencySelected
+      )[0].amount;
+      this.rsi = this.currencyTotalPrice - boughtAmount;
     },
     startTransfert() {
       const currency_id = localStorageService
@@ -142,7 +147,7 @@ export default {
         name: this.currencySelected,
         symbol: this.currencySymbol,
         sold: true,
-        rsi: this.rsi
+        rsi: this.rsi,
       };
 
       console.log(data);
