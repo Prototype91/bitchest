@@ -21,6 +21,7 @@ export default {
             result[i].amount =
                 result[i].currency_value *
                 currencyData[0].current_price;
+            result[i].current_price = currencyData[0].current_price;
             result[i].image = currencyData[0].image;
             result[i].symbol = currencyData[0].symbol;
         }

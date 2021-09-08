@@ -138,6 +138,10 @@ export default {
   height: 100%;
 }
 
+.market-ctn form .crypto-name {
+  text-transform: capitalize;
+}
+
 .market-ctn form h2 {
   font-size: 20px;
 }

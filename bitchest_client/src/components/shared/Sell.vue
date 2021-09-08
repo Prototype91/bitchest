@@ -8,6 +8,10 @@
       class="inputs"
       v-if="userCryptoCurrencies.length"
     >
+      <h2>
+        Valeur actuelle du <span class="crypto-name">{{ this.currencySelected }}</span> :
+        {{ this.currencyPrice }} €
+      </h2>
       <div class="input-crypto">
         <label for="vendre">Vendre</label>
         <div class="input-ctn">
@@ -40,10 +44,6 @@
         </div>
       </div>
       <div class="input-euro">
-        <p>
-          Valeur actuelle du {{ this.currencySelected }} :
-          {{ this.currencyPrice }}
-        </p>
         <label for="recevoir">Recevoir</label>
         <div class="input-ctn">
           <div>
@@ -103,6 +103,7 @@ export default {
       currencySelected: "",
       currencyImg: "",
       currencySymbol: "",
+      currencyPrice: 0,
       currencyTotalPrice: 0,
       crypto_amount: null,
       rsi: 0,
@@ -113,6 +114,7 @@ export default {
   },
   methods: {
     init() {
+      console.log("crypto user : ", this.userCryptoCurrencies)
       if (this.userCryptoCurrencies.length) {
         this.currencySelected = this.userCryptoCurrencies[0].name;
         this.setCurrentCurrency();
@@ -122,8 +124,10 @@ export default {
       const currencyData = this.userCryptoCurrencies.filter(
         (currency) => currency.name === this.currencySelected
       );
+      console.log(currencyData[0])
       this.currencySymbol = currencyData[0].symbol;
       this.currencyTotalPrice = currencyData[0].amount.toFixed(2);
+      this.currencyPrice = currencyData[0].current_price;
       this.currencyImg = currencyData[0].image;
       this.crypto_amount = currencyData[0].currency_value;
 

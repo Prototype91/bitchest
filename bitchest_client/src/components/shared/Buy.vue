@@ -7,7 +7,7 @@
     </div>
 
     <form @submit.prevent="startTransfert" class="inputs">
-    <h2>Valeur actuelle du {{ this.currencySelected }} : {{ this.currencyPrice }} €</h2>
+    <h2>Valeur actuelle du <span class="crypto-name">{{ this.currencySelected }}</span> : {{ this.currencyPrice }} €</h2>
       <div class="input-euro">
         <label for="acheter">Dépenser</label>
         <div class="input-ctn">
@@ -112,7 +112,6 @@ export default {
       if (this.exchange_value)
         this.crypto_amount = this.exchange_value / this.currencyPrice;
       else this.crypto_amount = null;
-      console.log(this.crypto_amount);
     },
     calculateAmountInEuro() {
       if (this.crypto_amount)
