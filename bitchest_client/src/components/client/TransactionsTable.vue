@@ -55,7 +55,7 @@
                   })
                 }}
               </td>
-              <td v-if="!transaction.type" @click="test">
+              <td v-if="!transaction.type">
                 {{
                   transaction.rsi.toLocaleString("fr-FR", {
                     style: "currency",
@@ -85,23 +85,10 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      classRsi: "",
-    };
-  },
   methods: {
     formatDate(date) {
       return moment(date).local(true).format("DD/MM/YYYY - HH:mm");
     },
-  },
-  created() {
-    for (let i = 0; i < this.transactions.length; i++) {
-      if (!this.transactions[i].type) {
-        if (this.transactions[i].rsi > 0) this.classRsi = "green";
-        else if (this.transactions[i].rsi < 0) this.classRsi = "text-danger";
-      }
-    }
   },
 };
 </script>
