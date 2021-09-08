@@ -26,7 +26,7 @@ En tant qu'Admin, vous pourrez également ajouter, modifier ou supprimer un util
 
 Créer une base de donnée sur `phpMyAdmin`
 
-`composer install` pour installer toutes les dépendances
+`composer install` puis `npm install` pour installer toutes les dépendances
 
 Créer un fichier `.env` à la racine, copier-coller le contenu du fichier `.env.example`
 
