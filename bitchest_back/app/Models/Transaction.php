@@ -18,6 +18,7 @@ class Transaction extends Model
         'currency_id',
         'user_id',
         'currency_value',
+        'currency_rate',
         'amount',
         'type',
         'name',

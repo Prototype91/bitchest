@@ -6,9 +6,10 @@
           <thead>
             <tr>
               <th>Type</th>
-              <th>Cryptomonnaie</th>
+              <th>Cryptos</th>
               <th>Débit</th>
               <th>Crédit</th>
+              <th>Cours</th>
               <th>RSI</th>
               <th>Date</th>
             </tr>
@@ -55,6 +56,13 @@
                     maximumFractionDigits: 2,
                   })
                 }}
+              </td>
+              <td>
+                {{ transaction.currency_rate.toLocaleString("fr-FR", {
+                    style: "currency",
+                    currency: "EUR",
+                    maximumFractionDigits: 2,
+                  }) }}
               </td>
               <td v-if="!transaction.type">
                 {{
