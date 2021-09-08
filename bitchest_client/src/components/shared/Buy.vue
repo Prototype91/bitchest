@@ -153,6 +153,7 @@ export default {
         currency_value: this.crypto_amount,
         user_id: this.userData.id,
         amount: this.exchange_value,
+        currency_rate: this.currencyPrice,
         type: true,
         name: this.currencySelected,
         symbol: this.currencySymbol,
