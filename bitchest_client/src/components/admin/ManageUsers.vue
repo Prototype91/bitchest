@@ -2,8 +2,10 @@
   <div class="manage-users-ctn">
     <Loader :isLoading="isLoading" />
     <div v-if="users.length" class="user-table">
-      <h1>Liste des utilisateurs</h1>
-      <button class="btn btn-success link-inside"><router-link to="/admin/create">Ajouter un utilisateur</router-link></button>
+      <h1>Liste des utilisateurs :</h1>
+      <button class="btn btn-success link-inside">
+        <router-link to="/admin/create">Ajouter un utilisateur</router-link>
+      </button>
       <UsersTable :users="users" @user-deleted="onUserDeleted" />
     </div>
   </div>
@@ -32,7 +34,8 @@ export default {
     },
     loadUsers() {
       this.isLoading = true;
-      usersService.getUsers()
+      usersService
+        .getUsers()
         .then((response) => {
           this.users = response.data.users;
           this.isLoading = false;
@@ -50,15 +53,15 @@ export default {
 </script>
 
 <style scoped>
-
 h1 {
   text-align: center;
   font-size: 30px;
+  margin-top: 30px;
 }
 
 button {
-  margin: 20px;
-  margin-left: auto;
+  text-align: center;
+  margin: 30px auto;
   display: flex;
 }
 </style>

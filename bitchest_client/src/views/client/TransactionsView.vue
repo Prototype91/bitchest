@@ -10,6 +10,9 @@
       <div v-if="transactions.length">
         <TransactionsTable :transactions="transactions" />
       </div>
+      <div v-else>
+        <h2>Aucune Transaction à afficher ...</h2>
+      </div>
     </div>
   </main>
 </template>

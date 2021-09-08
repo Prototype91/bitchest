@@ -4,7 +4,7 @@
     <main v-if="cryptoCurrencies.length && userData">
       <Navigation />
       <section class="synthesis-ctn">
-        <h1>Bonjour {{ userData.firstname }}</h1>
+        <h1>Bonjour {{ userData.firstname }}, bienvenue sur votre espace BitChest !</h1>
         <Balance :balance="userData.balance" />
         <HeartSynthesis
           v-if="!isLoading"
@@ -87,7 +87,9 @@ export default {
 <style>
 h1 {
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
+  margin: 30px auto 0;
+  width: 90%;
 }
 
 @media (min-width: 769px) {

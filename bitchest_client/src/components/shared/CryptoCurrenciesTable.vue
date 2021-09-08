@@ -6,7 +6,7 @@
           <thead>
             <tr>
               <th>Cryptomonnaie</th>
-              <th>Prix</th>
+              <th>Cours</th>
               <th class="responsive-xs">Fluctuation (24h)</th>
               <th>Action</th>
             </tr>
@@ -19,7 +19,7 @@
               <td>
                 <img :src="cryptoCurrency.image" class="prices-icon" alt="" />
                 <span class="responsive">{{ cryptoCurrency.name }}</span>
-                <span>({{ cryptoCurrency.symbol.toUpperCase() }})</span>
+                <span class="symbol">({{ cryptoCurrency.symbol.toUpperCase() }})</span>
               </td>
               <td>
                 {{
@@ -72,6 +72,14 @@ export default {
   padding: 0;
 }
 
+.section-ctn {
+  margin-top: 30px;
+}
+
+.symbol {
+  margin-left: 3px;
+}
+
 table,
 td {
   color: white;
@@ -91,7 +99,7 @@ table img {
   margin-right: 20px;
   width: 20%;
   background-color: white;
-  border-radius: 15px;
+  border-radius: 50%;
   padding: 20px;
 }
 

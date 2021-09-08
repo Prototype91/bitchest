@@ -70,6 +70,7 @@ export default {
 .total {
   text-align: center;
   padding: 30px;
+  font-size: 1.2rem;
 }
 
 @media (min-width: 1440px) {

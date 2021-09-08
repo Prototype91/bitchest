@@ -179,6 +179,10 @@ nav {
   align-items: center;
 }
 
+.logout svg {
+  width: 70%!important;
+}
+
 .link-menu:hover {
   background-color: #1e1f23;
   transition: 0.4s linear;

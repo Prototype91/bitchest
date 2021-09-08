@@ -7,10 +7,12 @@
         Voici l'évolution du {{ this.cryptoCurrencyId.toUpperCase() }} sur 30
         jours :
       </h1>
-      <CryptoCurrencyGraph :graphData="graphData" />
-      <button @click="onBuyClick" class="btn btn-primary">Acheter</button>
-      <div v-if="transactions.length">
-        <TransactionsTable :transactions="transactions" />
+      <div class="graph">
+        <CryptoCurrencyGraph :graphData="graphData" />
+        <button @click="onBuyClick" class="btn btn-primary">Acheter</button>
+        <div v-if="transactions.length">
+          <TransactionsTable :transactions="transactions" />
+        </div>
       </div>
     </div>
   </section>
@@ -61,13 +63,11 @@ export default {
     onBuyClick() {
       localStorageService.setWantedCurrencyLocalStorage(this.cryptoCurrencyId);
       this.$router.push("/client/market");
-
     },
     getHistoricalCoinValues(cryptoCurrencyId) {
       cryptoCurrencyService
         .getHistoricalCoinValues(cryptoCurrencyId)
         .then((response) => {
-          console.log("GraphData", response);
           this.graphData =
             cryptoCurrencyMapper.mapCryptoCurrencyHistory(response);
           this.isLoading = false;
@@ -96,8 +96,6 @@ export default {
           this.transactions = response.data
             .filter((transaction) => transaction.name == cryptoCurrencyId)
             .reverse();
-
-          console.log("Transactions", this.transactions);
         })
         .catch((error) => {
           this.isLoading = false;
@@ -114,7 +112,33 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
 }
+
+.graph {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .graph-ctn h1 {
   margin-bottom: 30px;
+}
+
+.btn-primary {
+  width: 20%;
+  margin: 40px auto;
+}
+
+@media (max-width: 830px) {
+  .graph {
+    width: 90%;
+  }
+}
+
+@media (max-width: 380px) {
+  .btn-primary {
+    width: 90%;
+  }
 }
 </style>
