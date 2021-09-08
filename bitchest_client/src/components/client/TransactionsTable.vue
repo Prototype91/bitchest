@@ -21,7 +21,11 @@
                     !transaction.type
                       ? 'fas fa-arrow-alt-circle-down'
                       : 'fas fa-arrow-alt-circle-up',
-                    !transaction.type && transaction.rsi > 0 ? 'green' : transaction.rsi < 0 ? 'text-danger' : '',
+                    !transaction.type && transaction.rsi > 0
+                      ? 'green'
+                      : transaction.rsi < 0
+                      ? 'text-danger'
+                      : '',
                   ]"
                 ></i>
               </td>
@@ -38,12 +42,9 @@
                   })
                 }}
               </td>
-              <td v-if="!transaction.type">
-                {{ transaction.currency_value }}
-                {{ transaction.symbol.toUpperCase() }}
-              </td>
-              <td v-if="transaction.type">
-                +{{ transaction.currency_value }}
+              <td>
+                <span v-if="transaction.type">+</span>
+                {{ transaction.currency_value.toFixed(9) }}
                 {{ transaction.symbol.toUpperCase() }}
               </td>
               <td v-if="!transaction.type">
