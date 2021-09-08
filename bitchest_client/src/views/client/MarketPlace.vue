@@ -36,11 +36,7 @@
           @transfer="init"
         />
         <Sell
-          v-if="
-            cryptoCurrenciesData.length &&
-            !this.buyMode &&
-            userTransactions.length
-          "
+          v-if="cryptoCurrenciesData.length && !this.buyMode"
           :cryptoCurrenciesData="cryptoCurrenciesData"
           :userCryptoCurrencies="userCryptoCurrencies"
           :userData="this.userData"
