@@ -40,6 +40,7 @@
         </div>
       </div>
       <div class="input-euro">
+        <p>Valeur actuelle du {{ this.currencySelected }} : {{ this.currencyPrice }}</p>
         <label for="recevoir">Recevoir</label>
         <div class="input-ctn">
           <div>
@@ -58,7 +59,7 @@
         </div>
       </div>
       <button class="btn btn-success" type="submit">Conclure</button>
-      <h2>RSI : {{ rsi.toLocaleString(
+      <h2>Retour sur investissement prévisionnel : {{ rsi.toLocaleString(
           "fr-FR",
           {
             style: "currency",

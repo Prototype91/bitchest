@@ -7,15 +7,17 @@
     </div>
 
     <form @submit.prevent="startTransfert" class="inputs">
+    <h2>Valeur actuelle du {{ this.currencySelected }} : {{ this.currencyPrice }} €</h2>
       <div class="input-euro">
         <label for="acheter">Dépenser</label>
         <div class="input-ctn">
           <div>
             <input
               id="acheter"
-              type="number"
+              type="text"
               placeholder="Veuillez entrer le montant"
               v-model="exchange_value"
+              @keypress="isNumber($event)"
               @keyup="calculateAmountInCrypto"
             />
           </div>
@@ -33,7 +35,8 @@
               id="vendre"
               type="text"
               placeholder="0.00"
-              v-model="this.crypto_amount"
+              v-model.number="this.crypto_amount"
+              @keypress="isNumber($event)"
               @keyup="calculateAmountInEuro"
             />
           </div>
@@ -96,14 +99,24 @@ export default {
       this.setSelectedCurrency();
       this.setCurrentCurrency();
     },
+    isNumber: function(evt) {
+      evt = (evt) ? evt : window.event;
+      var charCode = (evt.which) ? evt.which : evt.keyCode;
+      if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+        evt.preventDefault();
+      } else {
+        return true;
+      }
+    },
     calculateAmountInCrypto() {
       if (this.exchange_value)
         this.crypto_amount = this.exchange_value / this.currencyPrice;
       else this.crypto_amount = null;
+      console.log(this.crypto_amount);
     },
     calculateAmountInEuro() {
       if (this.crypto_amount)
-        this.exchange_value = this.crypto_amount * this.currencyPrice;
+        this.exchange_value = Number(this.crypto_amount) * this.currencyPrice;
       else this.exchange_value = null;
     },
     setCurrentCurrency() {

@@ -142,6 +142,10 @@ export default {
   height: 100%;
 }
 
+.market-ctn form h2 {
+  font-size: 20px;
+}
+
 .market-ctn section {
   width: 100%;
   display: flex;
