@@ -4,7 +4,7 @@
     <main v-if="cryptoCurrencies.length && userData">
       <Navigation />
       <section class="synthesis-ctn">
-        <h1>
+        <h1 class="welcome">
           Bonjour {{ userData.firstname }}, bienvenue sur votre espace BitChest
           !
         </h1>
@@ -100,7 +100,7 @@ export default {
 </script>
 
 <style>
-h1 {
+.welcome {
   text-align: center;
   font-size: 1.5rem;
   margin: 30px auto 0;
