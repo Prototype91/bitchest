@@ -20,7 +20,7 @@
               id="acheter"
               type="text"
               placeholder="Veuillez entrer le montant"
-              v-model="exchange_value"
+              v-model="exchangeValue"
               @keypress="isNumber($event)"
               @keyup="calculateAmountInCrypto"
             />

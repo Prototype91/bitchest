@@ -59,7 +59,7 @@
               </td>
               <td>
                 {{
-                  transaction.type ? 
+                  transaction.currency_rate > 0 ? 
                   transaction.currency_rate.toLocaleString("fr-FR", {
                     style: "currency",
                     currency: "EUR",
