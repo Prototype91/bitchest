@@ -1,5 +1,5 @@
 <template>
-  <div class="ctn-form" :class="[!this.userCryptoCurrencies.length ? 'no-sale-ctn' : '']">
+  <div class="ctn-form sell-form" :class="[!this.userCryptoCurrencies.length ? 'no-sale-ctn' : '']">
     <div class="no-sale" v-if="!this.userCryptoCurrencies.length">
       <h1>Vous n'avez rien à vendre</h1>
     </div>
@@ -64,7 +64,7 @@
       </div>
       <button class="btn btn-success" type="submit">Conclure</button>
       <h2>
-        Retour sur investissement prévisionnel :
+        RSI prévisionnel :
         {{
           rsi.toLocaleString("fr-FR", {
             style: "currency",

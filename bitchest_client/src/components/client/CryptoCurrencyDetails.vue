@@ -130,6 +130,8 @@ export default {
 
 .graph-ctn h1 {
   margin-bottom: 30px;
+  text-align: center;
+  font-size: 20px;
 }
 
 .btn-primary {

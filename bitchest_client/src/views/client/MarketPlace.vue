@@ -135,6 +135,10 @@ export default {
   height: 45%;
 }
 
+.market-ctn .ctn-form.sell-form {
+  height: 51%;
+}
+
 .market-ctn .ctn-form.no-sale-ctn {
   justify-content: flex-start;
 }
