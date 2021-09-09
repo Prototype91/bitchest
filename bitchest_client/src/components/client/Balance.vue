@@ -33,6 +33,7 @@ export default {
   justify-content: space-around;
   width: 100%;
   padding: 20px;
+  margin: 20px 0 0;
 }
 
 .balance-ctn p {

@@ -4,12 +4,13 @@
     <main v-if="cryptoCurrencies.length && userData">
       <Navigation />
       <section class="synthesis-ctn">
-        <h1>Bonjour {{ userData.firstname }}</h1>
+        <h1>Bonjour {{ userData.firstname }}, bienvenue sur votre espace BitChest !</h1>
         <Balance :balance="userData.balance" />
         <HeartSynthesis
           v-if="!isLoading"
           :userId="userData.id"
           :cryptoCurrencies="cryptoCurrencies"
+          :userCryptoCurrencies="userCryptoCurrencies"
         />
       </section>
     </main>
@@ -25,6 +26,9 @@ import cryptoCurrencyMapper from "../../services/cryptoCurrencies/cryptoCurrenci
 import localStorageService from "../../services/localStorage/localStorage.service";
 import Loader from "../../components/shared/Loader.vue";
 import usersService from "../../services/users/users.service";
+import transactionsService from "../../services/transactions/transactions.service";
+import cryptoCurrenciesMapper from "../../services/cryptoCurrencies/cryptoCurrencies.mapper";
+import transactionsMapper from "../../services/transactions/transactions.mapper";
 
 export default {
   name: "Home",
@@ -33,38 +37,49 @@ export default {
     return {
       userData: null,
       cryptoCurrencies: [],
-      isLoading: false,
-      allLoaded: false,
-      loaded: false
+      isLoading: true,
+      userCryptoCurrencies: [],
+      userId: null,
     };
   },
   mounted() {
-    this.isLoading = true;
+    cryptoCurrencyService
+      .getCryptoCurrencies()
+      .then((response) => {
+        const mappedValues = cryptoCurrencyMapper.mapCryptoCurrencies(response);
+        this.cryptoCurrencies = mappedValues;
+        localStorageService.setCryptoCurrenciesLocalStorage(mappedValues);
+        this.getUserCryptoCurrencies();
+      })
+      .catch((error) => {
+        this.isLoading = false;
+        console.error(error);
+      });
 
-    const cryptosLocalStorageData =
-      localStorageService.getCryptoCurrenciesLocalStorage();
-
-    if (cryptosLocalStorageData?.length) {
-      this.cryptoCurrencies = cryptosLocalStorageData;
-      this.isLoading = false;
-    } else {
-      cryptoCurrencyService.getCryptoCurrencies()
+    this.userId = localStorageService.getUserLocalStorage().id;
+    usersService.getUser(this.userId).then((response) => {
+      this.userData = response.data;
+    });
+  },
+  methods: {
+    getUserCryptoCurrencies() {
+      transactionsService
+        .getUserTransactions(this.userId)
         .then((response) => {
-          const mappedValues =
-            cryptoCurrencyMapper.mapCryptoCurrencies(response);
-          this.cryptoCurrencies = mappedValues;
-          localStorageService.setCryptoCurrenciesLocalStorage(mappedValues);
+          if (response.data.length) {
+            this.userCryptoCurrencies =
+              cryptoCurrenciesMapper.mapUserCryptoCurrencies(
+                transactionsMapper.sortUserCryptoCurrencies(response.data),
+                this.cryptoCurrencies
+              );
+          }
           this.isLoading = false;
         })
         .catch((error) => {
           this.isLoading = false;
           console.error(error);
         });
-    }
-    const userId = localStorageService.getUserLocalStorage().id;
-    usersService.getUser(userId).then((response) => {
-      this.userData = response.data;
-    });
+    },
   },
 };
 </script>
@@ -72,7 +87,9 @@ export default {
 <style>
 h1 {
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
+  margin: 30px auto 0;
+  width: 90%;
 }
 
 @media (min-width: 769px) {
