@@ -207,7 +207,7 @@ export default {
       usersService.updateUser(id, user, this.updatePassword)
         .then(() => {
           this.isLoading = false;
-          this.$router.push("/admin");
+          this.$router.push("/client");
         })
         .catch((error) => {
           this.isLoading = false;
