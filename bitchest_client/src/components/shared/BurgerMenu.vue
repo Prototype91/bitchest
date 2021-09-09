@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'BurgerMenu',
+  name: "BurgerMenu",
   methods: {
     burgerClic() {
       let smMenu = document.getElementById("smartphone-menu");
@@ -112,10 +112,10 @@ export default {
 }
 
 @media (max-width: 768px) {
-    #smartphone-menu {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-    }
+  #smartphone-menu {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
 }
 </style>

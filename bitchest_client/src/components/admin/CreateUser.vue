@@ -144,6 +144,7 @@ import {
 import usersService from "../../services/users/users.service";
 import Loader from "../shared/Loader.vue";
 import ModalError from "../shared/ModalError.vue";
+
 export default {
   name: "CreateUser",
   components: { Loader, ModalError },
@@ -159,7 +160,7 @@ export default {
         password_confirmation: null,
         elevation: null,
       },
-      isLoading: false,
+      isLoading: true,
       error: "",
       errorDisplayed: false,
     };
@@ -188,24 +189,25 @@ export default {
   },
   methods: {
     addUser() {
+      // Validations
       this.v$.$validate();
 
       if (this.v$.$error) {
         return false;
       }
 
-      this.isLoading = true;
+      // Add a user
       usersService
         .addUser(this.user)
-        .then((response) => {
+        .then(() => {
           this.isLoading = false;
           this.$router.push("/admin");
-          console.log(response);
         })
         .catch((err) => {
           this.isLoading = false;
 
           this.error = "Cette adresse mail est déjà utilisée";
+
           this.errorDisplayed = true;
 
           // Hide

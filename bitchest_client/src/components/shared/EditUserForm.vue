@@ -205,8 +205,7 @@ export default {
 
       this.isLoading = true;
       usersService.updateUser(id, user, this.updatePassword)
-        .then((response) => {
-          console.log(response);
+        .then(() => {
           this.isLoading = false;
           this.$router.push("/admin");
         })

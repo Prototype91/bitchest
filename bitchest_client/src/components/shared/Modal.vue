@@ -22,9 +22,11 @@ export default {
   },
   setup(props, { emit }) {
     return {
+      // Confirmation
       confirm() {
         emit("confirm");
       },
+      // Cancelling
       cancel() {
         emit("cancel");
       },

@@ -29,10 +29,12 @@ export default {
     };
   },
   mounted() {
+    // gets the user ID
     const userId = this.$route.params.id;
+
+    // Gets all the user's data
     usersService.getUser(userId)
       .then((response) => {
-        console.log(response.data);
         this.userData = response.data;
       })
       .catch((error) => {

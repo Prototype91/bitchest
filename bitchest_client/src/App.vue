@@ -10,7 +10,7 @@ export default {
 
 <style>
 /* FONT */
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
 
 body {
   background-color: #212121 !important;
@@ -105,7 +105,7 @@ video {
   border: 0;
   font-size: 100%;
   vertical-align: baseline;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -221,7 +221,7 @@ button.btn a:hover {
   main > section {
     width: calc(100% - 130px);
     margin-left: 130px; /* 120px de largeur nav + 10px de margin */
-    padding : 0px;
+    padding: 0px;
   }
 }
 </style>

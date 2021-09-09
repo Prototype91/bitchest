@@ -28,12 +28,12 @@ export default {
   methods: {
     getMinValue() {
       let values = Object.values(this.graphData);
-      return Math.min(...values) - (Math.min(...values) / 50);
+      return Math.min(...values) - Math.min(...values) / 50;
     },
     getMaxValue() {
       let values = Object.values(this.graphData);
-      return Math.max(...values) + (Math.min(...values) / 50);
-    }
+      return Math.max(...values) + Math.min(...values) / 50;
+    },
   },
 };
 </script>

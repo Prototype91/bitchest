@@ -11,6 +11,7 @@ import Details from "../views/client/Details.vue";
 import MarketPlace from '../views/client/MarketPlace.vue';
 import TransactionsView from '../views/client/TransactionsView.vue';
 
+// Routes
 const routes = [
   {
     path: '/',
@@ -78,11 +79,13 @@ const router = createRouter({
   routes
 });
 
+// Returns if the user is logged in
 const isLoggedIn = () => {
   const localStorageData = localStorageService.getUserLocalStorage();
   return !!localStorageData?.token;
 }
 
+// Returns if the user is a simple client not admin
 const isClient = () => {
   const localStorageData = localStorageService.getUserLocalStorage();
   return localStorageData?.elevation == 'user';

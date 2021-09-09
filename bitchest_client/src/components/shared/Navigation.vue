@@ -180,7 +180,7 @@ nav {
 }
 
 .logout svg {
-  width: 70%!important;
+  width: 70% !important;
 }
 
 .link-menu:hover {

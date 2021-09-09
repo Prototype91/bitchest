@@ -35,8 +35,8 @@ export default {
       required: true,
     },
     userCryptoCurrencies: {
-      type: Array, 
-      required: true
+      type: Array,
+      required: true,
     },
     userId: {
       type: Number,
@@ -53,7 +53,7 @@ export default {
           maximumFractionDigits: 2,
         });
     },
-  }
+  },
 };
 </script>
 
@@ -86,7 +86,7 @@ export default {
     width: 90%;
     gap: 10px;
     margin: 0 auto;
-    margin-bottom: 10px;  
+    margin-bottom: 10px;
   }
 }
 

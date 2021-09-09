@@ -14,6 +14,3 @@ export default {
   components: { CreateUser, Navigation },
 };
 </script>
-
-<style>
-</style>

@@ -18,14 +18,21 @@
           <td data-label="Email">{{ user.email }}</td>
           <td data-label="Rôle">{{ user.elevation }}</td>
           <td data-label="Modifier">
-            <button class="btn btn-primary link-inside" :class="[user.id === this.currentUserId ? 'disabled' : '']">
+            <button
+              class="btn btn-primary link-inside"
+              :class="[user.id === this.currentUserId ? 'disabled' : '']"
+            >
               <router-link :to="'/admin/update/' + user.id"
                 >Modifier</router-link
               >
             </button>
           </td>
           <td data-label="Supprimer">
-            <button class="btn btn-danger" :class="[user.id === this.currentUserId ? 'disabled' : '']" @click="updateModalStatus(user.id)">
+            <button
+              class="btn btn-danger"
+              :class="[user.id === this.currentUserId ? 'disabled' : '']"
+              @click="updateModalStatus(user.id)"
+            >
               Supprimer
             </button>
           </td>
@@ -49,7 +56,7 @@
 import UserService from "../../services/users/users.service";
 import Modal from "../../components/shared/Modal.vue";
 import { ref } from "vue";
-import localStorageService from '../../services/localStorage/localStorage.service';
+import localStorageService from "../../services/localStorage/localStorage.service";
 
 export default {
   name: "UsersTable",
@@ -62,8 +69,8 @@ export default {
   data() {
     return {
       userIdToDelete: null,
-      currentUserId: localStorageService.getUserLocalStorage().id
-    }
+      currentUserId: localStorageService.getUserLocalStorage().id,
+    };
   },
   emits: ["user-deleted"],
   setup(props, { emit }) {
@@ -71,13 +78,13 @@ export default {
     return {
       modalActive,
       updateModalStatus(id) {
-        this.userIdToDelete = id
+        this.userIdToDelete = id;
         modalActive.value = !modalActive.value;
       },
       onConfirm(id) {
+        // Deletes the user
         UserService.deleteUser(id)
-          .then((reponse) => {
-            console.log(reponse);
+          .then(() => {
             emit("user-deleted");
             modalActive.value = !modalActive.value;
           })
@@ -86,7 +93,7 @@ export default {
           });
       },
     };
-  }
+  },
 };
 </script>
 

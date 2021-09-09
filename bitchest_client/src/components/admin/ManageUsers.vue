@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       users: [],
-      isLoading: false,
+      isLoading: true,
     };
   },
   methods: {
@@ -33,7 +33,7 @@ export default {
       this.loadUsers();
     },
     loadUsers() {
-      this.isLoading = true;
+      // Gets the user's data
       usersService
         .getUsers()
         .then((response) => {

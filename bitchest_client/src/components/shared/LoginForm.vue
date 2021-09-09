@@ -62,8 +62,6 @@ export default {
         .then((response) => {
           const user = response.data.user;
 
-          console.log(user);
-
           const userData = {
             token: response.data.token,
             elevation: user.elevation,
@@ -82,7 +80,6 @@ export default {
             .getCurrencies()
             .then((response) => {
               const currenciesData = response.data;
-              console.log(currenciesData);
               localStorageService.setDataBaseCurrenciesLocalStorage(
                 currenciesData
               );

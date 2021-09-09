@@ -3,11 +3,9 @@
     <Navigation />
     <div class="market-ctn">
       <Loader :isLoading="isLoading" />
-
       <section class="sell" v-if="this.userData && !isLoading">
         <h1 v-if="!isLoading">Bonjour {{ this.userData.firstname }}</h1>
         <Balance v-if="!isLoading" :balance="this.userData.balance" />
-
         <ul class="btn-choice-ctn">
           <li>
             <button
@@ -28,7 +26,6 @@
             </button>
           </li>
         </ul>
-
         <Buy
           v-if="cryptoCurrenciesData.length && this.buyMode"
           :cryptoCurrenciesData="this.cryptoCurrenciesData"
@@ -74,25 +71,32 @@ export default {
     };
   },
   mounted() {
+    // Init
     this.init();
   },
   methods: {
     init() {
       this.isLoading = true;
+
+      // Gets the user's ID
       const userid = localStorageService.getUserLocalStorage().id;
+
+      // Gets all the user's data
       usersService
         .getUser(userid)
         .then((response) => {
           this.userData = response.data;
+
+          // Gets the user's transactions
           transactionsService
             .getUserTransactions(response.data.id)
             .then((response) => {
+              // Maps the response
               this.userCryptoCurrencies =
                 cryptoCurrenciesMapper.mapUserCryptoCurrencies(
                   transactionsMapper.sortUserCryptoCurrencies(response.data),
                   this.cryptoCurrenciesData
                 );
-              console.log(this.cryptoCurrenciesData);
               this.userTransactions = response.data;
               this.isLoading = false;
             })
@@ -105,6 +109,7 @@ export default {
           console.error(error);
         });
 
+      // Gets the cryptocurrencies data
       this.cryptoCurrenciesData =
         localStorageService.getCryptoCurrenciesLocalStorage();
     },
@@ -157,6 +162,7 @@ export default {
 .market-ctn section .btn-choice-ctn {
   display: flex;
   width: 200px;
+  margin-bottom: 30px;
 }
 
 .market-ctn section .btn-choice-ctn button.active {

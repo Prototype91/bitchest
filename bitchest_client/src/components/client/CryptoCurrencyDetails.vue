@@ -61,10 +61,14 @@ export default {
   },
   methods: {
     onBuyClick() {
+      // Sets the currency that you want to buy
       localStorageService.setWantedCurrencyLocalStorage(this.cryptoCurrencyId);
+
+      // Redirection to Market Place
       this.$router.push("/client/market");
     },
     getHistoricalCoinValues(cryptoCurrencyId) {
+      // Gets the historical values
       cryptoCurrencyService
         .getHistoricalCoinValues(cryptoCurrencyId)
         .then((response) => {
@@ -78,6 +82,7 @@ export default {
         });
     },
     getUser() {
+      // Gets the user's data
       usersService
         .getUser(this.userData.id)
         .then((response) => {
@@ -90,11 +95,13 @@ export default {
         });
     },
     getUserTransactions(userData, cryptoCurrencyId) {
+      // Gets the user's transactions
       transactionsService
         .getUserTransactions(userData.id)
         .then((response) => {
           this.transactions = response.data
             .filter((transaction) => transaction.name == cryptoCurrencyId)
+            // Reverses the transactions
             .reverse();
         })
         .catch((error) => {

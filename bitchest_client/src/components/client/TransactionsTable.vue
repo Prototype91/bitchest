@@ -58,11 +58,13 @@
                 }}
               </td>
               <td>
-                {{ transaction.currency_rate.toLocaleString("fr-FR", {
+                {{
+                  transaction.currency_rate.toLocaleString("fr-FR", {
                     style: "currency",
                     currency: "EUR",
                     maximumFractionDigits: 2,
-                  }) }}
+                  })
+                }}
               </td>
               <td v-if="!transaction.type">
                 {{
@@ -96,6 +98,7 @@ export default {
   },
   methods: {
     formatDate(date) {
+      // Format of the date
       return moment(date).local(true).format("DD/MM/YYYY - HH:mm");
     },
   },

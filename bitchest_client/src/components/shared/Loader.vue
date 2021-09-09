@@ -18,7 +18,7 @@ export default {
   props: {
     isLoading: {
       type: Boolean,
-      required: true
+      required: true,
     },
   },
   data() {
@@ -32,5 +32,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

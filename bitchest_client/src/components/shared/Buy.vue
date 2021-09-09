@@ -7,7 +7,11 @@
     </div>
 
     <form @submit.prevent="startTransfert" class="inputs">
-    <h2>Valeur actuelle du <span class="crypto-name">{{ this.currencySelected }}</span> : {{ this.currencyPrice }} €</h2>
+      <h2>
+        Valeur actuelle du
+        <span class="crypto-name">{{ this.currencySelected }}</span> :
+        {{ this.currencyPrice }} €
+      </h2>
       <div class="input-euro">
         <label for="acheter">Dépenser</label>
         <div class="input-ctn">
@@ -92,6 +96,7 @@ export default {
     };
   },
   mounted() {
+    // Init
     this.init();
   },
   methods: {
@@ -99,10 +104,14 @@ export default {
       this.setSelectedCurrency();
       this.setCurrentCurrency();
     },
-    isNumber: function(evt) {
-      evt = (evt) ? evt : window.event;
-      var charCode = (evt.which) ? evt.which : evt.keyCode;
-      if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+    isNumber: function (evt) {
+      evt = evt ? evt : window.event;
+      var charCode = evt.which ? evt.which : evt.keyCode;
+      if (
+        charCode > 31 &&
+        (charCode < 48 || charCode > 57) &&
+        charCode !== 46
+      ) {
         evt.preventDefault();
       } else {
         return true;
@@ -119,16 +128,22 @@ export default {
       else this.exchange_value = null;
     },
     setCurrentCurrency() {
+      // Gets the currency data
       const currencyData = this.cryptoCurrenciesData.filter(
         (currency) => currency.id === this.currencySelected
       );
+
+      // Assignments of the data
       this.currencySymbol = currencyData[0].symbol;
       this.currencyPrice = currencyData[0].current_price;
       this.currencyImg = currencyData[0].image;
+
+      // Calculs
       this.calculateAmountInCrypto();
       this.calculateAmountInEuro();
     },
     setSelectedCurrency() {
+      // If you have been redirected from the details page
       const wantedCurrency =
         localStorageService.getWantedCurrencyLocalStorage();
 
@@ -137,6 +152,7 @@ export default {
             localStorageService.getWantedCurrencyLocalStorage())
         : "bitcoin";
 
+      // Deleted the wanted currency
       window.localStorage.removeItem("wanted-currency");
     },
     startTransfert() {
@@ -144,10 +160,13 @@ export default {
         this.errorBalance = true;
         return;
       }
+
+      // Gets the currency ID
       const currency_id = localStorageService
         .getDataBaseCurrenciesLocalStorage()
         .filter((currency) => currency.coin_id === this.currencySelected)[0].id;
 
+      // Sets the data to send
       const data = {
         currency_id,
         currency_value: this.crypto_amount,
@@ -157,19 +176,18 @@ export default {
         type: true,
         name: this.currencySelected,
         symbol: this.currencySymbol,
-        sold: false
+        sold: false,
       };
 
-      // Ajout de la transaction
+      // Add a transaction
       transactionsService
         .addNewUserTransaction(data)
-        .then((response) => {
-          console.log(response);
+        .then(() => {
           this.$emit("transfer");
           this.init();
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
     },
   },
@@ -177,4 +195,11 @@ export default {
 </script>
 
 <style scoped>
+h2 {
+  margin-bottom: 20px;
+}
+
+.btn-success {
+  margin: 30px 0;
+}
 </style>

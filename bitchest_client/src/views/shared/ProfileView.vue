@@ -34,13 +34,13 @@ export default {
     };
   },
   mounted() {
-    const localStorageData = localStorageService.getUserLocalStorage();
-    const userId = localStorageData.id;
+    // User ID
+    const userId = localStorageService.getUserLocalStorage().id;
 
+    // Gets the user's data for the form
     usersService
       .getUser(userId)
       .then((response) => {
-        console.log(response.data);
         this.userData = response.data;
       })
       .catch((error) => {

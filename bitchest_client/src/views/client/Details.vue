@@ -13,6 +13,3 @@ export default {
   components: { CryptoCurrencyDetails, Navigation },
 };
 </script>
-
-<style>
-</style>

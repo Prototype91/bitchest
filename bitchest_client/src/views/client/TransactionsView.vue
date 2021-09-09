@@ -32,24 +32,28 @@ export default {
   data() {
     return {
       transactions: [],
-      isLoading: false,
+      isLoading: true,
       balance: null,
       userData: {},
     };
   },
   mounted() {
+    // Gets the user's ID
     const userId = localStorageService.getUserLocalStorage().id;
+
+    // Gets the user's data and his balance
     usersService.getUser(userId).then((response) => {
       this.userData = response.data;
       this.balance = response.data.balance;
     });
-    this.isLoading = true;
+
+    // Gets the user's transactions
     transactionsService
       .getUserTransactions(userId)
       .then((response) => {
+        // Reverses the transactions
         this.transactions = response.data.reverse();
         this.isLoading = false;
-        console.log("Transactions", this.transactions);
       })
       .catch((error) => {
         this.isLoading = false;
@@ -87,7 +91,7 @@ h1 {
   }
 
   .title-div {
-    margin-bottom: 20px
+    margin-bottom: 20px;
   }
 
   h2 {

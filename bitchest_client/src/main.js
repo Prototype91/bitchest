@@ -10,7 +10,7 @@ import VueChartkick from 'vue-chartkick';
 import App from './App.vue';
 import router from './router';
 
-
+// Fontawesome
 library.add(fas);
 library.add(fab);
 library.add(far);

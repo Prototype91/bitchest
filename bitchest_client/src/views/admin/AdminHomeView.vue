@@ -13,6 +13,3 @@ export default {
   components: { ManageUsers, Navigation },
 };
 </script>
-
-<style>
-</style>
