@@ -1,7 +1,7 @@
 <template>
   <div class="admin-ctn">
     <Loader :isLoading="isLoading" />
-    <ModalError :error="error" :errorDisplayed="errorDisplayed" v-if="errorDisplayed" />
+    <ModalError :error="error" v-if="errorDisplayed" />
     <div>
       <h1>Ajouter un utilisateur :</h1>
       <form autocomplete="off" @submit.prevent="addUser">
@@ -215,7 +215,7 @@ export default {
           this.error = "Cette adresse mail est déjà utilisée";
           this.errorDisplayed = true;
 
-          // Hide 
+          // Hide
           setTimeout(() => {
             this.errorDisplayed = false;
             this.error = "";

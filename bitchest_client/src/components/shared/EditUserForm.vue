@@ -1,6 +1,7 @@
 <template>
   <div class="admin-ctn">
     <Loader :isLoading="isLoading" />
+    <ModalError :error="error" v-if="errorDisplayed" />
     <form autocomplete="off" @submit.prevent="editUser(currentUserData.id, this.user)">
       <div>
         <label for="lastname">Nom :</label> <br />
@@ -143,10 +144,11 @@ import {
 } from "@vuelidate/validators";
 import usersService from "../../services/users/users.service";
 import Loader from "../shared/Loader.vue";
+import ModalError from './ModalError.vue';
 
 export default {
   name: "EditUserForm",
-  components: { Loader },
+  components: { Loader, ModalError },
   props: {
     currentUserData: {
       type: Object,
@@ -174,6 +176,8 @@ export default {
         elevation: this.currentUserData.elevation,
       },
       isLoading: false,
+      error: "",
+      errorDisplayed: false
     };
   },
   validations() {
@@ -214,8 +218,18 @@ export default {
           this.$router.push("/admin");
         })
         .catch((error) => {
-          console.error(error);
           this.isLoading = false;
+          
+          this.error = "Cette adresse mail est déjà utilisée";
+          this.errorDisplayed = true;
+
+          // Hide 
+          setTimeout(() => {
+            this.errorDisplayed = false;
+            this.error = "";
+          }, 3000);
+
+          console.error(error);
         });
     },
   },

@@ -11,10 +11,8 @@ export default {
     error: {
       type: String,
       required: true,
+      default: ""
     },
-    errDisplayed: {
-      type: Boolean
-    }
   },
 };
 </script>
