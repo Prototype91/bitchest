@@ -39,7 +39,7 @@
               id="vendre"
               type="text"
               placeholder="0.00"
-              v-model.number="this.crypto_amount"
+              v-model.number="this.cryptoAmount"
               @keypress="isNumber($event)"
               @keyup="calculateAmountInEuro"
             />
@@ -91,8 +91,8 @@ export default {
       currencyImg: "",
       currencySymbol: "",
       currencyPrice: 0,
-      exchange_value: null,
-      crypto_amount: null,
+      exchangeValue: null,
+      cryptoAmount: null,
     };
   },
   mounted() {
@@ -118,14 +118,14 @@ export default {
       }
     },
     calculateAmountInCrypto() {
-      if (this.exchange_value)
-        this.crypto_amount = this.exchange_value / this.currencyPrice;
-      else this.crypto_amount = null;
+      if (this.exchangeValue)
+        this.cryptoAmount = this.exchangeValue / this.currencyPrice;
+      else this.cryptoAmount = null;
     },
     calculateAmountInEuro() {
-      if (this.crypto_amount)
-        this.exchange_value = Number(this.crypto_amount) * this.currencyPrice;
-      else this.exchange_value = null;
+      if (this.cryptoAmount)
+        this.exchangeValue = Number(this.cryptoAmount) * this.currencyPrice;
+      else this.exchangeValue = null;
     },
     setCurrentCurrency() {
       // Gets the currency data
@@ -156,7 +156,7 @@ export default {
       window.localStorage.removeItem("wanted-currency");
     },
     startTransfert() {
-      if (this.userData.balance < this.exchange_value) {
+      if (this.userData.balance < this.exchangeValue) {
         this.errorBalance = true;
         return;
       }
@@ -169,9 +169,9 @@ export default {
       // Sets the data to send
       const data = {
         currency_id,
-        currency_value: this.crypto_amount,
+        currency_value: this.cryptoAmount,
         user_id: this.userData.id,
-        amount: this.exchange_value,
+        amount: this.exchangeValue,
         currency_rate: this.currencyPrice,
         type: true,
         name: this.currencySelected,

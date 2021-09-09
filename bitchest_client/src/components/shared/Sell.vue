@@ -21,7 +21,7 @@
               id="vendre"
               type="text"
               placeholder="0.00"
-              v-model="this.crypto_amount"
+              v-model="this.cryptoAmount"
               disabled="true"
             />
           </div>
@@ -106,7 +106,7 @@ export default {
       currencySymbol: "",
       currencyPrice: 0,
       currencyTotalPrice: 0,
-      crypto_amount: null,
+      cryptoAmount: null,
       rsi: 0,
     };
   },
@@ -132,7 +132,7 @@ export default {
       this.currencyTotalPrice = currencyData[0].amount.toFixed(2);
       this.currencyPrice = currencyData[0].current_price;
       this.currencyImg = currencyData[0].image;
-      this.crypto_amount = currencyData[0].currency_value;
+      this.cryptoAmount = currencyData[0].currency_value;
 
       // Gets the amounts
       let amounts = transactionsMapper.getBoughtAmount(this.userTransactions);
@@ -154,7 +154,8 @@ export default {
       // Sets the data to send
       const data = {
         currency_id,
-        currency_value: this.crypto_amount * -1,
+        currency_value: this.cryptoAmount * -1,
+        currency_rate: this.currencyPrice,
         user_id: this.userData.id,
         amount: this.currencyTotalPrice,
         type: false,
