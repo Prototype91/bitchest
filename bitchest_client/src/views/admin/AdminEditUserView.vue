@@ -9,6 +9,7 @@
         :currentUserData="userData"
         :displayRadios="true"
         :updatePassword="false"
+        routePath="/admin"
       />
     </div>
   </main>

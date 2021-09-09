@@ -12,6 +12,7 @@
           :currentUserData="userData"
           :displayRadios="false"
           :updatePassword="true"
+          routePath="/client"
         />
       </div>
     </section>

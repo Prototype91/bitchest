@@ -154,6 +154,10 @@ export default {
     updatePassword: {
       type: Boolean,
       default: false
+    },
+    routePath: {
+      type: String,
+      required: true
     }
   },
   data() {
@@ -207,7 +211,7 @@ export default {
       usersService.updateUser(id, user, this.updatePassword)
         .then(() => {
           this.isLoading = false;
-          this.$router.push("/client");
+          this.$router.push(this.routePath);
         })
         .catch((error) => {
           this.isLoading = false;
