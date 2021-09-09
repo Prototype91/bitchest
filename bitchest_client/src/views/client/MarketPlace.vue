@@ -135,6 +135,10 @@ export default {
   height: 45%;
 }
 
+.market-ctn .ctn-form.no-sale-ctn {
+  justify-content: flex-start;
+}
+
 .market-ctn form {
   display: flex;
   justify-content: space-evenly;
@@ -149,6 +153,10 @@ export default {
 
 .market-ctn form h2 {
   font-size: 20px;
+}
+
+.market-ctn h1 {
+  font-size: 2rem;
 }
 
 .market-ctn section {
@@ -302,5 +310,15 @@ export default {
 /* Firefox */
 .market-ctn input[type="number"] {
   -moz-appearance: textfield;
+}
+
+@media (max-width: 768px) {
+  .market-ctn .ctn-form {
+  height: 60%;
+}
+
+.market-ctn h1, .market-ctn h2 {
+  text-align: center;
+}
 }
 </style>
