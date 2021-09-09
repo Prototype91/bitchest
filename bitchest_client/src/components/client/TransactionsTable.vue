@@ -59,11 +59,12 @@
               </td>
               <td>
                 {{
+                  transaction.type ? 
                   transaction.currency_rate.toLocaleString("fr-FR", {
                     style: "currency",
                     currency: "EUR",
                     maximumFractionDigits: 2,
-                  })
+                  }) : ''
                 }}
               </td>
               <td>
