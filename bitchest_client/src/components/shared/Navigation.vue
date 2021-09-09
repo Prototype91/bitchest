@@ -203,7 +203,6 @@ nav {
 @media screen and (max-width: 768px) {
   nav {
     padding: 7.5px;
-    border-radius: 10px;
     background-color: #101010;
     height: 70px;
     display: flex;
@@ -211,6 +210,7 @@ nav {
     align-items: center;
     width: 100%;
     z-index: 12;
+    border-radius: 0px;
   }
 
   .logo-ctn {
@@ -224,7 +224,7 @@ nav {
     flex-direction: column;
     top: 70px;
     z-index: 999999999;
-    right: 5px;
+    right: 0px;
     position: absolute;
     background-color: #101010;
     height: auto;
