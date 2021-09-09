@@ -1,6 +1,7 @@
 <template>
   <div class="admin-ctn">
     <Loader :isLoading="isLoading" />
+    <ModalError :error="error" :errorDisplayed="errorDisplayed" v-if="errorDisplayed" />
     <div>
       <h1>Ajouter un utilisateur :</h1>
       <form autocomplete="off" @submit.prevent="addUser">
@@ -149,9 +150,10 @@ import {
 } from "@vuelidate/validators";
 import usersService from "../../services/users/users.service";
 import Loader from "../shared/Loader.vue";
+import ModalError from "../shared/ModalError.vue";
 export default {
   name: "CreateUser",
-  components: { Loader },
+  components: { Loader, ModalError },
   data() {
     return {
       user: {
@@ -165,6 +167,8 @@ export default {
         elevation: null,
       },
       isLoading: false,
+      error: "",
+      errorDisplayed: false,
     };
   },
   validations() {
@@ -198,7 +202,8 @@ export default {
       }
 
       this.isLoading = true;
-      usersService.addUser(this.user)
+      usersService
+        .addUser(this.user)
         .then((response) => {
           this.isLoading = false;
           this.$router.push("/admin");
@@ -206,6 +211,16 @@ export default {
         })
         .catch((err) => {
           this.isLoading = false;
+
+          this.error = "Cette adresse mail est déjà utilisée";
+          this.errorDisplayed = true;
+
+          // Hide 
+          setTimeout(() => {
+            this.errorDisplayed = false;
+            this.error = "";
+          }, 3000);
+
           console.error(err);
         });
     },
