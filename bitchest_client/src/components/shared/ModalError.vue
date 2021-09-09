@@ -30,4 +30,10 @@ div {
   border-radius: 20px;
   border: 1px solid white;
 }
+
+@media (max-width: 768px) {
+  div {
+    top: 80px;
+  }
+}
 </style>

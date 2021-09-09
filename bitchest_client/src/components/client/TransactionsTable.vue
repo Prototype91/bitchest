@@ -34,7 +34,7 @@
                 {{ transaction.name }}
               </td>
 
-              <td v-if="transaction.type">
+              <td class="crypto-value" v-if="transaction.type">
                 -{{
                   transaction.amount.toLocaleString("fr-FR", {
                     style: "currency",
@@ -43,12 +43,12 @@
                   })
                 }}
               </td>
-              <td>
+              <td class="crypto-value">
                 <span v-if="transaction.type">+</span>
                 {{ transaction.currency_value.toFixed(9) }}
                 {{ transaction.symbol.toUpperCase() }}
               </td>
-              <td v-if="!transaction.type">
+              <td class="crypto-value" v-if="!transaction.type">
                 +{{
                   transaction.amount.toLocaleString("fr-FR", {
                     style: "currency",
@@ -66,16 +66,16 @@
                   })
                 }}
               </td>
-              <td v-if="!transaction.type">
+              <td>
                 {{
+                  !transaction.type ? 
                   transaction.rsi.toLocaleString("fr-FR", {
                     style: "currency",
                     currency: "EUR",
                     maximumFractionDigits: 2,
-                  })
+                  }) : ''
                 }}
               </td>
-              <td v-if="transaction.type"></td>
               <td>{{ this.formatDate(transaction.created_at) }}</td>
             </tr>
           </tbody>
@@ -115,6 +115,18 @@ h2 {
 table,
 td {
   color: white;
+}
+
+td:last-of-type {
+  min-width: 160px;
+}
+
+td:nth-of-type(2) {
+  min-width: 110px;
+}
+
+td.crypto-value {
+  min-width: 170px;
 }
 
 tbody td {

@@ -7,7 +7,7 @@
         <h1>Historique des transactions :</h1>
         <Balance v-if="balance" :balance="balance" />
       </div>
-      <div v-if="transactions.length">
+      <div class="transcations-table-ctn" v-if="transactions.length">
         <TransactionsTable :transactions="transactions" />
       </div>
       <div v-else>
@@ -75,6 +75,10 @@ export default {
 .title-div .balance-ctn {
   width: auto;
   padding: 15px;
+}
+
+.transcations-table-ctn {
+  overflow: auto;
 }
 
 main {
