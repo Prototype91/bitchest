@@ -13,7 +13,6 @@
             class="form-control"
             id="lastname"
             placeholder="Nom"
-            @blur="v$.$touch"
           />
           <div class="error" v-if="v$.user.lastname.$error">
             {{ v$.user.lastname.$errors[0].$message }}
@@ -27,7 +26,6 @@
             type="text"
             id="firstname"
             placeholder="Prénom"
-            @blur="v$.$touch"
           />
           <div class="error" v-if="v$.user.firstname.$error">
             {{ v$.user.firstname.$errors[0].$message }}
@@ -42,7 +40,6 @@
             id="mail"
             type="mail"
             placeholder="Adresse mail"
-            @blur="v$.$touch"
           />
           <div class="error" v-if="v$.user.email.$error">
             {{ v$.user.email.$errors[0].$message }}
@@ -56,7 +53,6 @@
             type="text"
             id="address"
             placeholder="Lieu de résidence"
-            @blur="v$.$touch"
           />
           <div class="error" v-if="v$.user.address.$error">
             {{ v$.user.address.$errors[0].$message }}
@@ -70,7 +66,6 @@
             v-model="user.phone"
             type="tel"
             placeholder="0606060606"
-            @blur="v$.$touch"
           />
           <div class="error" v-if="v$.user.phone.$error">
             {{ v$.user.phone.$errors[0].$message }}
@@ -85,7 +80,6 @@
             id="password"
             placeholder="Mot de passe (8 char min.)"
             autocomplete="off"
-            @blur="v$.$touch"
           />
           <div class="error" v-if="v$.user.password.$error">
             {{ v$.user.password.$errors[0].$message }}
@@ -100,7 +94,6 @@
             id="password-confirm"
             placeholder="Confirmation du mot de passe (8 char min.)"
             autocomplete="off"
-            @blur="v$.$touch"
           />
           <div class="error" v-if="v$.user.password_confirmation.$error">
             {{ v$.user.password_confirmation.$errors[0].$message }}
