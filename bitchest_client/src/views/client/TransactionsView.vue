@@ -3,15 +3,15 @@
     <Navigation />
     <Loader :isLoading="isLoading" />
     <div>
-      <div class="title-div">
+      <div class="title-div" v-if="!isLoading">
         <h1>Historique des transactions :</h1>
         <Balance v-if="balance" :balance="balance" />
       </div>
       <div class="transcations-table-ctn" v-if="transactions.length">
         <TransactionsTable :transactions="transactions" />
       </div>
-      <div v-else>
-        <h2>Aucune Transaction à afficher ...</h2>
+      <div class="no-transactions" v-else>
+        <h2 v-if="!isLoading">Aucune Transaction à afficher ...</h2>
       </div>
     </div>
   </main>
@@ -79,6 +79,11 @@ export default {
 
 .transcations-table-ctn {
   overflow: auto;
+}
+
+.no-transactions {
+  text-align: center;
+  margin: 50px 0;
 }
 
 main {
