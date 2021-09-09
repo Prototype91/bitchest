@@ -23,7 +23,7 @@ class UserTableSeeder extends Seeder
                 'phone' => '0680789255',
                 'email' => 'dylan@dylan.fr',
                 'balance' => 50000,
-                'password' => Hash::make('dylan'),
+                'password' => Hash::make('12345678'),
                 'elevation' => 'admin'
             ],
             [
@@ -33,7 +33,7 @@ class UserTableSeeder extends Seeder
                 'phone' => '0690872635',
                 'email' => 'sandrine@oyarsabal.fr',
                 'balance' => 50000,
-                'password' => Hash::make('sandrine'),
+                'password' => Hash::make('12345678'),
                 'elevation' => 'admin'
             ],
             [
@@ -43,7 +43,7 @@ class UserTableSeeder extends Seeder
                 'phone' => '0687253891',
                 'email' => 'kenny@kenny.fr',
                 'balance' => 50000,
-                'password' => Hash::make('kenny'),
+                'password' => Hash::make('12345678'),
                 'elevation' => 'user'
             ],
             [
@@ -53,7 +53,7 @@ class UserTableSeeder extends Seeder
                 'phone' => '0658927367',
                 'email' => 'jean@dupont.fr',
                 'balance' => 50000,
-                'password' => Hash::make('jean'),
+                'password' => Hash::make('12345678'),
                 'elevation' => 'user'
             ],
         ]);

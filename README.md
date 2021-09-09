@@ -49,15 +49,15 @@ Générer une clé avec `php artisan key:generate`
 - Utilisateurs Standards : </br>
 
 `mail` : kenny@kenny.fr </br>
-`password` : kenny
+`password` : 12345678
 
 `mail` : jean@dupont.fr </br>
-`password` : jean
+`password` : 12345678
 
 - Utilisateurs Admin : </br>
 
 `mail` : dylan@dylan.fr </br>
-`password` : dylan
+`password` : 12345678
 
 `mail` : sandrine@oyarsabal.fr </br>
-`password` : sandrine
+`password` : 12345678
