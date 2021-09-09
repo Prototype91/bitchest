@@ -2,8 +2,8 @@
   <div class="admin-ctn">
     <Loader :isLoading="isLoading" />
     <ModalError :error="error" v-if="errorDisplayed" />
+    <h1>Ajouter un utilisateur :</h1>
     <div>
-      <h1>Ajouter un utilisateur :</h1>
       <form autocomplete="off" @submit.prevent="addUser">
         <div>
           <label for="lastname">Nom :</label> <br />
@@ -160,7 +160,7 @@ export default {
         password_confirmation: null,
         elevation: null,
       },
-      isLoading: true,
+      isLoading: false,
       error: "",
       errorDisplayed: false,
     };
@@ -196,6 +196,7 @@ export default {
         return false;
       }
 
+      this.isLoading = true;
       // Add a user
       usersService
         .addUser(this.user)
