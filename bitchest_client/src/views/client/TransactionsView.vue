@@ -75,6 +75,7 @@ export default {
 .title-div .balance-ctn {
   width: auto;
   padding: 15px;
+  margin:0;
 }
 
 .transcations-table-ctn {
@@ -91,7 +92,7 @@ main {
 }
 
 h1 {
-  text-align: center;
+  font-size: 2rem;
 }
 
 @media (min-width: 769px) and (max-width: 992px) {
@@ -106,12 +107,16 @@ h1 {
   h2 {
     margin-bottom: 20px;
   }
+
+  .title-div .balance-ctn {
+  margin: 20px 0;
+}
 }
 
 @media (max-width: 768px) {
   .title-div {
     padding: 0px;
-    margin-bottom: 10px;
+    margin: 10px 0;
     font-size: 20px;
     flex-direction: column;
   }
@@ -122,6 +127,7 @@ h1 {
 
   .title-div .balance-ctn {
     padding: 5px;
+    margin: 20px 0px;
   }
 }
 </style>
