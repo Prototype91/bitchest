@@ -19,8 +19,8 @@ class CreateTransactionsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedInteger('currency_id');
             $table->foreign('currency_id')->references('id')->on('currencies');
-            $table->unsignedDouble('currency_value');
-            $table->unsignedDouble('currency_rate');
+            $table->Double('currency_value');
+            $table->unsignedDouble('currency_rate')->default(0);
             $table->string('name');
             $table->string('symbol');
             $table->float('amount');

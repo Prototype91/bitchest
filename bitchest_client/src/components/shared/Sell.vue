@@ -154,7 +154,7 @@ export default {
         rsi: this.rsi,
       };
 
-      console.log(data);
+      console.log("datas : ", data);
 
       // Ajout de la transaction
       transactionsService
