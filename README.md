@@ -30,13 +30,13 @@ Créer une base de donnée sur `phpMyAdmin`
 
 `composer install` puis `npm install` pour installer toutes les dépendances
 
-Créer un fichier `.env` à la racine, copier-coller le contenu du fichier `.env.example`
+Créer un fichier `.env` à la racine du dossier bitchest_back, copier-coller le contenu du fichier `.env.example`
 
 Configurer le fichier `.env` avec `DB_DATABASE={{DATABASE_NAME}}`
 
 Générer une clé avec `php artisan key:generate`
 
-`php artisan migrate:refresh --seed` pour générer vos users, .
+`php artisan migrate:fresh --seed` pour générer vos users, .
 
 `php artisan serve` pour se mettre en écoute 
 
