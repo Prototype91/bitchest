@@ -22,6 +22,8 @@ En tant qu'Admin, vous pourrez également ajouter, modifier ou supprimer un util
 
 ## Avant-propos
 
+Lancer `XAMPP`, `MAMP`, `WAMP` ou `LAMP`
+
 ### bitchest_back :
 
 Créer une base de donnée sur `phpMyAdmin`
